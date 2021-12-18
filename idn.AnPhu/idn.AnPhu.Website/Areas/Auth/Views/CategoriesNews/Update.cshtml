@@ -1,0 +1,204 @@
+﻿@using idn.AnPhu.Biz.Models
+@model NewsCategories
+@{
+    ViewBag.Title = "Update";
+    Layout = "~/Areas/Auth/Views/Shared/_LayoutAuth.cshtml";
+}
+
+@section StyleSheet {
+    <style>
+        .container-admin {
+            font-size: 13px;
+        }
+
+            .container-admin .header-admin {
+                margin: 0 8px;
+                margin-bottom: 12px;
+                font-size: 24px;
+                font-weight: lighter;
+                color: #2679b5;
+                border-bottom: 1px dotted #e2e2e2;
+                padding-bottom: 16px;
+                padding-top: 7px;
+            }
+
+            .container-admin .header-table {
+                padding: 12px;
+                background-color: #EFF3F8;
+                display: flex;
+                justify-content: space-between;
+            }
+
+        .input-number {
+            width: 78px;
+        }
+    </style>
+}
+
+<div class="container-admin">
+    <div class="header-admin">Tạo mới danh mục tin tức</div>
+    <div class="content-admin">
+        <div class="content-table">
+            @using (Html.BeginForm("Update", "CategoriesNews", FormMethod.Post, new { id = "manageForm", @class = "form-horizontal" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1">
+                        Tiêu đề danh mục:
+                    </label>
+
+                    <div class="col-sm-9">
+                        <input type='hidden' name="NewsCategoryId" value="@Model.NewsCategoryId" />
+                        <input type="text" name="NewsCategoryTitle" value="@Model.NewsCategoryTitle" class="col-xs-12 col-sm-6" />
+                        <div class="text-danger" id="error_title"></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1">
+                        Danh mục:
+                    </label>
+
+                    <div class="col-sm-9">
+                        <div class="clearfix">
+                            <select data-val="true" data-val-number="The field ParentId must be a number." data-val-required="The ParentId field is required." id="ParentId" name="ParentId" required="required">
+                                @if (Model.ParentId == 0)
+                                {
+                                    <option selected="selected" value="0">-- Tất cả --</option>
+
+                                }
+                                else
+                                {
+                                    <option value="0">-- Tất cả --</option>
+                                }
+
+                                @foreach (NewsCategories item in ViewBag.ListCategoriesNews)
+                                {
+                                    if (Model.ParentId == item.NewsCategoryId)
+                                    {
+                                        if (item.ParentId > 0)
+                                        {
+
+                                            <option selected="selected" value="@item.NewsCategoryId">&nbsp;&nbsp;| --@item.NewsCategoryTitle</option>
+                                        }
+                                        else
+                                        {
+                                            <option selected="selected" value="@item.NewsCategoryId">@item.NewsCategoryTitle</option>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (item.ParentId > 0)
+                                        {
+
+                                            <option value="@item.NewsCategoryId">&nbsp;&nbsp;| --@item.NewsCategoryTitle</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@item.NewsCategoryId">@item.NewsCategoryTitle</option>
+                                        }
+                                    }
+
+
+                                }
+
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-4"></div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right" for="form-field-2">
+                        Short Name:
+                    </label>
+
+                    <div class="col-sm-9">
+                        <textarea type="text" name="NewsCategoryShortName" rows="2" class="col-xs-12 col-sm-6">@Model.NewsCategoryShortName</textarea>
+                        <div class="text-danger" id="error_shortname"></div>
+                    </div>
+                </div>
+
+                <div class="space-4"></div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right" for="form-field-2">
+                        Mô tả:
+                    </label>
+
+                    <div class="col-sm-9">
+                        <textarea type="text" name="NewsCategoryDescription" rows="2" class="col-xs-12 col-sm-6">@Model.NewsCategoryDescription</textarea>
+                        <div class="text-danger" id="error_description"></div>
+                    </div>
+                </div>
+
+                <div class="space-4"></div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right" for="form-input-readonly">
+                        Keyword:
+                    </label>
+
+                    <div class="col-sm-9">
+                        <textarea type="text" name="NewsCategoryKeyword" class="col-xs-12 col-sm-6">@Model.NewsCategoryKeyword</textarea>
+                        <div class="text-danger" id="error_keyword"></div>
+                    </div>
+                </div>
+
+                <div class="space-4"></div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right" for="form-field-2">
+                        Tóm tắt:
+                    </label>
+
+                    <div class="col-sm-9">
+                        <textarea type="text" name="NewsCategorySummary" class="col-xs-12 col-sm-6">@Model.NewsCategorySummary</textarea>
+                        <div class="text-danger" id="error_summary"></div>
+                    </div>
+                </div>
+
+                <div class="space-4"></div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right" for="form-field-2">
+                        Thứ tự:
+                    </label>
+
+                    <div class="col-sm-9">
+                        <input type="number" name="OrderNo" value="@Model.OrderNo" class="col-xs-12 col-sm-6 input-number" />
+                    </div>
+                </div>
+                <div class="space-4"></div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right">
+                        Trạng thái:
+                    </label>
+
+                    <div class="checkbox">
+                        <label>
+                            <input name="IsActive" type="checkbox" class="ace" value="true">
+
+                            <span class="lbl"> Ẩn/Hiện danh mục</span>
+                            <input name="IsActive" type="hidden" value="false">
+                        </label>
+                    </div>
+                </div>
+                <button type="submit" href="#" id="btn_submit_save" class="btn btn-success">Lưu</button>
+            }
+        </div>
+    </div>
+
+</div>
+@section Scripts {
+    <script>
+        $('#btn_submit_save').click(function () {
+            $("#manageForm").attr("action", '@Url.ActionLocalized("Update")').submit();
+        });
+    </script>
+}
+

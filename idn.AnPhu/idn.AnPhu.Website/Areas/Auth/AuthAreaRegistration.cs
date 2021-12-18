@@ -73,9 +73,44 @@ namespace idn.AnPhu.Website.Areas.Auth
               namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
           );
 
+            context.MapRoute(
+              name: "auth_categoriesnews",
+              url: "{culture}/quan-tri/danh-muc-tin-tuc/danh-sach",
+              defaults: new
+              {
+                  culture = "vi",
+                  area = "Auth",
+                  controller = "CategoriesNews",
+                  action = "Index",
+              },
+              namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+          );
 
+            context.MapRoute(
+              name: "auth_categoriesnews_create",
+              url: "{culture}/quan-tri/danh-muc-tin-tuc/tao-moi",
+              defaults: new
+              {
+                  culture = "vi",
+                  area = "Auth",
+                  controller = "CategoriesNews",
+                  action = "Create",
+              },
+              namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+          );
 
-
+            context.MapRoute(
+              name: "auth_categoriesnews_update",
+              url: "{culture}/quan-tri/danh-muc-tin-tuc/cap-nhat",
+              defaults: new
+              {
+                  culture = "vi",
+                  area = "Auth",
+                  controller = "CategoriesNews",
+                  action = "Update",
+              },
+              namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+          );
 
 
 
