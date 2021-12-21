@@ -38,18 +38,12 @@ namespace idn.AnPhu.Biz.Persistance.SqlServer
             return EntityBase.ParseListFromTable<NewsCategories>(table);
         }
 
-        public List<NewsCategories> Search(PageInfo<NewsCategories> pageInfoSearch)
+        public List<NewsCategories> Search(string txtSearch, int pageIndex, int pageCount, ref int totalItems)
         {
-            var newsCategories = pageInfoSearch.DataList[0];
-            var pageIndex = CUtils.ConvertToInt32(CUtils.StrTrim(pageInfoSearch.PageIndex));
-            var pageSize = CUtils.ConvertToInt32(CUtils.StrTrim(pageInfoSearch.PageSize));
-            var comm = this.GetCommand("Sp_NewsCategories_Search");
-            comm.AddParameter<string>(this.Factory, "newsCategoryTitle", CUtils.StrTrim(newsCategories.NewsCategoryTitle));
-            comm.AddParameter<string>(this.Factory, "newsCategoryShortName", CUtils.StrTrim(newsCategories.NewsCategoryShortName));
-            comm.AddParameter<string>(this.Factory, "newsCategoryDescription", CUtils.StrTrim(newsCategories.NewsCategoryShortName));
-            comm.AddParameter<string>(this.Factory, "newsCategoryKeyword", CUtils.StrTrim(newsCategories.NewsCategoryKeyword));
+            DbCommand comm = this.GetCommand("Sp_NewsCategories_Search");
+            comm.AddParameter<string>(this.Factory, "txtSearch", (txtSearch != null && txtSearch.Trim().Length > 0) ? txtSearch : null);
             comm.AddParameter<int>(this.Factory, "startIndex", pageIndex);
-            comm.AddParameter<int>(this.Factory, "count", pageSize);
+            comm.AddParameter<int>(this.Factory, "count", pageCount);
 
             DbParameter totalItemsParam = comm.AddParameter(this.Factory, "totalItems", DbType.Int32, null);
             totalItemsParam.Direction = ParameterDirection.Output;
@@ -59,10 +53,9 @@ namespace idn.AnPhu.Biz.Persistance.SqlServer
 
             if (totalItemsParam.Value != DBNull.Value)
             {
-                pageInfoSearch.ItemCount = Convert.ToInt32(totalItemsParam.Value);
+                totalItems = Convert.ToInt32(totalItemsParam.Value);
             }
             return EntityBase.ParseListFromTable<NewsCategories>(table);
-
         }
 
         public void Add(NewsCategories item)
@@ -89,7 +82,16 @@ namespace idn.AnPhu.Biz.Persistance.SqlServer
             item.NewsCategoryId = old.NewsCategoryId;
             var comm = this.GetCommand("Sp_NewsCategories_Update");            
             if (comm == null) return;
-            comm.AddParameter<int>(this.Factory, "newsCategoryId", item.NewsCategoryId);
+            comm.AddParameter<int>(this.Factory, "newsCategoriesId", item.NewsCategoryId);
+            comm.AddParameter<int>(this.Factory, "parentId", item.ParentId);
+            comm.AddParameter<string>(this.Factory, "newsCategoryTitle", (item.NewsCategoryTitle != null && item.NewsCategoryTitle.Trim().Length > 0) ? item.NewsCategoryTitle.Trim() : null);
+            comm.AddParameter<string>(this.Factory, "newsCategoryShortName", (item.NewsCategoryShortName != null && item.NewsCategoryShortName.Trim().Length > 0) ? item.NewsCategoryShortName.Trim() : null);
+            comm.AddParameter<string>(this.Factory, "newsCategorySummary", (item.NewsCategorySummary != null && item.NewsCategorySummary.Trim().Length > 0) ? item.NewsCategorySummary.Trim() : null);
+            comm.AddParameter<string>(this.Factory, "newsCategoryDescription", (item.NewsCategoryDescription != null && item.NewsCategoryDescription.Trim().Length > 0) ? item.NewsCategoryDescription.Trim() : null);
+            comm.AddParameter<string>(this.Factory, "newsCategoryKeyword", (item.NewsCategoryKeyword != null && item.NewsCategoryKeyword.Trim().Length > 0) ? item.NewsCategoryKeyword.Trim() : null);
+            comm.AddParameter<bool>(this.Factory, "isActive", item.IsActive);
+            comm.AddParameter<int>(this.Factory, "orderNo", item.OrderNo);
+            comm.AddParameter<string>(this.Factory, "culture", item.Culture);
 
             this.SafeExecuteNonQuery(comm);
         }

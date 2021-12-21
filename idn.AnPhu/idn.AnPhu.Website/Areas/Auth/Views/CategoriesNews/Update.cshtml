@@ -50,7 +50,7 @@
 
                     <div class="col-sm-9">
                         <input type='hidden' name="NewsCategoryId" value="@Model.NewsCategoryId" />
-                        <input type="text" name="NewsCategoryTitle" value="@Model.NewsCategoryTitle" class="col-xs-12 col-sm-6" />
+                        <input type="text" name="NewsCategoryTitle" value="@Model.NewsCategoryTitle" class="col-xs-12 col-sm-6"  required/>
                         <div class="text-danger" id="error_title"></div>
                     </div>
                 </div>
@@ -117,7 +117,7 @@
                     </label>
 
                     <div class="col-sm-9">
-                        <textarea type="text" name="NewsCategoryShortName" rows="2" class="col-xs-12 col-sm-6">@Model.NewsCategoryShortName</textarea>
+                        <textarea type="text" name="NewsCategoryShortName" rows="2" class="col-xs-12 col-sm-6" required>@Model.NewsCategoryShortName</textarea>
                         <div class="text-danger" id="error_shortname"></div>
                     </div>
                 </div>
@@ -130,7 +130,7 @@
                     </label>
 
                     <div class="col-sm-9">
-                        <textarea type="text" name="NewsCategoryDescription" rows="2" class="col-xs-12 col-sm-6">@Model.NewsCategoryDescription</textarea>
+                        <textarea type="text" name="NewsCategoryDescription" rows="2" class="col-xs-12 col-sm-6" required>@Model.NewsCategoryDescription</textarea>
                         <div class="text-danger" id="error_description"></div>
                     </div>
                 </div>
@@ -143,7 +143,7 @@
                     </label>
 
                     <div class="col-sm-9">
-                        <textarea type="text" name="NewsCategoryKeyword" class="col-xs-12 col-sm-6">@Model.NewsCategoryKeyword</textarea>
+                        <textarea type="text" name="NewsCategoryKeyword" class="col-xs-12 col-sm-6" required>@Model.NewsCategoryKeyword</textarea>
                         <div class="text-danger" id="error_keyword"></div>
                     </div>
                 </div>
@@ -156,7 +156,7 @@
                     </label>
 
                     <div class="col-sm-9">
-                        <textarea type="text" name="NewsCategorySummary" class="col-xs-12 col-sm-6">@Model.NewsCategorySummary</textarea>
+                        <textarea type="text" name="NewsCategorySummary" class="col-xs-12 col-sm-6" required>@Model.NewsCategorySummary</textarea>
                         <div class="text-danger" id="error_summary"></div>
                     </div>
                 </div>
@@ -200,5 +200,6 @@
             $("#manageForm").attr("action", '@Url.ActionLocalized("Update")').submit();
         });
     </script>
+    
 }
 

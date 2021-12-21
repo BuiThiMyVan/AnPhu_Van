@@ -23,42 +23,26 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
         }
 
         // GET: Auth/CategoriesNews
-        public ActionResult Index(/*string newsCategoryTitle = "", string newsCategoryShortName = "", string newsCategoryDescription = "", string newsCategoryKeyword = "", string createBy = "", string init = "init", bool isActive = true, int page = 0*/)
+        public ActionResult Index(string txtSearch = "", string init = "init", int page = 0)
         {
-            //var startCount = "0";
-            //var pageInfo = new PageInfo<NewsCategories>(0, PageSizeAdminConfig);
-            //if (init != "init")
-            //{
-            //    PageInfo<NewsCategories> pageNewsCategoriesInfo = new PageInfo<NewsCategories>();
-            //    pageNewsCategoriesInfo.DataList[0].NewsCategoryTitle = newsCategoryTitle;
-            //    pageNewsCategoriesInfo.DataList[0].NewsCategoryShortName = newsCategoryShortName;
-            //    pageNewsCategoriesInfo.DataList[0].NewsCategoryDescription = newsCategoryDescription;
-            //    pageNewsCategoriesInfo.DataList[0].NewsCategoryKeyword = newsCategoryKeyword;
-            //    pageNewsCategoriesInfo.DataList[0].CreateBy = createBy;
-            //    pageNewsCategoriesInfo.DataList[0].IsActive = isActive;
-            //    pageInfo = NewsCategoriesManager.Search(pageNewsCategoriesInfo);
-            //    if (pageInfo != null && pageInfo.DataList != null && pageInfo.DataList.Count > 0)
-            //    {
-            //        startCount = (page * PageSizeAdminConfig).ToString();
-            //    }
-            //}
-            //else
-            //{
-            //    createdtimefrom = CUtils.GetDateToSearch(DateTime.Now.ToString("yyyy-MM-dd"));
-            //}
+            var startCount = "0";
+            var pageInfo = new PageInfo<NewsCategories>(0, PageSizeAdminConfig);
+            if (init != "init")
+            {
+                //pageInfo = NewsCategoriesManager.Search(txtSearch, );
+                if (pageInfo != null && pageInfo.DataList != null && pageInfo.DataList.Count > 0)
+                {
+                    startCount = (page * PageSizeAdminConfig).ToString();
+                }
+            }
+            else
+            {
+                //createdtimefrom = CUtils.GetDateToSearch(DateTime.Now.ToString("yyyy-MM-dd"));
+            }
 
-            //ViewBag.UserCode = CUtils.StrValue(usercode);
-            //ViewBag.FullName = CUtils.StrValue(fullname);
-            //ViewBag.Email = CUtils.StrValue(email);
-            //ViewBag.CreateDTimeFrom = CUtils.StrValue(createdtimefrom);
-            //ViewBag.CreateDTimeTo = CUtils.StrValue(createdtimeto);
-            //ViewBag.BirthDayFrom = CUtils.StrValue(birthdayfrom);
-            //ViewBag.BirthDayTo = CUtils.StrValue(birthdayto);
-            //ViewBag.FlagActive = CUtils.StrValue(flagactive);
 
-            //ViewBag.StartCount = startCount;
-            //return View(pageInfo);
-            return View();
+            ViewBag.StartCount = startCount;
+            return View(pageInfo);
         }
 
         #region["Tạo mới danh mục tin tức"]
@@ -104,6 +88,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
             if (newsCategory != null)
             {
                 ViewBag.ListCategoriesNews = NewsCategoriesManager.GetAll();
+                ViewBag.message = "";
                 return View(newsCategory);
             }
             else
@@ -115,32 +100,31 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Update(NewsCategories model)
         {
-            var resultEntry = new JsonResultEntry() { Success = false };
-            var exitsData = "";
-            if (model != null && !CUtils.IsNullOrEmpty(model.NewsCategoryId))
+            var message = "";
+            if(ModelState.IsValid)
             {
-                var newsCategories = NewsCategoriesManager.Get(new NewsCategories() { NewsCategoryId = model.NewsCategoryId });
-                if (newsCategories != null)
+                if (model != null && !CUtils.IsNullOrEmpty(model.NewsCategoryId))
                 {
-                    NewsCategoriesManager.Update(model, newsCategories);
-                    resultEntry.Success = true;
-                    resultEntry.AddMessage("Cập nhật thông tin danh mục thành công!");
-                    resultEntry.RedirectUrl = Url.Action("Index", "CategoriesNews", new { area = "Auth" });
+                    var newsCategories = NewsCategoriesManager.Get(new NewsCategories() { NewsCategoryId = model.NewsCategoryId });
+                    if (newsCategories != null)
+                    {
+                        NewsCategoriesManager.Update(model, newsCategories);
+                        message = "Cập nhật thông tin danh mục thành công!";
+                    }
+                    else
+                    {
+                        message = "Mã danh mục tin tức '" + model.NewsCategoryId + "' không có trong hệ thống!";
+                    }
                 }
                 else
                 {
-                    resultEntry.Success = true;
-                    exitsData = "Mã danh mục tin tức '" + model.NewsCategoryId + "' không có trong hệ thống!";
+                    message = "Mã danh mục tin tức trống!";
                 }
+                ViewBag.message = message;
+                return RedirectToAction("Index");
             }
-            else
-            {
-                resultEntry.Success = true;
-                exitsData = "Mã danh mục tin tức trống!";
-            }
-            resultEntry.AddMessage(exitsData);
-
-            return Json(resultEntry);
+            return View();
+            
         }
 
         #endregion

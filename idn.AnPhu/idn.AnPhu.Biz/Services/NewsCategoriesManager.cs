@@ -36,16 +36,5 @@ namespace idn.AnPhu.Biz.Services
             item.IsActive = true;
             base.Add(item);
         }
-
-        //public override void Update(NewsCategories @new, NewsCategories old)
-        //{
-        //    Provider.Update(@new, old);        
-        //}
-
-        //public PageInfo<NewsCategories> Search(PageInfo<NewsCategories> infoNewsCategoriesInfo)
-        //{
-
-        //    return Provider.;
-        //}
     }
 }
