@@ -38,12 +38,12 @@ namespace idn.AnPhu.Biz.Persistance.SqlServer
             return EntityBase.ParseListFromTable<NewsCategories>(table);
         }
 
-        public List<NewsCategories> Search(string txtSearch, int pageIndex, int pageCount, ref int totalItems)
+        public List<NewsCategories> Search(string txtSearch, int startIndex, int pageSize, ref int totalItems)
         {
             DbCommand comm = this.GetCommand("Sp_NewsCategories_Search");
             comm.AddParameter<string>(this.Factory, "txtSearch", (txtSearch != null && txtSearch.Trim().Length > 0) ? txtSearch : null);
-            comm.AddParameter<int>(this.Factory, "startIndex", pageIndex);
-            comm.AddParameter<int>(this.Factory, "count", pageCount);
+            comm.AddParameter<int>(this.Factory, "startIndex", startIndex);
+            comm.AddParameter<int>(this.Factory, "count", pageSize);
 
             DbParameter totalItemsParam = comm.AddParameter(this.Factory, "totalItems", DbType.Int32, null);
             totalItemsParam.Direction = ParameterDirection.Output;

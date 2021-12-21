@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace idn.AnPhu.Biz.Models
 {
-    class News : EntityBase
+    public class News : EntityBase
     {
         [DataColum]
         //[DataColumEx("UserCode")]

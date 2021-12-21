@@ -22,28 +22,44 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
             get { return ServiceFactory.NewsCategoriesManager; }
         }
 
+        #region["List danh mục tin tức"]
         // GET: Auth/CategoriesNews
-        public ActionResult Index(string txtSearch = "", string init = "init", int page = 0)
+        public ActionResult Index(int? page, int? pageSize, string txtSearch = "")
         {
-            var startCount = "0";
             var pageInfo = new PageInfo<NewsCategories>(0, PageSizeAdminConfig);
-            if (init != "init")
+            if(page != null && pageSize != null)
             {
-                //pageInfo = NewsCategoriesManager.Search(txtSearch, );
-                if (pageInfo != null && pageInfo.DataList != null && pageInfo.DataList.Count > 0)
+                pageInfo.PageIndex = (int)page;
+                pageInfo.PageSize = (int)pageSize;
+            } else
+            {
+                pageInfo.PageIndex = 1;
+                pageInfo.PageSize = 10;
+            }
+            
+            var pageView = "";
+            var lastRecord = 0;
+
+            pageInfo = NewsCategoriesManager.Search(txtSearch, pageInfo.PageIndex, pageInfo.PageSize);
+            
+            if (pageInfo != null && pageInfo.DataList != null && pageInfo.DataList.Count > 0)
+            {
+                if((pageInfo.PageIndex * pageInfo.PageSize) > pageInfo.ItemCount)
                 {
-                    startCount = (page * PageSizeAdminConfig).ToString();
+                    lastRecord = pageInfo.ItemCount;
+                } else
+                {
+                    lastRecord = pageInfo.PageIndex * pageInfo.PageSize;
                 }
-            }
-            else
-            {
-                //createdtimefrom = CUtils.GetDateToSearch(DateTime.Now.ToString("yyyy-MM-dd"));
+                pageView = "Showing " + ((pageInfo.PageIndex - 1) * pageInfo.PageSize + 1) + " to " + lastRecord + " of " + pageInfo.ItemCount + " entries";
             }
 
-
-            ViewBag.StartCount = startCount;
+            ViewBag.pageView = pageView;
+            var listPageSize = new int[3] { 10, 15, 20 };
+            ViewBag.listPageSize = listPageSize;
             return View(pageInfo);
         }
+        #endregion
 
         #region["Tạo mới danh mục tin tức"]
         [HttpGet]

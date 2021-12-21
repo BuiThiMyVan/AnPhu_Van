@@ -1,0 +1,216 @@
+﻿@model News
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Auth/Views/Shared/_LayoutAuth.cshtml";
+}
+
+@section StyleSheet {
+    <style>
+        .container-admin {
+            font-size: 13px;
+        }
+
+            .container-admin .header-admin {
+                margin: 0 8px;
+                margin-bottom: 12px;
+                font-size: 24px;
+                font-weight: lighter;
+                color: #2679b5;
+                border-bottom: 1px dotted #e2e2e2;
+                padding-bottom: 16px;
+                padding-top: 7px;
+            }
+
+            .container-admin .header-table {
+                padding: 12px;
+                background-color: #EFF3F8;
+                display: flex;
+                justify-content: space-between;
+            }
+
+        .input-number {
+            width: 78px;
+        }
+
+        .form-group .btn {
+            margin-left: 16px;
+        }
+    </style>
+}
+
+<div class="container-admin">
+    <div class="header-admin">Tạo mới tin tức</div>
+    <div class="content-admin">
+        <div class="content-table">
+            @using (Html.BeginForm("Create", "News", FormMethod.Post, new { id = "manageForm", @class = "form-horizontal" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1">
+                        Tiêu đề tin tức:
+                    </label>
+
+                    <div class="col-sm-9">
+                        <input type="text" name="NewsTitle" class="col-xs-12 col-sm-6"  required/>
+                        <div class="text-danger" id="error_title"></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1">
+                        Danh mục:
+                    </label>
+
+                    <div class="col-sm-9">
+                        <div class="clearfix">
+                            <select data-val="true" data-val-number="The field ParentId must be a number." data-val-required="The ParentId field is required." id="ParentId" name="ParentId" required="required">
+                                @*<option selected="selected" value="0">-- Tất cả --</option>
+                            @foreach (NewsCategories item in ViewBag.ListCategoriesNews)
+                            {
+                                if (item.ParentId > 0)
+                                {
+                                    <option value="@item.NewsCategoryId">&nbsp;&nbsp;| --@item.NewsCategoryTitle</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.NewsCategoryId">@item.NewsCategoryTitle</option>
+                                }
+
+                            }*@
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-4"></div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right" for="form-field-2">
+                        Mô tả:
+                    </label>
+
+                    <div class="col-sm-9">
+                        <textarea type="text" name="NewsCategoryShortName" rows="2" class="col-xs-12 col-sm-6"></textarea>
+                        <div class="text-danger" id="error_shortname"></div>
+                    </div>
+                </div>
+
+                <div class="space-4"></div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right" for="form-input-readonly">
+                        Keyword:
+                    </label>
+
+                    <div class="col-sm-9">
+                        <textarea type="text" name="NewsCategoryKeyword" class="col-xs-12 col-sm-6"></textarea>
+                        <div class="text-danger" id="error_keyword"></div>
+                    </div>
+                </div>
+
+                <div class="space-4"></div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right" for="form-field-2">
+                        Tóm tắt:
+                    </label>
+
+                    <div class="col-sm-9">
+                        <textarea type="text" name="NewsCategorySummary" class="col-xs-12 col-sm-6"></textarea>
+                        <div class="text-danger" id="error_summary"></div>
+                    </div>
+                </div>
+
+                <div class="space-4"></div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right" for="form-field-2">
+                        Hình ảnh:
+                    </label>
+
+                    <div class="col-sm-9">
+                        <input type="text" name="NewsCategoryDescription" class="col-xs-12 col-sm-6" style="width: 175px" />
+                        <button class="btn btn-success">Browse..</button>
+                        <div class="text-danger" id="error_description"></div>
+
+                    </div>
+                </div>
+
+                <div class="space-4"></div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right" for="form-field-2">
+                        Nội dung
+                    </label>
+
+                    <div class="col-sm-9">
+                        <textarea type="text" name="NewsCategoryDescription" rows="2" class="col-xs-12 col-sm-6"></textarea>
+                        <div class="text-danger" id="error_description"></div>
+                    </div>
+                </div>
+
+                <div class="space-4"></div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right" for="form-field-2">
+                        Thứ tự:
+                    </label>
+
+                    <div class="col-sm-9">
+                        <input type="number" name="OrderNo" class="col-xs-12 col-sm-6 input-number" value="0" />
+                    </div>
+                </div>
+                <div class="space-4"></div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right">
+                        Trạng thái:
+                    </label>
+
+                    <div class="checkbox">
+                        <label>
+                            <input name="IsActive" type="checkbox" class="ace" value="true">
+                            <span class="lbl"> Ẩn/Hiện danh mục</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right">
+                        Hot news:
+                    </label>
+
+                    <div class="checkbox">
+                        <label>
+                            <input name="IsActive" type="checkbox" class="ace" value="true">
+                            <span class="lbl"> Bài viết nổi bật</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="space-4"></div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1">
+                        Tiêu đề tin tức:
+                    </label>
+
+                    <div class="col-sm-9">
+                        <input type="text" name="NewsCategoryTitle" class="col-xs-12 col-sm-6" style="width: 175px" />
+                        <button class="btn btn-default">Lọc</button>
+                        <div class="text-danger" id="error_title"></div>
+                    </div>
+                </div>
+                <button type="submit" id="btn_submit_save" class="btn btn-success">Lưu</button>
+            }
+        </div>
+    </div>
+
+</div>
+@section Scripts {
+    <script>
+        $('#btn_submit_save').click(function () {
+            $("#manageForm").attr("action", '@Url.ActionLocalized("Create")').submit();
+        });
+    </script>
+}
+

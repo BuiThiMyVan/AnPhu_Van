@@ -64,7 +64,7 @@ namespace idn.AnPhu.Biz.Services
             }
             set
             {
-                services[typeof(Sys_GroupManager)] = value;
+                services[typeof(NewsCategoriesManager)] = value;
             }
         }
     }

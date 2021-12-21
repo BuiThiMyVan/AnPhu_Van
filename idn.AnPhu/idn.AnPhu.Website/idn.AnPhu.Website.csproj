@@ -130,6 +130,7 @@
     <Compile Include="Areas\Auth\Controllers\AccountController.cs" />
     <Compile Include="Areas\Auth\Controllers\CategoriesNewsController.cs" />
     <Compile Include="Areas\Auth\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Auth\Controllers\NewsController.cs" />
     <Compile Include="Areas\Auth\Controllers\Sys_UserController.cs" />
     <Compile Include="Controllers\AdministratorController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -425,6 +426,8 @@
     <Content Include="Areas\Auth\Views\CategoriesNews\Index.cshtml" />
     <Content Include="Areas\Auth\Views\CategoriesNews\Create.cshtml" />
     <Content Include="Areas\Auth\Views\CategoriesNews\Update.cshtml" />
+    <Content Include="Areas\Auth\Views\News\Index.cshtml" />
+    <Content Include="Areas\Auth\Views\News\Create.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
