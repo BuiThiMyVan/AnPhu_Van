@@ -11,6 +11,10 @@ namespace idn.AnPhu.Biz.Models
     {
         [DataColum]
         //[DataColumEx("UserCode")]
+        public int NewsId { get; set; }
+
+        [DataColum]
+        //[DataColumEx("UserCode")]
         public int NewsCategoryId { get; set; }
 
         [DataColum]
@@ -60,5 +64,19 @@ namespace idn.AnPhu.Biz.Models
 
         [DataColum]
         public bool IsAdsNews { get; set; }
+
+        [DataColum]
+        public DateTime CreateDate { get; set; }
+
+        public string CreateDateFormat
+        {
+            get
+            {
+                return CreateDate == null ? "" : CreateDate.ToString("dd/MM/yyyy");
+            }
+        }
+
+        [DataColum]
+        public string NewsCategoryTitle { get; set; }
     }
 }

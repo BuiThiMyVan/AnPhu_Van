@@ -34,11 +34,33 @@
             background-color: #EFF3F8;
             padding: 20px;
         }
+
+        .head-sort {
+            position: relative;
+        }
+
+        .sort-icon {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .sort-icon:hover {
+            cursor: pointer;
+        }
+
+        .sort-icon i {
+            height: 5px;
+        }
     </style>
 }
 
 <div class="container-admin">
-    <div class="header-admin">Danh sách danh mục tin tức</div>
+    <div class="header-admin">Danh sách tin tức</div>
     <div class="content-admin">
         <div class="header-table">
             <div class="filter-select">
@@ -60,34 +82,71 @@
             </div>
             <div class="search-box">
                 <span>Search:</span>
-                <input type="text" id="txtSearch" name="name" onkeyup="search(event)" />
+                <input type="text" id="txtSearch" name="txtSearch" value="@ViewBag.txtSearch" onkeyup="search(event)" />
             </div>
         </div>
         <div class="content-table">
             <table id="simple-table" class="table table-striped table-bordered table-hover" style="margin-bottom: 0px">
                 <thead>
                     <tr>
-                        <th>Tên danh mục</th>
-                        <th class="hidden-480">Người tạo</th>
+                        <th class="head-sort">
+                            Tiêu đề
+                            <div class="sort-icon">
+                                <i class="fa fa-caret-up"></i>
+                                <i class="fa fa-sort-down"></i>
+                            </div>
+                        </th>
+                        <th class="head-sort">
+                            Danh mục
+                            <div class="sort-icon head-sort">
+                                <i class="fa fa-caret-up"></i>
+                                <i class="fa fa-sort-down"></i>
+                            </div>
+                        </th>
+                        <th class="hidden-480 head-sort">
+                            Người tạo
+                            <div class="sort-icon">
+                                <i class="fa fa-caret-up"></i>
+                                <i class="fa fa-sort-down"></i>
+                            </div>
+                        </th>
 
-                        <th>
+                        <th class="head-sort">
                             <i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
                             Ngày tạo
+                            <div class="sort-icon">
+                                <i class="fa fa-caret-up"></i>
+                                <i class="fa fa-sort-down"></i>
+                            </div>
                         </th>
-                        <th class="hidden-480">Status</th>
+                        <th class="hidden-480 head-sort">
+                            Lượt xem
+                            <div class="sort-icon">
+                                <i class="fa fa-caret-up"></i>
+                                <i class="fa fa-sort-down"></i>
+                            </div>
+                        </th>
+                        <th class="hidden-480 head-sort">
+                            Status
+                            <div class="sort-icon">
+                                <i class="fa fa-caret-up"></i>
+                                <i class="fa fa-sort-down"></i>
+                            </div>
+                        </th>
 
                         <th></th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    @foreach (NewsCategories item in Model.DataList)
+                    @foreach (News item in Model.DataList)
                     {
                         <tr>
-                            <td>@item.NewsCategoryTitle</td>
+                            <td>@item.NewsTitle</td>
+                            <td class="hidden-480">@item.NewsCategoryTitle</td>
                             <td class="hidden-480">@item.CreateBy</td>
-                            <td>@item.CreateDate</td>
-
+                            <td>@item.CreateDateFormat</td>
+                            <td>@item.Count</td>
                             <td class="hidden-480">
                                 @if (item.IsActive == true)
                                 {
@@ -103,7 +162,7 @@
 
                             <td>
                                 <div class="hidden-sm hidden-xs btn-group">
-                                    <button class="btn btn-xs btn-info" onclick="window.location.href='/vi/quan-tri/danh-muc-tin-tuc/cap-nhat?newsCategoryId='+ @item.NewsCategoryId">
+                                    <button class="btn btn-xs btn-info" onclick="window.location.href='/vi/quan-tri/danh-sach-tin-tuc/cap-nhat?newsId='+ @item.NewsId">
                                         <i class="ace-icon fa fa-pencil bigger-120"></i>
                                     </button>
                                 </div>
@@ -180,7 +239,7 @@
                     </li>
                 </ul>
             </div>
-            <a href="/vi/quan-tri/danh-muc-tin-tuc/tao-moi" class="btn btn-success">Tạo mới</a>
+            <a href="/vi/quan-tri/danh-sach-tin-tuc/tao-moi" class="btn btn-success">Tạo mới</a>
         </div>
     </div>
 </div>
@@ -191,15 +250,16 @@
 
     function updatePageSize() {
         var pageSizeUpdate = $('#pageSize').val();
+        var txtSearch = $('#txtSearch').val().trim();
         debugger
-        window.location.href = "/vi/quan-tri/danh-muc-tin-tuc/danh-sach?page=" + pageIndex + "&pageSize=" + pageSizeUpdate;
+        window.location.href = "/vi/quan-tri/danh-sach-tin-tuc/danh-sach?page=" + pageIndex + "&pageSize=" + pageSizeUpdate + "&txtSearch=" + txtSearch;
         debugger
     }
 
     function search(e) {
         var txtSearch = $('#txtSearch').val().trim();
         if (e.key === 'Enter' || e.keyCode === 13) {
-            window.location.href = "/vi/quan-tri/danh-muc-tin-tuc/danh-sach?page=" + pageIndex + "&pageSize=" + pageSize + "&txtSearch=" + txtSearch;
+            window.location.href = "/vi/quan-tri/danh-sach-tin-tuc/danh-sach?page=" + pageIndex + "&pageSize=" + pageSize + "&txtSearch=" + txtSearch;
         }
 
     }
@@ -207,7 +267,7 @@
     function prev() {
         if (pageIndex > 1) {
             pageIndex--;
-            window.location.href = "/vi/quan-tri/danh-muc-tin-tuc/danh-sach?page=" + pageIndex + "&pageSize=" + pageSize;
+            window.location.href = "/vi/quan-tri/danh-sach-tin-tuc/danh-sach?page=" + pageIndex + "&pageSize=" + pageSize;
         }
 
     }
@@ -215,14 +275,14 @@
     function next() {
         if (pageIndex < @Model.PageCount) {
             pageIndex++;
-            window.location.href = "/vi/quan-tri/danh-muc-tin-tuc/danh-sach?page=" + pageIndex + "&pageSize=" + pageSize;
+            window.location.href = "/vi/quan-tri/danh-sach-tin-tuc/danh-sach?page=" + pageIndex + "&pageSize=" + pageSize;
         }
 
     }
 
     function goToPage(index) {
         var txtSearch = $('#txtSearch').val().trim();
-            window.location.href = "/vi/quan-tri/danh-muc-tin-tuc/danh-sach?page=" + index + "&pageSize=" + pageSize + "&txtSearch=" + txtSearch;
+            window.location.href = "/vi/quan-tri/danh-sach-tin-tuc/danh-sach?page=" + index + "&pageSize=" + pageSize + "&txtSearch=" + txtSearch;
     }
     </script>
 }

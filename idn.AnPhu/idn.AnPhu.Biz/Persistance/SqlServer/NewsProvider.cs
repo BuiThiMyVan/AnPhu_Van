@@ -47,7 +47,7 @@ namespace idn.AnPhu.Biz.Persistance.SqlServer
             totalItemsParam.Direction = ParameterDirection.Output;
 
             var table = this.GetTable(comm);
-            table.TableName = TableName.NewsCategories;
+            table.TableName = TableName.News;
 
             if (totalItemsParam.Value != DBNull.Value)
             {
@@ -59,15 +59,30 @@ namespace idn.AnPhu.Biz.Persistance.SqlServer
         public void Add(News item)
         {
             DbCommand comm = this.GetCommand("Sp_News_Create");
+            comm.AddParameter<int>(this.Factory, "newsCategoryId", item.NewsCategoryId);
+            comm.AddParameter<string>(this.Factory, "newsTitle", (item.NewsTitle != null && item.NewsTitle.Trim().Length > 0) ? item.NewsTitle.Trim() : "");
+            comm.AddParameter<string>(this.Factory, "newsSummary", (item.NewsSummary != null && item.NewsSummary.Trim().Length > 0) ? item.NewsSummary.Trim() : null);
+            comm.AddParameter<string>(this.Factory, "newsBody", (item.NewsBody != null && item.NewsBody.Trim().Length > 0) ? item.NewsBody.Trim() : null);
+            comm.AddParameter<string>(this.Factory, "newsDescription", (item.NewsDescription != null && item.NewsDescription.Trim().Length > 0) ? item.NewsDescription.Trim() : null);
+            comm.AddParameter<string>(this.Factory, "newsKeyword", (item.NewsKeyword != null && item.NewsKeyword.Trim().Length > 0) ? item.NewsKeyword.Trim() : null);
+            comm.AddParameter<string>(this.Factory, "createBy", (item.CreateBy != null && item.CreateBy.Trim().Length > 0) ? item.CreateBy.Trim() : null);
+            comm.AddParameter<bool>(this.Factory, "isActive", item.IsActive);
+            comm.AddParameter<int>(this.Factory, "orderNo", item.OrderNo);
+            comm.AddParameter<string>(this.Factory, "culture", (item.Culture != null && item.Culture.Trim().Length > 0) ? item.Culture.Trim() : null);
+            comm.AddParameter<string>(this.Factory, "newsOther", (item.NewsOther != null && item.NewsOther.Trim().Length > 0) ? item.NewsOther.Trim() : null);
+            comm.AddParameter<string>(this.Factory, "productTag", (item.ProductTag != null && item.ProductTag.Trim().Length > 0) ? item.ProductTag.Trim() : null);
 
-            
+            comm.AddParameter<bool>(this.Factory, "isHotNews", item.IsHotNews);
+            comm.AddParameter<string>(this.Factory, "newsImage", (item.NewsImage != null && item.NewsImage.Trim().Length > 0) ? item.NewsImage.Trim() : null);
+            comm.AddParameter<bool>(this.Factory, "isAdsNews", item.IsAdsNews);
+
             this.SafeExecuteNonQuery(comm);
         }
 
         public void Update(News @new, News old)
         {
             var item = @new;
-            item.NewsCategoryId = old.NewsCategoryId;
+            item.NewsId = old.NewsId;
             var comm = this.GetCommand("Sp_News_Update");
             if (comm == null) return;
 
