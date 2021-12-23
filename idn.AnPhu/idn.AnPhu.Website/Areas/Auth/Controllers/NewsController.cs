@@ -73,13 +73,11 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
         {
             ViewBag.Title = "Tạo mới danh mục tin tức";
             ViewBag.Today = Today;
-            List<NewsCategories> listCategoriesNews = NewsCategoriesManager.GetAll();
-            ViewBag.ListCategoriesNews = listCategoriesNews;
+            ViewBag.ListCategoriesNews = NewsCategoriesManager.GetAll();
             return View();
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Create(News model)
         {
             var resultEntry = new JsonResultEntry() { Success = false };
@@ -110,6 +108,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
 
             if (news != null)
             {
+                //ViewBag.Categories = new SelectList(NewsCategoriesManager.GetAll(), "NewsCategoryId", "HlevelTitle");
                 ViewBag.ListCategoriesNews = NewsCategoriesManager.GetAll();
                 ViewBag.message = "";
                 return View(news);
@@ -124,28 +123,27 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
         public ActionResult Update(News model)
         {
             var message = "";
-                if (model != null && !CUtils.IsNullOrEmpty(model.NewsCategoryId))
+            if (model != null && !CUtils.IsNullOrEmpty(model.NewsCategoryId))
+            {
+                var news = NewsManager.Get(new News() { NewsId = model.NewsId });
+                if (news != null)
                 {
-                    var news = NewsManager.Get(new News() { NewsId = model.NewsId });
-                    if (news != null)
-                    {
-                        NewsManager.Update(model, news);
-                        message = "Cập nhật thông tin danh mục thành công!";
-                    }
-                    else
-                    {
-                        message = "Mã danh mục tin tức '" + model.NewsCategoryId + "' không có trong hệ thống!";
-                        return View(model);
-                    }
+                    NewsManager.Update(model, news);
+                    message = "Cập nhật thông tin danh mục thành công!";
                 }
                 else
                 {
-                    message = "Mã danh mục tin tức trống!";
-                    return View(model);
+                    message = "Mã danh mục tin tức '" + model.NewsCategoryId + "' không có trong hệ thống!";
                 }
-                ViewBag.message = message;
-                return View(model);
+            }
+            else
+            {
+                message = "Mã danh mục tin tức trống!";
+            }
+            ViewBag.message = message;
+            ViewBag.ListCategoriesNews = NewsCategoriesManager.GetAll();
 
+            return View(model);
         }
 
         #endregion

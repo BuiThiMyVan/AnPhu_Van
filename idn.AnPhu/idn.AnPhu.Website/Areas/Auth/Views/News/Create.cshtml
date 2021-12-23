@@ -1,4 +1,6 @@
 ﻿@model News
+
+
 @{
     ViewBag.Title = "Create";
     Layout = "~/Areas/Auth/Views/Shared/_LayoutAuth.cshtml";
@@ -32,10 +34,6 @@
             width: 78px;
         }
 
-        .form-group .btn {
-            margin-left: 16px;
-        }
-
         .box-input {
             display: flex;
             flex-direction: column;
@@ -43,6 +41,11 @@
 
         .text-danger {
             margin-top: 8px;
+        }
+
+        .btn {
+            margin-left: 8px;
+            margin-top: -5px;
         }
     </style>
 }
@@ -61,8 +64,8 @@
                     </label>
 
                     <div class="col-sm-9 box-input">
-                        <input type="text" name="NewsTitle" id="NewsTitle" class="col-xs-12 col-sm-6" oninput="validateEmpty(event)" required />
-                        <div class="text-danger" id="error_title"></div>
+                        <input type="text" name="NewsTitle" class="col-xs-12 col-sm-6" oninput="validateEmpty(event)" />
+                        <div class="text-danger"></div>
                     </div>
                 </div>
 
@@ -73,7 +76,7 @@
 
                     <div class="col-sm-9">
                         <div class="clearfix">
-                            <select name="NewsCategoryId">
+                            <select data-val="true" data-val-number="The field ParentId must be a number." data-val-required="The ParentId field is required." id="ParentId" name="NewsCategoryId" required="required">
                                 <option selected="selected" value="0">-- Tất cả --</option>
                                 @foreach (NewsCategories item in ViewBag.ListCategoriesNews)
                                 {
@@ -102,7 +105,7 @@
 
                     <div class="col-sm-9 box-input">
                         <textarea type="text" name="NewsDescription" rows="2" class="col-xs-12 col-sm-6" oninput="validateEmpty(event)"></textarea>
-                        <div class="text-danger" id="error_shortname"></div>
+                        <div class="text-danger"></div>
                     </div>
                 </div>
 
@@ -115,7 +118,7 @@
 
                     <div class="col-sm-9 box-input">
                         <textarea type="text" name="NewsKeyword" class="col-xs-12 col-sm-6" oninput="validateEmpty(event)"></textarea>
-                        <div class="text-danger" id="error_keyword"></div>
+                        <div class="text-danger"></div>
                     </div>
                 </div>
 
@@ -140,11 +143,13 @@
                     </label>
 
                     <div class="col-sm-9" style="display: flex">
-                        <div class="box-input">
-                            <input type="text" name="NewsImage" class="col-xs-12 col-sm-6" style="width: 175px" oninput="validateEmpty(event)" />
-                            <div class="text-danger" id="error_description"></div>
+                        <div style="display: flex;">
+                            <div>
+                                <input type="text" name="NewsImage" class="col-xs-12 col-sm-6" style="width: 175px" oninput="validateEmpty(event)" />
+                                <div class="text-danger" id="error_description"></div>
+                            </div>
+                            @Html.Partial("FileManagerButton", "NewsImage")
                         </div>
-                        <button class="btn btn-success" style="height: 42px">Browse..</button>
                     </div>
                 </div>
 
@@ -158,11 +163,11 @@
                     <div class="col-sm-9 box-input">
                         <textarea type="text" name="NewsBody" rows="2" class="col-xs-12 col-sm-6" oninput="validateEmpty(event)"></textarea>
                         <div class="text-danger" id="error_description"></div>
+                        @Html.Partial("EditorScripts", CreateViewData(new { Name = "NewsBody" }))
                     </div>
                 </div>
 
                 <div class="space-4"></div>
-
                 <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-2">
                         Thứ tự:
@@ -172,6 +177,7 @@
                         <input type="number" name="OrderNo" class="col-xs-12 col-sm-6 input-number" value="0" />
                     </div>
                 </div>
+
                 <div class="space-4"></div>
 
                 <div class="form-group">
@@ -180,24 +186,32 @@
                     </label>
 
                     <div class="checkbox">
-                        <label class="pos-rel">
-                            <input type="checkbox" id="isActive" class="ace" name="IsActive" checked="@Model.IsActive">
-                            <span class="lbl">Ẩn/Hiện danh mục</span>
+                        <label>
+                            <input name="IsActive" type="checkbox" class="ace" value="true">
+
+                            <span class="lbl"> Ẩn/Hiện danh mục</span>
+                            <input name="IsActive" type="hidden" value="false" />
                         </label>
                     </div>
                 </div>
+
+                <div class="space-4"></div>
+
                 <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right">
-                        Hot news:
+                        Tin nổi bật:
                     </label>
 
                     <div class="checkbox">
-                        <label class="pos-rel">
-                            <input type="checkbox" id="isActive" class="ace" name="IsHotNews">
-                            <span class="lbl">Bài viết nổi bật</span>
+                        <label>
+                            <input name="IsHotNews" type="checkbox" class="ace" value="true">
+
+                            <span class="lbl"> Bài viết nổi bật</span>
+                            <input name="IsHotNews" type="hidden" value="false" />
                         </label>
                     </div>
                 </div>
+
                 <div class="space-4"></div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1">
@@ -209,7 +223,8 @@
                         <button class="btn btn-default">Lọc</button>
                     </div>
                 </div>
-                <button type="submit" id="btn_submit_save" class="btn btn-success">Lưu</button>
+                <div class="space-4"></div>
+                <button type="submit" href="#" id="btn_submit_save" class="btn btn-success">Lưu</button>
             }
         </div>
     </div>
@@ -232,11 +247,10 @@
         function checkValid(e) {
             var inputs = $('input, textarea');
             var bug = 0;
-            //console.log($(inputs[1]).val());
-           
+
             for (var i = 1; i < inputs.length; i++) {
                 if ($(inputs[i]).val() == '') {
-                    $(inputs[i]).next().text('bạn không được để trống');
+                    $(inputs[i]).next().text('Bạn không được để trống');
                     bug++;
                 }
             }
@@ -249,4 +263,6 @@
         }
     </script>
 }
+
+
 

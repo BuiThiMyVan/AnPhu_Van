@@ -72,7 +72,6 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Create(NewsCategories model)
         {
             var resultEntry = new JsonResultEntry() { Success = false };
@@ -117,29 +116,27 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
         public ActionResult Update(NewsCategories model)
         {
             var message = "";
-            if(ModelState.IsValid)
+            if (model != null && !CUtils.IsNullOrEmpty(model.NewsCategoryId))
             {
-                if (model != null && !CUtils.IsNullOrEmpty(model.NewsCategoryId))
+                var newsCategories = NewsCategoriesManager.Get(new NewsCategories() { NewsCategoryId = model.NewsCategoryId });
+                if (newsCategories != null)
                 {
-                    var newsCategories = NewsCategoriesManager.Get(new NewsCategories() { NewsCategoryId = model.NewsCategoryId });
-                    if (newsCategories != null)
-                    {
-                        NewsCategoriesManager.Update(model, newsCategories);
-                        message = "Cập nhật thông tin danh mục thành công!";
-                    }
-                    else
-                    {
-                        message = "Mã danh mục tin tức '" + model.NewsCategoryId + "' không có trong hệ thống!";
-                    }
+                    NewsCategoriesManager.Update(model, newsCategories);
+                    message = "Cập nhật thông tin danh mục thành công!";
                 }
                 else
                 {
-                    message = "Mã danh mục tin tức trống!";
+                    message = "Mã danh mục tin tức '" + model.NewsCategoryId + "' không có trong hệ thống!";
                 }
-                ViewBag.message = message;
-                return RedirectToAction("Index");
             }
-            return View();
+            else
+            {
+                message = "Mã danh mục tin tức trống!";
+            }
+            ViewBag.message = message;
+            ViewBag.ListCategoriesNews = NewsCategoriesManager.GetAll();
+            return View(model);
+
             
         }
 

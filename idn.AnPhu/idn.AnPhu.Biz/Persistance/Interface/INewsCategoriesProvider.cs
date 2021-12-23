@@ -10,6 +10,7 @@ namespace idn.AnPhu.Biz.Persistance.Interface
 {
     interface INewsCategoriesProvider : IImportableDataProvider<NewsCategories>
     {
+        //List<NewsCategories> GetAll(int startIndex, int count, ref int totalItems);
         List<NewsCategories> Search(string txtSearch, int startIndex, int pageCount, ref int totalItems);
     }
 }

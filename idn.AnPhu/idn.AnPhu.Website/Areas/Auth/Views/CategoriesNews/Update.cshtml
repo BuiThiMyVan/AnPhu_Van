@@ -32,6 +32,15 @@
         .input-number {
             width: 78px;
         }
+
+        .box-input {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .text-danger {
+            margin-top: 8px;
+        }
     </style>
 }
 
@@ -39,7 +48,7 @@
     <div class="header-admin">Tạo mới danh mục tin tức</div>
     <div class="content-admin">
         <div class="content-table">
-            @using (Html.BeginForm("Update", "CategoriesNews", FormMethod.Post, new { id = "manageForm", @class = "form-horizontal" }))
+            @using (Html.BeginForm("Update", "CategoriesNews", FormMethod.Post, new { id = "manageForm", @class = "form-horizontal", onsubmit= "checkValid(event)" }))
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true)
@@ -48,9 +57,9 @@
                         Tiêu đề danh mục:
                     </label>
 
-                    <div class="col-sm-9">
+                    <div class="col-sm-9 box-input">
                         <input type='hidden' name="NewsCategoryId" value="@Model.NewsCategoryId" />
-                        <input type="text" name="NewsCategoryTitle" value="@Model.NewsCategoryTitle" class="col-xs-12 col-sm-6"  required/>
+                        <input type="text" name="NewsCategoryTitle" value="@Model.NewsCategoryTitle" class="col-xs-12 col-sm-6" oninput="validateEmpty(event)"/>
                         <div class="text-danger" id="error_title"></div>
                     </div>
                 </div>
@@ -62,7 +71,7 @@
 
                     <div class="col-sm-9">
                         <div class="clearfix">
-                            <select data-val="true" data-val-number="The field ParentId must be a number." data-val-required="The ParentId field is required." id="ParentId" name="ParentId" required="required">
+                            <select data-val="true" data-val-number="The field ParentId must be a number." data-val-required="The ParentId field is required." id="ParentId" name="ParentId">
                                 @if (Model.ParentId == 0)
                                 {
                                     <option selected="selected" value="0">-- Tất cả --</option>
@@ -116,8 +125,8 @@
                         Short Name:
                     </label>
 
-                    <div class="col-sm-9">
-                        <textarea type="text" name="NewsCategoryShortName" rows="2" class="col-xs-12 col-sm-6" required>@Model.NewsCategoryShortName</textarea>
+                    <div class="col-sm-9 box-input">
+                        <textarea type="text" name="NewsCategoryShortName" rows="2" class="col-xs-12 col-sm-6" oninput="validateEmpty(event)">@Model.NewsCategoryShortName</textarea>
                         <div class="text-danger" id="error_shortname"></div>
                     </div>
                 </div>
@@ -129,8 +138,8 @@
                         Mô tả:
                     </label>
 
-                    <div class="col-sm-9">
-                        <textarea type="text" name="NewsCategoryDescription" rows="2" class="col-xs-12 col-sm-6" required>@Model.NewsCategoryDescription</textarea>
+                    <div class="col-sm-9 box-input">
+                        <textarea type="text" name="NewsCategoryDescription" rows="2" class="col-xs-12 col-sm-6" oninput="validateEmpty(event)">@Model.NewsCategoryDescription</textarea>
                         <div class="text-danger" id="error_description"></div>
                     </div>
                 </div>
@@ -142,9 +151,9 @@
                         Keyword:
                     </label>
 
-                    <div class="col-sm-9">
-                        <textarea type="text" name="NewsCategoryKeyword" class="col-xs-12 col-sm-6" required>@Model.NewsCategoryKeyword</textarea>
-                        <div class="text-danger" id="error_keyword"></div>
+                    <div class="col-sm-9 box-input">
+                        <textarea type="text" name="NewsCategoryKeyword" class="col-xs-12 col-sm-6" oninput="validateEmpty(event)">@Model.NewsCategoryKeyword</textarea>
+                        <div class="text-danger"></div>
                     </div>
                 </div>
 
@@ -155,9 +164,9 @@
                         Tóm tắt:
                     </label>
 
-                    <div class="col-sm-9">
-                        <textarea type="text" name="NewsCategorySummary" class="col-xs-12 col-sm-6" required>@Model.NewsCategorySummary</textarea>
-                        <div class="text-danger" id="error_summary"></div>
+                    <div class="col-sm-9 box-input">
+                        <textarea type="text" name="NewsCategorySummary" class="col-xs-12 col-sm-6" oninput="validateEmpty(event)">@Model.NewsCategorySummary</textarea>
+                        <div class="text-danger"></div>
                     </div>
                 </div>
 
@@ -175,14 +184,17 @@
                 <div class="space-4"></div>
 
                 <div class="form-group">
+                    @{var check = Model.IsActive ? "checked" : "";}
                     <label class="col-sm-3 control-label no-padding-right">
                         Trạng thái:
                     </label>
 
                     <div class="checkbox">
-                        <label class="pos-rel">
-                            <input type="checkbox" id="isActive" class="ace" name="IsActive" checked="@Model.IsActive">
-                            <span class="lbl">Ẩn/Hiện danh mục</span>
+                        <label>
+                            <input name="IsActive" type="checkbox" class="ace" value="true" @check>
+
+                            <span class="lbl"> Ẩn/Hiện danh mục</span>
+                            <input name="IsActive" type="hidden" value="false" />
                         </label>
                     </div>
                 </div>
@@ -197,6 +209,40 @@
         $('#btn_submit_save').click(function () {
             $("#manageForm").attr("action", '@Url.ActionLocalized("Update")').submit();
         });
+
+        function validateEmpty(e) {
+            if ($(e.target).val() == '') {
+                $(e.target).next().text('Bạn không được để trống');
+            } else {
+                $(e.target).next().text('');
+            }
+        }
+
+        function checkValid(e) {
+            var inputs = $('input, textarea');
+            var bug = 0;
+
+            for (var i = 1; i < inputs.length; i++) {
+                if ($(inputs[i]).val() == '') {
+                    $(inputs[i]).next().text('Bạn không được để trống');
+                    bug++;
+                }
+            }
+
+            if (bug > 0) {
+                e.preventDefault();
+            } else {
+                return true;
+            }
+        }
+
+        var message = '@ViewBag.message';
+
+        $(document).ready(function () {
+            if (message.trim() != null && message.trim() != '') {
+                alert(message);
+            }
+        })
     </script>
     
 }

@@ -62,6 +62,7 @@
                     </label>
 
                     <div class="col-sm-9 box-input">
+                        <input type='hidden' name="NewsId" value="@Model.NewsId" />
                         <input type="text" name="NewsTitle" value="@Model.NewsTitle" class="col-xs-12 col-sm-6" oninput="validateEmpty(event)" required />
                         <div class="text-danger" id="error_title"></div>
                     </div>
@@ -192,26 +193,31 @@
                 <div class="space-4"></div>
 
                 <div class="form-group">
+                    @{var check = Model.IsActive ? "checked" : "";}
                     <label class="col-sm-3 control-label no-padding-right">
                         Trạng thái:
                     </label>
 
                     <div class="checkbox">
                         <label>
-                            <input name="IsActive" type="checkbox" class="ace" value="@Model.IsActive">
+                            <input name="IsActive" type="checkbox" class="ace" value="true" @check>
+
                             <span class="lbl"> Ẩn/Hiện danh mục</span>
+                            <input name="IsActive" type="hidden" value="false" />
                         </label>
                     </div>
                 </div>
                 <div class="form-group">
+                    @{var hot = Model.IsActive ? "checked" : "";}
                     <label class="col-sm-3 control-label no-padding-right">
                         Hot news:
                     </label>
 
                     <div class="checkbox">
                         <label>
-                            <input name="IsHotNews" type="checkbox" class="ace" value="@Model.IsHotNews">
+                            <input name="IsActive" type="checkbox" class="ace" value="true" @hot>
                             <span class="lbl"> Bài viết nổi bật</span>
+                            <input name="IsActive" type="hidden" value="false" />
                         </label>
                     </div>
                 </div>
@@ -251,7 +257,6 @@
         function checkValid(e) {
             var inputs = $('input, textarea');
             var bug = 0;
-            //console.log($(inputs[1]).val());
 
             for (var i = 1; i < inputs.length; i++) {
                 if ($(inputs[i]).val() == '') {
@@ -266,6 +271,16 @@
                 return true;
             }
         }
+
+        var message = '@ViewBag.message';
+        console.log(typeof message);
+        console.log(message);
+
+        $(document).ready(function () {
+            if (message.trim() != null && message.trim() != '' && message != undefined) {
+                alert(message);
+            }
+        })
     </script>
 }
 

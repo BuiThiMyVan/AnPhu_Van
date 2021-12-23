@@ -139,17 +139,17 @@ namespace idn.AnPhu.Website.Areas.Auth
           );
 
             context.MapRoute(
-                  name: "auth_news_update",
-                  url: "{culture}/quan-tri/danh-sach-tin-tuc/cap-nhat",
-                  defaults: new
-                  {
-                      culture = "vi",
-                      area = "Auth",
-                      controller = "News",
-                      action = "Update",
-                  },
-                  namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
-            );
+              name: "auth_news_update",
+              url: "{culture}/quan-tri/danh-sach-tin-tuc/cap-nhat",
+              defaults: new
+              {
+                  culture = "vi",
+                  area = "Auth",
+                  controller = "News",
+                  action = "Update",
+              },
+              namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+          );
 
             context.MapRoute(
                 "Auth_default",

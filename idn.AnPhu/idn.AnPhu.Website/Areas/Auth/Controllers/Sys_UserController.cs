@@ -113,7 +113,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
             }
 
 
-            return View();
+            //return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
