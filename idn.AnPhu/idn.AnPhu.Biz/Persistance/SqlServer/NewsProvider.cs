@@ -104,7 +104,10 @@ namespace idn.AnPhu.Biz.Persistance.SqlServer
 
         public void Remove(News item)
         {
-
+            var comm = this.GetCommand("Sp_News_Delete");
+            if (comm == null) return;
+            comm.AddParameter<int>(this.Factory, "newsId", item.NewsId);
+            this.SafeExecuteNonQuery(comm);
         }
 
         public void Import(List<News> list, bool deleteExist)

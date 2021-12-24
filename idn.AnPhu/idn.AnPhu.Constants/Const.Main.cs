@@ -44,6 +44,8 @@ namespace idn.AnPhu.Constants
         public const string Sys_Group = "Sys_Group";
         public const string NewsCategories = "NewsCategories";
         public const string News = "News";
+        public const string PrdCategories = "PrdCategories";
+        public const string Product = "Product";
     }
 
     #region["Columns Table"]

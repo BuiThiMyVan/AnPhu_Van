@@ -44,8 +44,25 @@
     </style>
 }
 
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="#">Home</a>
+        </li>
+        <li><a href="@Url.Action("Index", "Home")">Dashboard</a></li>
+        <li><a href="@Url.Action("Index", "CategoriesNews")">Danh sách danh mục tin tức</a></li>
+        @if (ViewBag.IsEdit != null && ViewBag.IsEdit == true)
+        {
+            <li class="active">@Model.NewsCategoryTitle</li>
+        }
+        else
+        {
+            <li class="active">Tạo mới danh mục tin tức</li>
+        }
+    </ul>
+
 <div class="container-admin">
-    <div class="header-admin">Tạo mới danh mục tin tức</div>
+    <div class="header-admin">@Model.NewsCategoryTitle</div>
     <div class="content-admin">
         <div class="content-table">
             @using (Html.BeginForm("Update", "CategoriesNews", FormMethod.Post, new { id = "manageForm", @class = "form-horizontal", onsubmit= "checkValid(event)" }))

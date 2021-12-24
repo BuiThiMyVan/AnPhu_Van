@@ -19,6 +19,7 @@ namespace idn.AnPhu.Biz.Services
             services.Add(typeof(Sys_GroupManager), new Sys_GroupManager(new Sys_GroupProvider()));
             services.Add(typeof(NewsCategoriesManager), new NewsCategoriesManager(new NewsCategoriesProvider()));
             services.Add(typeof(NewsManager), new NewsManager(new NewsProvider()));
+            services.Add(typeof(PrdCategoriesManager), new PrdCategoriesManager(new PrdCategoriesProvider()));
             #endregion
         }
 
@@ -78,6 +79,18 @@ namespace idn.AnPhu.Biz.Services
             set
             {
                 services[typeof(NewsManager)] = value;
+            }
+        }
+
+        public static PrdCategoriesManager PrdCategoriesManager
+        {
+            get
+            {
+                return (PrdCategoriesManager)services[typeof(PrdCategoriesManager)];
+            }
+            set
+            {
+                services[typeof(PrdCategoriesManager)] = value;
             }
         }
     }

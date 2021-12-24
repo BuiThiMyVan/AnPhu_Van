@@ -59,6 +59,17 @@
     </style>
 }
 
+<div class="breadcrumbs ace-save-state" id="breadcrumbs">
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="#">Home</a>
+        </li>
+        <li><a href="@Url.Action("Index", "Home")">Dashboard</a></li>
+        <li><a href="@Url.Action("Index", "CategoriesNews")">Danh sách danh mục tin tức</a></li>
+    </ul>
+</div>
+
 <div class="container-admin">
     <div class="header-admin">Danh sách danh mục tin tức</div>
     <div class="content-admin">
@@ -125,7 +136,7 @@
                 </thead>
 
                 <tbody>
-                    @foreach(NewsCategories item in Model.DataList)
+                    @foreach (NewsCategories item in Model.DataList)
                     {
                         <tr>
                             <td>@item.NewsCategoryTitle</td>
@@ -160,25 +171,9 @@
 
                                         <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
                                             <li>
-                                                <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
-                                                    <span class="blue">
-                                                        <i class="ace-icon fa fa-search-plus bigger-120"></i>
-                                                    </span>
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                <a href="'/vi/quan-tri/danh-muc-tin-tuc/cap-nhat?newsCategoryId='+ @item.NewsCategoryId" class="tooltip-success" data-rel="tooltip" title="Edit">
                                                     <span class="green">
                                                         <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
-                                                    </span>
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
-                                                    <span class="red">
-                                                        <i class="ace-icon fa fa-trash-o bigger-120"></i>
                                                     </span>
                                                 </a>
                                             </li>
@@ -203,16 +198,16 @@
                     </li>
                     @for (var i = 0; i < Model.PageCount; i++)
                     {
-                        if ((i+1) == Model.PageIndex)
+                        if ((i + 1) == Model.PageIndex)
                         {
                             <li class="active">
-                                <a href="javascript:void(0);" onclick="goToPage(@(i+1))">@(i+1)</a>
+                                <a href="javascript:void(0);" onclick="goToPage(@(i+1))">@(i + 1)</a>
                             </li>
                         }
                         else
                         {
                             <li>
-                                <a href="javascript:void(0);" onclick="goToPage(@(i+1))">@(i+1)</a>
+                                <a href="javascript:void(0);" onclick="goToPage(@(i+1))">@(i + 1)</a>
                             </li>
                         }
                     }
@@ -229,7 +224,7 @@
     </div>
 </div>
 @section Scripts {
-<script>
+    <script>
     var pageIndex = @Model.PageIndex;
     var pageSize = @Model.PageSize;
 
@@ -268,7 +263,7 @@
         var txtSearch = $('#txtSearch').val().trim();
             window.location.href = "/vi/quan-tri/danh-muc-tin-tuc/danh-sach?page=" + index + "&pageSize=" + pageSize + "&txtSearch=" + txtSearch;
     }
-</script>
-    }
+    </script>
+}
 
 

@@ -49,15 +49,26 @@
             transform: translateY(-50%);
         }
 
-        .sort-icon:hover {
-            cursor: pointer;
-        }
+            .sort-icon:hover {
+                cursor: pointer;
+            }
 
-        .sort-icon i {
-            height: 5px;
-        }
+            .sort-icon i {
+                height: 5px;
+            }
     </style>
 }
+
+    <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="ace-icon fa fa-home home-icon"></i>
+                <a href="#">Home</a>
+            </li>
+            <li><a href="@Url.Action("Index", "Home")">Dashboard</a></li>
+            <li><a href="@Url.Action("Index", "News")">Danh sách tin tức</a></li>
+        </ul>
+    </div>
 
 <div class="container-admin">
     <div class="header-admin">Danh sách tin tức</div>
@@ -165,6 +176,9 @@
                                     <button class="btn btn-xs btn-info" onclick="window.location.href='/vi/quan-tri/danh-sach-tin-tuc/cap-nhat?newsId='+ @item.NewsId">
                                         <i class="ace-icon fa fa-pencil bigger-120"></i>
                                     </button>
+                                    <button class="btn btn-xs btn-danger" onclick="confirmDelete(@item.NewsId)">
+                                        <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                    </button>
                                 </div>
 
                                 <div class="hidden-md hidden-lg">
@@ -175,15 +189,7 @@
 
                                         <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
                                             <li>
-                                                <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
-                                                    <span class="blue">
-                                                        <i class="ace-icon fa fa-search-plus bigger-120"></i>
-                                                    </span>
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                <a href="'/vi/quan-tri/danh-sach-tin-tuc/cap-nhat?newsId='+ @item.NewsId" class="tooltip-success" data-rel="tooltip" title="Edit">
                                                     <span class="green">
                                                         <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
                                                     </span>
@@ -191,7 +197,7 @@
                                             </li>
 
                                             <li>
-                                                <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                                <a href="javascript:void(0)" class="tooltip-error" data-rel="tooltip" title="Delete" onclick="confirmDelete(@item.NewsId)">
                                                     <span class="red">
                                                         <i class="ace-icon fa fa-trash-o bigger-120"></i>
                                                     </span>
@@ -283,7 +289,23 @@
     function goToPage(index) {
         var txtSearch = $('#txtSearch').val().trim();
             window.location.href = "/vi/quan-tri/danh-sach-tin-tuc/danh-sach?page=" + index + "&pageSize=" + pageSize + "&txtSearch=" + txtSearch;
-    }
+        }
+
+        var message = '@ViewBag.message';
+
+        $(document).ready(function () {
+            if (message.trim() != null && message.trim() != '') {
+                alert(message);
+            }
+        })
+
+        function confirmDelete(id) {
+            if (confirm("Bạn muốn xóa tin có mã " + id + " ?") == true) {
+                window.location.href = '/vi/quan-tri/danh-sach-tin-tuc/xoa?newsId=' + id;
+            } else {
+                return false;
+            }
+        }
     </script>
 }
 

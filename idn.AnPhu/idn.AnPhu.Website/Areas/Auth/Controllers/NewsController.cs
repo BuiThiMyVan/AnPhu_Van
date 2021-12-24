@@ -63,6 +63,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
             var listPageSize = new int[3] { 10, 15, 20 };
             ViewBag.listPageSize = listPageSize;
             ViewBag.txtSearch = txtSearch;
+            ViewBag.message = "";
             return View(pageInfo);
         }
         #endregion
@@ -80,19 +81,25 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
         [HttpPost]
         public ActionResult Create(News model)
         {
-            var resultEntry = new JsonResultEntry() { Success = false };
-
             var createBy = "";
             if (UserState != null && !CUtils.IsNullOrEmpty(UserState.UserName))
             {
                 createBy = CUtils.StrTrim(UserState.UserName);
+                model.CreateBy = createBy;
             }
-            model.CreateBy = createBy;
-            NewsManager.Add(model);
-            resultEntry.Success = true;
-            resultEntry.AddMessage("Tạo mới danh mục tin tức thành công!");
+            try
+            {
+                NewsManager.Add(model);
+                //ViewBag.message = "Thêm mới tin tức thành công";
+                return RedirectToAction("Index");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return RedirectToAction("Index");
+            }
 
-            return RedirectToAction("Index");
+
         }
         #endregion
 
@@ -111,6 +118,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
                 //ViewBag.Categories = new SelectList(NewsCategoriesManager.GetAll(), "NewsCategoryId", "HlevelTitle");
                 ViewBag.ListCategoriesNews = NewsCategoriesManager.GetAll();
                 ViewBag.message = "";
+                ViewBag.IsEdit = true;
                 return View(news);
             }
             else
@@ -142,10 +150,33 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
             }
             ViewBag.message = message;
             ViewBag.ListCategoriesNews = NewsCategoriesManager.GetAll();
-
+            ViewBag.IsEdit = true;
             return View(model);
         }
 
+        #endregion
+
+        #region["Xóa tin tức"]
+        [HttpGet]
+        public ActionResult Delete(int newsId)
+        {
+            if (CUtils.IsNullOrEmpty(newsId))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            
+            try
+            {
+                NewsManager.Remove(new News() { NewsId = newsId });
+                //ViewBag.message = "Xóa tin tức mã " + newsId + "thành công";
+                return RedirectToAction("Index");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return RedirectToAction("Index");
+            }
+        }
         #endregion
     }
 }

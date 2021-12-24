@@ -152,6 +152,58 @@ namespace idn.AnPhu.Website.Areas.Auth
           );
 
             context.MapRoute(
+              name: "auth_news_delete",
+              url: "{culture}/quan-tri/danh-sach-tin-tuc/xoa",
+              defaults: new
+              {
+                  culture = "vi",
+                  area = "Auth",
+                  controller = "News",
+                  action = "Delete",
+              },
+              namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+            );
+
+            context.MapRoute(
+              name: "auth_prdcategories",
+              url: "{culture}/quan-tri/danh-muc-san-pham/danh-sach",
+              defaults: new
+              {
+                  culture = "vi",
+                  area = "Auth",
+                  controller = "PrdCategories",
+                  action = "Index",
+              },
+              namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+            );
+
+            context.MapRoute(
+              name: "auth_prdcategories_create",
+              url: "{culture}/quan-tri/danh-muc-san-pham/tao-moi",
+              defaults: new
+              {
+                  culture = "vi",
+                  area = "Auth",
+                  controller = "PrdCategories",
+                  action = "Create",
+              },
+              namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+            );
+
+            context.MapRoute(
+              name: "auth_prdcategories_update",
+              url: "{culture}/quan-tri/danh-muc-san-pham/cap-nhat",
+              defaults: new
+              {
+                  culture = "vi",
+                  area = "Auth",
+                  controller = "PrdCategories",
+                  action = "Update",
+              },
+              namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+            );
+
+            context.MapRoute(
                 "Auth_default",
                 "{culture}/Auth/{controller}/{action}/{id}",
                 new { culture = "vi", controller = "Home", action = "Index", id = UrlParameter.Optional },

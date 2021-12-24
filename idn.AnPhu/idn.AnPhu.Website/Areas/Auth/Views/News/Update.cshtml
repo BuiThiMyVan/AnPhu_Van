@@ -48,8 +48,25 @@
     </style>
 }
 
+<ul class="breadcrumb">
+    <li>
+        <i class="ace-icon fa fa-home home-icon"></i>
+        <a href="#">Home</a>
+    </li>
+    <li><a href="@Url.Action("Index", "Home")">Dashboard</a></li>
+    <li><a href="@Url.Action("Index", "News")">Danh sách danh mục tin tức</a></li>
+    @if (ViewBag.IsEdit != null && ViewBag.IsEdit == true)
+    {
+        <li class="active">@Model.NewsTitle</li>
+    }
+    else
+    {
+        <li class="active">Tạo mới danh mục tin tức</li>
+    }
+</ul>
+
 <div class="container-admin">
-    <div class="header-admin">Cập nhật tin tức</div>
+    <div class="header-admin">@Model.NewsTitle</div>
     <div class="content-admin">
         <div class="content-table">
             @using (Html.BeginForm("Update", "News", FormMethod.Post, new { id = "manageForm", @class = "form-horizontal", onsubmit = "checkValid(event)" }))
@@ -101,7 +118,7 @@
                                         {
                                             <option value="@item.NewsCategoryId">@item.NewsCategoryTitle</option>
                                         }
-                                        
+
                                     }
 
                                 }
@@ -157,12 +174,13 @@
                         Hình ảnh:
                     </label>
 
-                    <div class="col-sm-9" style="display: flex">
-                        <div class="box-input">
-                            <input type="text" name="NewsImage" class="col-xs-12 col-sm-6" style="width: 175px" value="@Model.NewsImage" oninput="validateEmpty(event)" />
-                            <div class="text-danger" id="error_description"></div>
+                    <div class="col-sm-9">
+                        <div>
+                            <div style="display: flex">
+                                <input type="text" name="NewsImage" id="NewsImage" value="@Model.NewsImage" class="col-xs-12 col-sm-6" style="width: 300px" oninput="validateEmpty(event)" />
+                                <span type="button" onclick="ChooseImage(event)" class="btn btn-sm btn-success">Browse..</span>
+                            </div>
                         </div>
-                        <button class="btn btn-success" style="height: 42px">Browse..</button>
                     </div>
                 </div>
 
@@ -174,7 +192,8 @@
                     </label>
 
                     <div class="col-sm-9 box-input">
-                        <textarea type="text" name="NewsBody" rows="2" class="col-xs-12 col-sm-6" oninput="validateEmpty(event)">@Model.NewsBody</textarea>
+                        <input type="hidden" name="NewsBody" id="news_body" />
+                        <textarea type="text" id="NewsBody" rows="2" class="col-xs-12 col-sm-6" oninput="validateEmpty(event)">@Model.NewsBody</textarea>
                         <div class="text-danger" id="error_description"></div>
                     </div>
                 </div>
@@ -241,13 +260,39 @@
 
 </div>
 @section Scripts {
+    <script src="/Scripts/tinymce/tinymce.min.js"></script>
+    <script src="/Content/js/ckfinder/ckfinder.js"></script>
+    <!-- Script to wire up your TinyMCE editor -->
+    <script type="text/javascript">
+        // Initialize your tinyMCE Editor with your preferred options
+        tinymce.init({
+            selector: "#NewsBody",
+            init_instance_callback: function (editor) {
+                editor.on('input', function (e) {
+                    var value = tinymce.get("NewsBody").getContent();
+                    var div = document.createElement("div");
+                    div.innerHTML = value;
+                    var text = div.textContent || div.innerText || "";
+                    $('#news_body').val(text);
+                });
+            }
+        });
+
+        function ChooseImage(e) {
+            var finder = new CKFinder();
+            finder.selectActionFunction = function (fileUrl) {
+                $('#NewsImage').val(fileUrl);
+            }
+            finder.popup();
+        }
+    </script>
     <script>
         $('#btn_submit_save').click(function () {
-            $("#manageForm").attr("action", '@Url.ActionLocalized("Update")').submit();
+            $("#manageForm").attr("action", '@Url.ActionLocalized("Create")').submit();
         });
 
         function validateEmpty(e) {
-            if ($(e.target).val() == '') {
+            if ($(e.target).val() == '' && $(e.target).attr('id') != 'NewsOther' && $(e.target).attr('id') != 'NewsBody' && $(e.target).attr('id') != 'NewsImage' && $(e.target).attr('id') != 'news_body') {
                 $(e.target).next().text('Bạn không được để trống');
             } else {
                 $(e.target).next().text('');
@@ -259,8 +304,8 @@
             var bug = 0;
 
             for (var i = 1; i < inputs.length; i++) {
-                if ($(inputs[i]).val() == '') {
-                    $(inputs[i]).next().text('bạn không được để trống');
+                if ($(inputs[i]).val() == '' && $(inputs[i]).attr('id') != 'NewsOther' && $(inputs[i]).attr('id') != 'NewsBody' && $(inputs[i]).attr('id') != 'NewsImage' && $(inputs[i]).attr('id') != 'news_body') {
+                    $(inputs[i]).next().text('Bạn không được để trống');
                     bug++;
                 }
             }
@@ -271,16 +316,6 @@
                 return true;
             }
         }
-
-        var message = '@ViewBag.message';
-        console.log(typeof message);
-        console.log(message);
-
-        $(document).ready(function () {
-            if (message.trim() != null && message.trim() != '' && message != undefined) {
-                alert(message);
-            }
-        })
     </script>
 }
 

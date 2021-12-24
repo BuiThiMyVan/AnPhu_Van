@@ -8,13 +8,13 @@
     <textarea id="@id"></textarea>
 </div>
 <input type="button" id="btn-@id" value="Browse.." class="btn btn-sm btn-success" />
-@*<script src="~/Scripts/tinymce/tiny_mce.js"></script>*@
+<script src="~/Scripts/tinymce/tiny_mce.js"></script>
+<script src="~/Scripts/tinymce/jquery.tinymce.js"></script>
 @*@Html.Script("~/scripts/tinymce/jquery.tinymce.js")*@
 <script type="text/javascript">
 
 		var _editorOptions = {
-			script_url: "@Url.Content("~/Scripts/tinymce/tiny_mce.js")",
-			 theme: "advanced",
+			script_url: "@Url.Content("~/scripts/tinymce/tiny_mce.js")",
                 plugins: "netadvimage"
 
 
@@ -24,19 +24,16 @@
 </script>
 <script type="text/javascript">
 	$(document).ready(function () {
-		tinyMCE.init({
-
+	    tinyMCE.init({
 	        // General options
 	        mode: "exact",
 	        elements: "@id",
-        theme: "advanced",
         plugins: "netadvimage"
 		});
 	});
 
 
-	$('#btn-@id').click(function () {
-
+    $('#btn-@id').click(function () {
 	    //tinymce.get('@id').plugins.netadvimage.getInfo();
 		var b = tinymce.get('@id').execCommand("mceNetAdvImagePickup");
 

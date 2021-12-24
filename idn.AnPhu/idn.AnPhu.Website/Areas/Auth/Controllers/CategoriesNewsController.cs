@@ -84,8 +84,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
             model.CreateBy = createBy;
             NewsCategoriesManager.Add(model);
             resultEntry.Success = true;
-            resultEntry.AddMessage("Tạo mới danh mục tin tức thành công!");
-
+            resultEntry.AddMessage("Tạo mới danh mục tin tức thành công!");            
             return RedirectToAction("Index");
         }
         #endregion
@@ -104,6 +103,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
             {
                 ViewBag.ListCategoriesNews = NewsCategoriesManager.GetAll();
                 ViewBag.message = "";
+                ViewBag.IsEdit = true;
                 return View(newsCategory);
             }
             else
@@ -135,6 +135,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
             }
             ViewBag.message = message;
             ViewBag.ListCategoriesNews = NewsCategoriesManager.GetAll();
+            ViewBag.IsEdit = true;
             return View(model);
 
             
