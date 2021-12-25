@@ -19,7 +19,7 @@ namespace idn.AnPhu.Biz.Persistance.SqlServer
         {
             DbCommand comm = this.GetCommand("Sp_PrdCategories_GetById");
 
-            comm.AddParameter<int>(this.Factory, "newsCategoryId", dummy.PrdCategoryId);
+            comm.AddParameter<int>(this.Factory, "prdCategoryId", dummy.PrdCategoryId);
 
             var table = this.GetTable(comm);
             table.TableName = TableName.PrdCategories;
@@ -79,16 +79,15 @@ namespace idn.AnPhu.Biz.Persistance.SqlServer
             item.PrdCategoryId = old.PrdCategoryId;
             var comm = this.GetCommand("Sp_PrdCategories_Update");
             if (comm == null) return;
-            comm.AddParameter<int>(this.Factory, "prdCategoriesId", item.PrdCategoryId);
-            comm.AddParameter<int>(this.Factory, "parentId", item.ParentId);
-            //comm.AddParameter<string>(this.Factory, "newsCategoryTitle", (item.NewsCategoryTitle != null && item.NewsCategoryTitle.Trim().Length > 0) ? item.NewsCategoryTitle.Trim() : null);
-            //comm.AddParameter<string>(this.Factory, "newsCategoryShortName", (item.NewsCategoryShortName != null && item.NewsCategoryShortName.Trim().Length > 0) ? item.NewsCategoryShortName.Trim() : null);
-            //comm.AddParameter<string>(this.Factory, "newsCategorySummary", (item.NewsCategorySummary != null && item.NewsCategorySummary.Trim().Length > 0) ? item.NewsCategorySummary.Trim() : null);
-            //comm.AddParameter<string>(this.Factory, "newsCategoryDescription", (item.NewsCategoryDescription != null && item.NewsCategoryDescription.Trim().Length > 0) ? item.NewsCategoryDescription.Trim() : null);
-            //comm.AddParameter<string>(this.Factory, "newsCategoryKeyword", (item.NewsCategoryKeyword != null && item.NewsCategoryKeyword.Trim().Length > 0) ? item.NewsCategoryKeyword.Trim() : null);
-            //comm.AddParameter<bool>(this.Factory, "isActive", item.IsActive);
-            comm.AddParameter<int>(this.Factory, "orderNo", item.OrderNo);
-            comm.AddParameter<string>(this.Factory, "culture", item.Culture);
+            comm.AddParameter<int>(this.Factory, "PrdCategoryId", item.PrdCategoryId);
+            comm.AddParameter<int>(this.Factory, "ParentId", item.ParentId);
+            comm.AddParameter<string>(this.Factory, "PrdCategoryTitle", (item.PrdCategoryTitle != null && item.PrdCategoryTitle.Trim().Length > 0) ? item.PrdCategoryTitle.Trim() : null);
+            comm.AddParameter<string>(this.Factory, "PrdCategorySummary", (item.PrdCategorySummary != null && item.PrdCategorySummary.Trim().Length > 0) ? item.PrdCategorySummary.Trim() : null);
+            comm.AddParameter<string>(this.Factory, "PrdCategoryDescription", (item.PrdCategoryDescription != null && item.PrdCategoryDescription.Trim().Length > 0) ? item.PrdCategoryDescription.Trim() : null);
+            comm.AddParameter<string>(this.Factory, "PrdCategoryKeyword", (item.PrdCategoryKeyword != null && item.PrdCategoryKeyword.Trim().Length > 0) ? item.PrdCategoryKeyword.Trim() : null);
+            comm.AddParameter<bool>(this.Factory, "IsActive", item.IsActive);
+            comm.AddParameter<int>(this.Factory, "OrderNo", item.OrderNo);
+            comm.AddParameter<string>(this.Factory, "Culture", (item.Culture != null && item.Culture.Trim().Length > 0) ? item.Culture.Trim() : null);
 
             this.SafeExecuteNonQuery(comm);
         }

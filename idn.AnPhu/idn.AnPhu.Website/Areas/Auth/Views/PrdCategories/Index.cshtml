@@ -232,14 +232,14 @@
     function updatePageSize() {
         var pageSizeUpdate = $('#pageSize').val();
         debugger
-        window.location.href = "/vi/quan-tri/danh-muc-tin-tuc/danh-sach?page=" + pageIndex + "&pageSize=" + pageSizeUpdate;
+        window.location.href = "/vi/quan-tri/danh-muc-san-pham/danh-sach?page=" + pageIndex + "&pageSize=" + pageSizeUpdate;
         debugger
     }
 
     function search(e) {
         var txtSearch = $('#txtSearch').val().trim();
         if (e.key === 'Enter' || e.keyCode === 13) {
-            window.location.href = "/vi/quan-tri/danh-muc-tin-tuc/danh-sach?page=" + pageIndex + "&pageSize=" + pageSize + "&txtSearch=" + txtSearch;
+            window.location.href = "/vi/quan-tri/danh-muc-san-pham/danh-sach?page=" + pageIndex + "&pageSize=" + pageSize + "&txtSearch=" + txtSearch;
         }
 
     }
@@ -247,7 +247,7 @@
     function prev() {
         if (pageIndex > 1) {
             pageIndex--;
-            window.location.href = "/vi/quan-tri/danh-muc-tin-tuc/danh-sach?page=" + pageIndex + "&pageSize=" + pageSize;
+            window.location.href = "/vi/quan-tri/danh-muc-san-pham/danh-sach?page=" + pageIndex + "&pageSize=" + pageSize;
         }
 
     }
@@ -255,14 +255,14 @@
     function next() {
         if (pageIndex < @Model.PageCount) {
             pageIndex++;
-            window.location.href = "/vi/quan-tri/danh-muc-tin-tuc/danh-sach?page=" + pageIndex + "&pageSize=" + pageSize;
+            window.location.href = "/vi/quan-tri/danh-muc-san-pham/danh-sach?page=" + pageIndex + "&pageSize=" + pageSize;
         }
 
     }
 
     function goToPage(index) {
         var txtSearch = $('#txtSearch').val().trim();
-            window.location.href = "/vi/quan-tri/danh-muc-tin-tuc/danh-sach?page=" + index + "&pageSize=" + pageSize + "&txtSearch=" + txtSearch;
+            window.location.href = "/vi/quan-tri/danh-muc-san-pham/danh-sach?page=" + index + "&pageSize=" + pageSize + "&txtSearch=" + txtSearch;
     }
     </script>
 }

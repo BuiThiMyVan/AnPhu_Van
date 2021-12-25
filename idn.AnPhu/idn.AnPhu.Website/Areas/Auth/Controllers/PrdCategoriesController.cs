@@ -6,6 +6,7 @@ using idn.AnPhu.Website.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -18,7 +19,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
             get { return ServiceFactory.PrdCategoriesManager; }
         }
 
-        #region["List danh mục sản phẩm"]
+        #region["List loại xe"]
         // GET: Auth/PrdCategories
         public ActionResult Index(int? page, int? pageSize, string txtSearch = "")
         {
@@ -59,7 +60,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
         }
         #endregion
 
-        #region["Tạo mới danh mục sản phẩm"]
+        #region["Tạo mới loại xe"]
         [HttpGet]
         public ActionResult Create()
         {
@@ -94,6 +95,60 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
             }
 
         }
+        #endregion
+
+        #region["Thay đổi thông tin loại xe"]
+        [HttpGet]
+        public ActionResult Update(int prdCategoryId)
+        {
+            if (CUtils.IsNullOrEmpty(prdCategoryId))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var prdCategory = PrdCategoriesManager.Get(new PrdCategories() { PrdCategoryId = prdCategoryId });
+
+            if (prdCategory != null)
+            {
+                ViewBag.ListPrdCategories = PrdCategoriesManager.GetAll();
+                ViewBag.message = "";
+                ViewBag.IsEdit = true;
+                return View(prdCategory);
+            }
+            else
+            {
+                return HttpNotFound();
+            }
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Update(PrdCategories model)
+        {
+            var message = "";
+            if (model != null && !CUtils.IsNullOrEmpty(model.PrdCategoryId))
+            {
+                var prdCategories = PrdCategoriesManager.Get(new PrdCategories() { PrdCategoryId = model.PrdCategoryId });
+                if (prdCategories != null)
+                {
+                    PrdCategoriesManager.Update(model, prdCategories);
+                    message = "Cập nhật thông tin loại xe thành công!";
+                }
+                else
+                {
+                    message = "Mã loại xe '" + model.PrdCategoryId + "' không có trong hệ thống!";
+                }
+            }
+            else
+            {
+                message = "Mã loại xe trống!";
+            }
+            ViewBag.message = message;
+            ViewBag.ListPrdCategories = PrdCategoriesManager.GetAll();
+            ViewBag.IsEdit = true;
+            return View(model);
+
+
+        }
+
         #endregion
     }
 }

@@ -210,8 +210,57 @@ namespace idn.AnPhu.Website.Areas.Auth
                 new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
             );
 
+            context.MapRoute(
+              name: "auth_product",
+              url: "{culture}/quan-tri/danh-sach-san-pham/danh-sach",
+              defaults: new
+              {
+                  culture = "vi",
+                  area = "Auth",
+                  controller = "Product",
+                  action = "Index",
+              },
+              namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+            );
 
+            context.MapRoute(
+              name: "auth_product_create",
+              url: "{culture}/quan-tri/danh-sach-san-pham/tao-moi",
+              defaults: new
+              {
+                  culture = "vi",
+                  area = "Auth",
+                  controller = "Product",
+                  action = "Create",
+              },
+              namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+            );
 
+            context.MapRoute(
+              name: "auth_product_update",
+              url: "{culture}/quan-tri/danh-sach-san-pham/cap-nhat",
+              defaults: new
+              {
+                  culture = "vi",
+                  area = "Auth",
+                  controller = "Product",
+                  action = "Update",
+              },
+              namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+            );
+
+            context.MapRoute(
+              name: "auth_product_delete",
+              url: "{culture}/quan-tri/danh-sach-san-pham/xoa",
+              defaults: new
+              {
+                  culture = "vi",
+                  area = "Auth",
+                  controller = "Product",
+                  action = "Delete",
+              },
+              namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+            );
             //context.MapRoute(
             //    "Auth_default",
             //    "Auth/{controller}/{action}/{id}",

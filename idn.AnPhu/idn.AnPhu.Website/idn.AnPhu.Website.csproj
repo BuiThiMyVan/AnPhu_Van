@@ -1075,6 +1075,7 @@
     <Content Include="Areas\Auth\Views\Product\Index.cshtml" />
     <Content Include="Areas\Auth\Views\PrdCategories\Index.cshtml" />
     <Content Include="Areas\Auth\Views\PrdCategories\Create.cshtml" />
+    <Content Include="Areas\Auth\Views\PrdCategories\Update.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

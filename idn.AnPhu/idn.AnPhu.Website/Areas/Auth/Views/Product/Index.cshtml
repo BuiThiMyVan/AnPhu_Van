@@ -1,4 +1,4 @@
-﻿@model PageInfo<NewsCategories>
+﻿@model PageInfo<Product>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Auth/Views/Shared/_LayoutAuth.cshtml";
@@ -66,7 +66,7 @@
             <a href="#">Home</a>
         </li>
         <li><a href="@Url.Action("Index", "Home")">Dashboard</a></li>
-        <li><a href="@Url.Action("Index", "CategoriesNews")">Danh sách danh mục tin tức</a></li>
+        <li><a href="@Url.Action("Index", "Product")">Danh sách sản phẩm</a></li>
     </ul>
 </div>
 
@@ -101,23 +101,21 @@
                 <thead>
                     <tr>
                         <th class="head-sort">
-                            Tên danh mục
+                            Mã sản phẩm
+                            <div class="sort-icon">
+                                <i class="fa fa-caret-up"></i>
+                                <i class="fa fa-sort-down"></i>
+                            </div>
+                        </th>
+                        <th class="head-sort">
+                            Tên sản phẩm
                             <div class="sort-icon">
                                 <i class="fa fa-caret-up"></i>
                                 <i class="fa fa-sort-down"></i>
                             </div>
                         </th>
                         <th class="hidden-480 head-sort">
-                            Người tạo
-                            <div class="sort-icon">
-                                <i class="fa fa-caret-up"></i>
-                                <i class="fa fa-sort-down"></i>
-                            </div>
-                        </th>
-
-                        <th class="head-sort">
-                            <i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
-                            Ngày tạo
+                            Loại sản phẩm
                             <div class="sort-icon">
                                 <i class="fa fa-caret-up"></i>
                                 <i class="fa fa-sort-down"></i>
@@ -136,12 +134,12 @@
                 </thead>
 
                 <tbody>
-                    @foreach (NewsCategories item in Model.DataList)
+                    @foreach (Product item in Model.DataList)
                     {
                         <tr>
-                            <td>@item.NewsCategoryTitle</td>
-                            <td class="hidden-480">@item.CreateBy</td>
-                            <td>@item.CreateDate</td>
+                            <td>@item.ProductCode</td>
+                            <td class="hidden-480">@item.ProductName</td>
+                            <td>@item.PrdCategoryName</td>
 
                             <td class="hidden-480">
                                 @if (item.IsActive == true)
@@ -158,8 +156,17 @@
 
                             <td>
                                 <div class="hidden-sm hidden-xs btn-group">
-                                    <button class="btn btn-xs btn-info" onclick="window.location.href='/vi/quan-tri/danh-muc-tin-tuc/cap-nhat?newsCategoryId='+ @item.NewsCategoryId">
+                                    <button class="btn btn-xs btn-info" onclick="window.location.href='/vi/quan-tri/danh-sach-san-pham/cap-nhat?productId='+ @item.ProductId">
                                         <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                    </button>
+                                    <button class="btn btn-xs btn-info" onclick="window.location.href='/vi/quan-tri/danh-sach-san-pham/cap-nhat?productId='+ @item.ProductId">
+                                        <i class="ace-icon fa fa-file-text-o bigger-120"></i>
+                                    </button>
+                                    <button class="btn btn-xs btn-info" onclick="window.location.href='/vi/quan-tri/danh-sach-san-pham/cap-nhat?productId='+ @item.ProductId">
+                                        <i class="ace-icon fa fa-gear bigger-120"></i>
+                                    </button>
+                                    <button class="btn btn-xs btn-info" onclick="window.location.href='/vi/quan-tri/danh-sach-san-pham/cap-nhat?productId='+ @item.ProductId">
+                                        <i class="ace-icon fa fa-th bigger-120"></i>
                                     </button>
                                 </div>
 
@@ -171,9 +178,30 @@
 
                                         <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
                                             <li>
-                                                <a href="'/vi/quan-tri/danh-muc-tin-tuc/cap-nhat?newsCategoryId='+ @item.NewsCategoryId" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                <a href="'/vi/quan-tri/danh-sach-san-pham/cap-nhat?productId='+ @item.ProductId" class="tooltip-success" data-rel="tooltip" title="Edit">
                                                     <span class="green">
                                                         <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="'/vi/quan-tri/danh-sach-san-pham/cap-nhat?productId='+ @item.ProductId" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                    <span class="green">
+                                                        <i class="ace-icon fa fa-file-text-o bigger-120"></i>
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="'/vi/quan-tri/danh-sach-san-pham/cap-nhat?productId='+ @item.ProductId" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                    <span class="green">
+                                                        <i class="ace-icon fa fa-gear bigger-120"></i>
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="'/vi/quan-tri/danh-sach-san-pham/cap-nhat?productId='+ @item.ProductId" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                    <span class="green">
+                                                        <i class="ace-icon fa fa-th bigger-120"></i>
                                                     </span>
                                                 </a>
                                             </li>
@@ -219,7 +247,7 @@
                     </li>
                 </ul>
             </div>
-            <a href="/vi/quan-tri/danh-muc-tin-tuc/tao-moi" class="btn btn-success">Tạo mới</a>
+            <a href="/vi/quan-tri/danh-sach-san-pham/tao-moi" class="btn btn-success">Tạo mới</a>
         </div>
     </div>
 </div>
@@ -231,14 +259,14 @@
     function updatePageSize() {
         var pageSizeUpdate = $('#pageSize').val();
         debugger
-        window.location.href = "/vi/quan-tri/danh-muc-tin-tuc/danh-sach?page=" + pageIndex + "&pageSize=" + pageSizeUpdate;
+        window.location.href = "/vi/quan-tri/danh-sach-san-pham/danh-sach?page=" + pageIndex + "&pageSize=" + pageSizeUpdate;
         debugger
     }
 
     function search(e) {
         var txtSearch = $('#txtSearch').val().trim();
         if (e.key === 'Enter' || e.keyCode === 13) {
-            window.location.href = "/vi/quan-tri/danh-muc-tin-tuc/danh-sach?page=" + pageIndex + "&pageSize=" + pageSize + "&txtSearch=" + txtSearch;
+            window.location.href = "/vi/quan-tri/danh-sach-san-pham/danh-sach?page=" + pageIndex + "&pageSize=" + pageSize + "&txtSearch=" + txtSearch;
         }
 
     }
@@ -246,7 +274,7 @@
     function prev() {
         if (pageIndex > 1) {
             pageIndex--;
-            window.location.href = "/vi/quan-tri/danh-muc-tin-tuc/danh-sach?page=" + pageIndex + "&pageSize=" + pageSize;
+            window.location.href = "/vi/quan-tri/danh-sach-san-pham/danh-sach?page=" + pageIndex + "&pageSize=" + pageSize;
         }
 
     }
@@ -254,14 +282,14 @@
     function next() {
         if (pageIndex < @Model.PageCount) {
             pageIndex++;
-            window.location.href = "/vi/quan-tri/danh-muc-tin-tuc/danh-sach?page=" + pageIndex + "&pageSize=" + pageSize;
+            window.location.href = "/vi/quan-tri/danh-sach-san-pham/danh-sach?page=" + pageIndex + "&pageSize=" + pageSize;
         }
 
     }
 
     function goToPage(index) {
         var txtSearch = $('#txtSearch').val().trim();
-            window.location.href = "/vi/quan-tri/danh-muc-tin-tuc/danh-sach?page=" + index + "&pageSize=" + pageSize + "&txtSearch=" + txtSearch;
+            window.location.href = "/vi/quan-tri/danh-sach-san-pham/danh-sach?page=" + index + "&pageSize=" + pageSize + "&txtSearch=" + txtSearch;
     }
     </script>
 }
