@@ -87,7 +87,7 @@
 
                     <div class="col-sm-9">
                         <div class="clearfix">
-                            <select data-val="true" data-val-number="The field ParentId must be a number." data-val-required="The ParentId field is required." id="ParentId" name="ParentId" required="required">
+                            <select name="ParentId">
                                 <option selected="selected" value="0">-- Tất cả --</option>
                                 @foreach (PrdCategories item in ViewBag.ListPrdCategories)
                                 {
@@ -101,6 +101,7 @@
                                     }
                                 }
                             </select>
+                            <div class="text-danger"></div>
                         </div>
                     </div>
                 </div>
@@ -114,7 +115,7 @@
 
                     <div class="col-sm-9 box-input">
                         <textarea type="text" name="PrdCategoryDescription" rows="2" class="col-xs-12 col-sm-6" oninput="validateEmpty(event)"></textarea>
-                        <div class="text-danger" id="error_description"></div>
+                        <div class="text-danger"></div>
                     </div>
                 </div>
 

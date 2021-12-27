@@ -12,23 +12,17 @@ using System.Web.Mvc;
 
 namespace idn.AnPhu.Website.Areas.Auth.Controllers
 {
-    public class ProductController : AdministratorController
+    public class ProductReviewsController : AdministratorController
     {
-        private ProductManager ProductManager
+        private ProductReviewsManager ProductReviewsManager
         {
-            get { return ServiceFactory.ProductManager; }
+            get { return ServiceFactory.ProductReviewsManager; }
         }
 
-        private PrdCategoriesManager PrdCategoriesManager
+        #region["List danh sách review"]
+        public ActionResult Index(int productId, int? page, int? pageSize, string txtSearch = "")
         {
-            get { return ServiceFactory.PrdCategoriesManager; }
-        }
-
-        #region["List sản phẩm"]
-        // GET: Auth/Product
-        public ActionResult Index(int? page, int? pageSize, string txtSearch = "")
-        {
-            var pageInfo = new PageInfo<Product>(0, PageSizeAdminConfig);
+            var pageInfo = new PageInfo<ProductReviews>(0, PageSizeAdminConfig);
             if (page != null && pageSize != null)
             {
                 pageInfo.PageIndex = (int)page;
@@ -43,7 +37,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
             var pageView = "";
             var lastRecord = 0;
 
-            pageInfo = ProductManager.Search(txtSearch, pageInfo.PageIndex, pageInfo.PageSize);
+            pageInfo = ProductReviewsManager.Search(productId, txtSearch, pageInfo.PageIndex, pageInfo.PageSize);
 
             if (pageInfo != null && pageInfo.DataList != null && pageInfo.DataList.Count > 0)
             {
@@ -61,65 +55,62 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
             ViewBag.pageView = pageView;
             var listPageSize = new int[3] { 10, 15, 20 };
             ViewBag.listPageSize = listPageSize;
+            ViewBag.txtSearch = txtSearch;
+            ViewBag.message = "";
             return View(pageInfo);
         }
         #endregion
 
-        #region["Tạo mới sản phẩm"]
+        #region["Tạo mới tin tức"]
         [HttpGet]
         public ActionResult Create()
         {
             ViewBag.Title = "Tạo mới danh mục tin tức";
             ViewBag.Today = Today;
-            ViewBag.ListPrdCategories = PrdCategoriesManager.GetAll();
-            ViewBag.message = "";
+            ViewBag.ListCategoriesNews = ProductReviewsManager.GetAll();
             return View();
         }
 
         [HttpPost]
-        public ActionResult Create(Product model)
+        public ActionResult Create(News model)
         {
             var createBy = "";
             if (UserState != null && !CUtils.IsNullOrEmpty(UserState.UserName))
             {
                 createBy = CUtils.StrTrim(UserState.UserName);
+                model.CreateBy = createBy;
             }
-            model.CreateBy = createBy;
-            var productName = model.ProductName;
-            model.ProductCode = productName.Trim().Replace(" ", "-").ToLower();
             try
             {
-                ProductManager.Add(model);
-                ViewBag.message = "Thêm mới sản phẩm thành công";
-                ViewBag.ListPrdCategories = PrdCategoriesManager.GetAll();
-                return View(model);
+                ProductReviewsManager.Add(model);
+                //ViewBag.message = "Thêm mới tin tức thành công";
+                return RedirectToAction("Index");
             }
-            catch
+            catch (Exception e)
             {
-                ViewBag.message = "Đã có lỗi trong quá trình thêm mới sản phẩm";
-                ViewBag.ListPrdCategories = PrdCategoriesManager.GetAll();
-                return View(model);
+                Console.WriteLine(e.Message);
+                return RedirectToAction("Index");
             }
+
 
         }
         #endregion
 
-        #region["Thay đổi thông tin sản phẩm"]
+        #region["Thay đổi thông tin tin tức"]
         [HttpGet]
-        public ActionResult Update(int productId)
+        public ActionResult Update(int productId, int reviewId)
         {
-            if (CUtils.IsNullOrEmpty(productId))
+            if (CUtils.IsNullOrEmpty(reviewId))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var product = ProductManager.Get(new Product() { ProductId = productId });
+            var news = ProductReviewsManager.Get(new ProductReviews() { ReviewId = reviewId, ProductId = productId });
 
-            if (product != null)
+            if (news != null)
             {
-                ViewBag.ListPrdCategories = PrdCategoriesManager.GetAll();
                 ViewBag.message = "";
                 ViewBag.IsEdit = true;
-                return View(product);
+                return View(news);
             }
             else
             {
@@ -128,34 +119,55 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Update(Product model)
+        public ActionResult Update(News model)
         {
             var message = "";
-            if (model != null && !CUtils.IsNullOrEmpty(model.PrdCategoryId))
+            if (model != null && !CUtils.IsNullOrEmpty(model.NewsCategoryId))
             {
-                var product = ProductManager.Get(new Product() { ProductId = model.ProductId });
-                if (product != null)
+                var news = NewsManager.Get(new News() { NewsId = model.NewsId });
+                if (news != null)
                 {
-                    ProductManager.Update(model, product);
-                    message = "Cập nhật thông tin sản phẩm thành công!";
+                    NewsManager.Update(model, news);
+                    message = "Cập nhật thông tin danh mục thành công!";
                 }
                 else
                 {
-                    message = "Mã sản phẩm '" + model.ProductId + "' không có trong hệ thống!";
+                    message = "Mã danh mục tin tức '" + model.NewsCategoryId + "' không có trong hệ thống!";
                 }
             }
             else
             {
-                message = "Mã sản phẩm trống!";
+                message = "Mã danh mục tin tức trống!";
             }
             ViewBag.message = message;
-            ViewBag.ListPrdCategories = PrdCategoriesManager.GetAll();
+            ViewBag.ListCategoriesNews = NewsCategoriesManager.GetAll();
             ViewBag.IsEdit = true;
             return View(model);
-
-
         }
 
+        #endregion
+
+        #region["Xóa tin tức"]
+        [HttpGet]
+        public ActionResult Delete(int newsId)
+        {
+            if (CUtils.IsNullOrEmpty(newsId))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            try
+            {
+                NewsManager.Remove(new News() { NewsId = newsId });
+                //ViewBag.message = "Xóa tin tức mã " + newsId + "thành công";
+                return RedirectToAction("Index");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return RedirectToAction("Index");
+            }
+        }
         #endregion
     }
 }

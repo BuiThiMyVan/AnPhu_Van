@@ -22,7 +22,7 @@ namespace idn.AnPhu.Biz.Models
         public string ProductCode { get; set; }
 
         [DataColum]
-        public string ProductImgae { get; set; }
+        public string ProductImage { get; set; }
 
         [DataColum]
         public string ProductSlogan { get; set; }
@@ -70,7 +70,7 @@ namespace idn.AnPhu.Biz.Models
         public bool IsHotProduct { get; set; }
 
         [DataColum]
-        public string ProductTitle { get; set; }
+        public string ProductTilte { get; set; }
 
         [DataColum]
         public bool IsNewProduct { get; set; }
@@ -88,7 +88,7 @@ namespace idn.AnPhu.Biz.Models
         public double ProductPrice { get; set; }
 
         [DataColum]
-        public string PrdCategoryName { get; set; }
+        public string PrdCategoryTitle { get; set; }
 
     }
 }

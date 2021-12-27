@@ -22,7 +22,8 @@ namespace idn.AnPhu.Biz.Persistance.SqlServer
             comm.AddParameter<int>(this.Factory, "productId", dummy.ProductId);
 
             var table = this.GetTable(comm);
-            table.TableName = TableName.PrdCategories;
+            table.TableName = TableName.Product;
+            var test = EntityBase.ParseListFromTable<Product>(table).FirstOrDefault();
             return EntityBase.ParseListFromTable<Product>(table).FirstOrDefault();
         }
 
@@ -32,7 +33,6 @@ namespace idn.AnPhu.Biz.Persistance.SqlServer
 
             var table = this.GetTable(comm);
             table.TableName = TableName.Product;
-
             return EntityBase.ParseListFromTable<Product>(table);
         }
 
@@ -60,11 +60,22 @@ namespace idn.AnPhu.Biz.Persistance.SqlServer
         {
             DbCommand comm = this.GetCommand("Sp_Product_Create");
 
-            //comm.AddParameter<int>(this.Factory, "ParentId", item.ParentId);
-            //comm.AddParameter<string>(this.Factory, "PrdCategoryTitle", (item.PrdCategoryTitle != null && item.PrdCategoryTitle.Trim().Length > 0) ? item.PrdCategoryTitle.Trim() : null);
-            //comm.AddParameter<string>(this.Factory, "PrdCategorySummary", (item.PrdCategorySummary != null && item.PrdCategorySummary.Trim().Length > 0) ? item.PrdCategorySummary.Trim() : null);
-            //comm.AddParameter<string>(this.Factory, "PrdCategoryDescription", (item.PrdCategoryDescription != null && item.PrdCategoryDescription.Trim().Length > 0) ? item.PrdCategoryDescription.Trim() : null);
-            //comm.AddParameter<string>(this.Factory, "PrdCategoryKeyword", (item.PrdCategoryKeyword != null && item.PrdCategoryKeyword.Trim().Length > 0) ? item.PrdCategoryKeyword.Trim() : null);
+            comm.AddParameter<int>(this.Factory, "PrdCategoryId", item.PrdCategoryId);
+            comm.AddParameter<string>(this.Factory, "ProductName", (item.ProductName != null && item.ProductName.Trim().Length > 0) ? item.ProductName.Trim() : null);
+            comm.AddParameter<string>(this.Factory, "ProductTitle", (item.ProductTilte != null && item.ProductTilte.Trim().Length > 0) ? item.ProductTilte.Trim() : null);
+            comm.AddParameter<string>(this.Factory, "ProductSummary", (item.ProductSummary != null && item.ProductSummary.Trim().Length > 0) ? item.ProductSummary.Trim() : null);
+            comm.AddParameter<string>(this.Factory, "ProductKeyword", (item.ProductKeyword != null && item.ProductKeyword.Trim().Length > 0) ? item.ProductKeyword.Trim() : null);
+            comm.AddParameter<string>(this.Factory, "ProductDescription", (item.ProductDescription != null && item.ProductDescription.Trim().Length > 0) ? item.ProductDescription.Trim() : null);
+            comm.AddParameter<string>(this.Factory, "ProductImage", (item.ProductImage != null && item.ProductImage.Trim().Length > 0) ? item.ProductImage.Trim() : null);
+            comm.AddParameter<string>(this.Factory, "ProductCode", (item.ProductCode != null && item.ProductCode.Trim().Length > 0) ? item.ProductCode.Trim() : null);
+            comm.AddParameter<double>(this.Factory, "ProductPrice", item.ProductPrice);
+            comm.AddParameter<string>(this.Factory, "ProductSlogan", (item.ProductSlogan != null && item.ProductSlogan.Trim().Length > 0) ? item.ProductSlogan.Trim() : null);
+            comm.AddParameter<bool>(this.Factory, "IsHotProduct", item.IsHotProduct);
+            comm.AddParameter<bool>(this.Factory, "IsNewProduct", item.IsNewProduct);
+            comm.AddParameter<bool>(this.Factory, "IsSaleProduct", item.IsSaleProduct);
+            comm.AddParameter<string>(this.Factory, "ProductVideo", (item.ProductVideo != null && item.ProductVideo.Trim().Length > 0) ? item.ProductVideo.Trim() : null);
+            comm.AddParameter<string>(this.Factory, "ProductBrochure", (item.ProductBrochure != null && item.ProductBrochure.Trim().Length > 0) ? item.ProductBrochure.Trim() : null);
+            comm.AddParameter<string>(this.Factory, "ProductBackground", (item.ProductBackground != null && item.ProductBackground.Trim().Length > 0) ? item.ProductBackground.Trim() : null);
             comm.AddParameter<string>(this.Factory, "CreateBy", item.CreateBy);
             comm.AddParameter<bool>(this.Factory, "IsActive", item.IsActive);
             comm.AddParameter<int>(this.Factory, "OrderNo", item.OrderNo);
@@ -79,12 +90,23 @@ namespace idn.AnPhu.Biz.Persistance.SqlServer
             item.PrdCategoryId = old.PrdCategoryId;
             var comm = this.GetCommand("Sp_Product_Update");
             if (comm == null) return;
-            comm.AddParameter<int>(this.Factory, "ProductId", item.PrdCategoryId);
-            //comm.AddParameter<int>(this.Factory, "ParentId", item.ParentId);
-            //comm.AddParameter<string>(this.Factory, "PrdCategoryTitle", (item.PrdCategoryTitle != null && item.PrdCategoryTitle.Trim().Length > 0) ? item.PrdCategoryTitle.Trim() : null);
-            //comm.AddParameter<string>(this.Factory, "PrdCategorySummary", (item.PrdCategorySummary != null && item.PrdCategorySummary.Trim().Length > 0) ? item.PrdCategorySummary.Trim() : null);
-            //comm.AddParameter<string>(this.Factory, "PrdCategoryDescription", (item.PrdCategoryDescription != null && item.PrdCategoryDescription.Trim().Length > 0) ? item.PrdCategoryDescription.Trim() : null);
-            //comm.AddParameter<string>(this.Factory, "PrdCategoryKeyword", (item.PrdCategoryKeyword != null && item.PrdCategoryKeyword.Trim().Length > 0) ? item.PrdCategoryKeyword.Trim() : null);
+            comm.AddParameter<int>(this.Factory, "ProductId", item.ProductId);
+            comm.AddParameter<int>(this.Factory, "PrdCategoryId", item.PrdCategoryId);
+            comm.AddParameter<string>(this.Factory, "ProductName", (item.ProductName != null && item.ProductName.Trim().Length > 0) ? item.ProductName.Trim() : null);
+            comm.AddParameter<string>(this.Factory, "ProductTitle", (item.ProductTilte != null && item.ProductTilte.Trim().Length > 0) ? item.ProductTilte.Trim() : null);
+            comm.AddParameter<string>(this.Factory, "ProductSummary", (item.ProductSummary != null && item.ProductSummary.Trim().Length > 0) ? item.ProductSummary.Trim() : null);
+            comm.AddParameter<string>(this.Factory, "ProductKeyword", (item.ProductKeyword != null && item.ProductKeyword.Trim().Length > 0) ? item.ProductKeyword.Trim() : null);
+            comm.AddParameter<string>(this.Factory, "ProductDescription", (item.ProductDescription != null && item.ProductDescription.Trim().Length > 0) ? item.ProductDescription.Trim() : null);
+            comm.AddParameter<string>(this.Factory, "ProductImage", (item.ProductImage != null && item.ProductImage.Trim().Length > 0) ? item.ProductImage.Trim() : null);
+            comm.AddParameter<string>(this.Factory, "ProductCode", (item.ProductCode != null && item.ProductCode.Trim().Length > 0) ? item.ProductCode.Trim() : null);
+            comm.AddParameter<double>(this.Factory, "ProductPrice", item.ProductPrice);
+            comm.AddParameter<string>(this.Factory, "ProductSlogan", (item.ProductSlogan != null && item.ProductSlogan.Trim().Length > 0) ? item.ProductSlogan.Trim() : null);
+            comm.AddParameter<bool>(this.Factory, "IsHotProduct", item.IsHotProduct);
+            comm.AddParameter<bool>(this.Factory, "IsNewProduct", item.IsNewProduct);
+            comm.AddParameter<bool>(this.Factory, "IsSaleProduct", item.IsSaleProduct);
+            comm.AddParameter<string>(this.Factory, "ProductVideo", (item.ProductVideo != null && item.ProductVideo.Trim().Length > 0) ? item.ProductVideo.Trim() : null);
+            comm.AddParameter<string>(this.Factory, "ProductBrochure", (item.ProductBrochure != null && item.ProductBrochure.Trim().Length > 0) ? item.ProductBrochure.Trim() : null);
+            comm.AddParameter<string>(this.Factory, "ProductBackground", (item.ProductBackground != null && item.ProductBackground.Trim().Length > 0) ? item.ProductBackground.Trim() : null);
             comm.AddParameter<bool>(this.Factory, "IsActive", item.IsActive);
             comm.AddParameter<int>(this.Factory, "OrderNo", item.OrderNo);
             comm.AddParameter<string>(this.Factory, "Culture", (item.Culture != null && item.Culture.Trim().Length > 0) ? item.Culture.Trim() : null);
