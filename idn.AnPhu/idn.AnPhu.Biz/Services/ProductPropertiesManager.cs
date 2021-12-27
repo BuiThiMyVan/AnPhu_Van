@@ -13,7 +13,15 @@ namespace idn.AnPhu.Biz.Services
     public class ProductPropertiesManager : DataManagerBase<ProductProperties>
     {
         public ProductPropertiesManager(IDataProvider<ProductProperties> provider)
-          : base(provider)
+         : base(provider)
+        {
+        }
+
+        public ProductPropertiesManager(ProductPropertiesManager productPropertiesManager)
+        {
+        }
+
+        public ProductPropertiesManager()
         {
         }
 
@@ -28,7 +36,7 @@ namespace idn.AnPhu.Biz.Services
         public List<ProductProperties> GetAll(int productId)
         {
             int total = 0;
-            return ProductPropertiesProvider.GetAll(productId, 0, 0, ref total);
+            return ProductPropertiesProvider.GetAllProperties(productId, 0, 0, ref total);
         }
 
         public override void Add(ProductProperties item)

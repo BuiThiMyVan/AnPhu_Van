@@ -102,7 +102,10 @@ namespace idn.AnPhu.Biz.Persistance.SqlServer
 
         public void Remove(ProductProperties item)
         {
-
+            var comm = this.GetCommand("Sp_ProductProperties_Delete");
+            if (comm == null) return;
+            comm.AddParameter<int>(this.Factory, "ProductPropertyId", item.ProductPropertyId);
+            this.SafeExecuteNonQuery(comm);
         }
 
         public void Import(List<ProductProperties> list, bool deleteExist)

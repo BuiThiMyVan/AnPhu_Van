@@ -261,6 +261,58 @@ namespace idn.AnPhu.Website.Areas.Auth
               },
               namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
             );
+
+            context.MapRoute(
+              name: "auth_productreviews",
+              url: "{culture}/quan-tri/danh-sach-review/danh-sach",
+              defaults: new
+              {
+                  culture = "vi",
+                  area = "Auth",
+                  controller = "ProductReviews",
+                  action = "Index",
+              },
+              namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+            );
+
+            context.MapRoute(
+              name: "auth_productreviews_create",
+              url: "{culture}/quan-tri/danh-sach-review/tao-moi",
+              defaults: new
+              {
+                  culture = "vi",
+                  area = "Auth",
+                  controller = "ProductReviews",
+                  action = "Create",
+              },
+              namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+            );
+
+            context.MapRoute(
+              name: "auth_productreviews_update",
+              url: "{culture}/quan-tri/danh-sach-review/cap-nhat",
+              defaults: new
+              {
+                  culture = "vi",
+                  area = "Auth",
+                  controller = "ProductReviews",
+                  action = "Update",
+              },
+              namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+            );
+
+            context.MapRoute(
+              name: "auth_productreviews_delete",
+              url: "{culture}/quan-tri/danh-sach-review/xoa",
+              defaults: new
+              {
+                  culture = "vi",
+                  area = "Auth",
+                  controller = "ProductReviews",
+                  action = "Delete",
+              },
+              namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+            );
             //context.MapRoute(
             //    "Auth_default",
             //    "Auth/{controller}/{action}/{id}",

@@ -113,7 +113,10 @@ namespace idn.AnPhu.Biz.Persistance.SqlServer
 
         public void Remove(ProductReviews item)
         {
-
+            var comm = this.GetCommand("Sp_ProductReviews_Delete");
+            if (comm == null) return;
+            comm.AddParameter<int>(this.Factory, "ReviewId", item.ReviewId);
+            this.SafeExecuteNonQuery(comm);
         }
 
         public void Import(List<ProductReviews> list, bool deleteExist)

@@ -30,7 +30,7 @@ namespace idn.AnPhu.Biz.Services
             }
         }
 
-        public List<ProductProperties> GetAll(int productId)
+        public List<ProductReviews> GetAll(int productId)
         {
             int total = 0;
             return ProductReviewsProvider.GetAllReview(productId, 0, 0, ref total);

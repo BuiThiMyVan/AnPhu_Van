@@ -94,18 +94,32 @@ namespace idn.AnPhu.Biz.Persistance.SqlServer
         public void Update(ProductVersions @new, ProductVersions old)
         {
             var item = @new;
-            item.ReviewId = old.ReviewId;
-            var comm = this.GetCommand("Sp_ProductReviews_Update");
+            item.VersionId = old.VersionId;
+            var comm = this.GetCommand("Sp_ProductVersions_Update");
             if (comm == null) return;
-            comm.AddParameter<int>(this.Factory, "ReviewId", item.ReviewId);
             comm.AddParameter<int>(this.Factory, "ProductId", item.ProductId);
-            comm.AddParameter<string>(this.Factory, "ReviewTitle", (item.ReviewTitle != null && item.ReviewTitle.Trim().Length > 0) ? item.ReviewTitle.Trim() : null);
-            comm.AddParameter<string>(this.Factory, "ReviewLogo", (item.ReviewLogo != null && item.ReviewLogo.Trim().Length > 0) ? item.ReviewLogo.Trim() : null);
-            comm.AddParameter<string>(this.Factory, "ReviewKeyword", (item.ReviewKeyword != null && item.ReviewKeyword.Trim().Length > 0) ? item.ReviewKeyword.Trim() : null);
-            comm.AddParameter<string>(this.Factory, "ReviewDescription", (item.ReviewDescription != null && item.ReviewDescription.Trim().Length > 0) ? item.ReviewDescription.Trim() : null);
-            comm.AddParameter<string>(this.Factory, "ReviewBody", (item.ReviewBody != null && item.ReviewBody.Trim().Length > 0) ? item.ReviewBody.Trim() : null);
-            comm.AddParameter<string>(this.Factory, "ReviewSource", (item.ReviewSource != null && item.ReviewSource.Trim().Length > 0) ? item.ReviewSource.Trim() : null);
-            comm.AddParameter<string>(this.Factory, "CreateBy", item.CreateBy);
+            comm.AddParameter<int>(this.Factory, "VersionID", item.VersionId);
+            comm.AddParameter<string>(this.Factory, "VersionTitle", (item.VersionTitle != null && item.VersionTitle.Trim().Length > 0) ? item.VersionTitle.Trim() : null);
+            comm.AddParameter<string>(this.Factory, "VersionCode", (item.VersionCode != null && item.VersionCode.Trim().Length > 0) ? item.VersionCode.Trim() : null);
+            comm.AddParameter<float>(this.Factory, "VersionPrice", item.VersionPrice);
+            comm.AddParameter<string>(this.Factory, "VersionDescription", (item.VersionDescription != null && item.VersionDescription.Trim().Length > 0) ? item.VersionDescription.Trim() : null);
+            comm.AddParameter<string>(this.Factory, "CreateBy", (item.CreateBy != null && item.CreateBy.Trim().Length > 0) ? item.CreateBy.Trim() : null);
+            comm.AddParameter<int>(this.Factory, "RegistrationFeeHN", item.RegistrationFeeHN);
+            comm.AddParameter<int>(this.Factory, "LicenseFeeHN", item.LicenseFeeHN);
+            comm.AddParameter<int>(this.Factory, "RoadTaxHN", item.RoadTaxHN);
+            comm.AddParameter<int>(this.Factory, "InsuranceFeeHN", item.InsuranceFeeHN);
+            comm.AddParameter<int>(this.Factory, "RegistrationFeeHCM", item.RegistrationFeeHCM);
+            comm.AddParameter<int>(this.Factory, "LicenseFeeHCM", item.LicenseFeeHCM);
+            comm.AddParameter<int>(this.Factory, "CertificateFeeHCM", item.CertificateFeeHCM);
+            comm.AddParameter<int>(this.Factory, "RoadTaxHCM", item.RoadTaxHCM);
+            comm.AddParameter<int>(this.Factory, "InsuranceFeeHCM", item.InsuranceFeeHCM);
+            comm.AddParameter<int>(this.Factory, "RegistrationFeeKHAC", item.RegistrationFeeKHAC);
+            comm.AddParameter<int>(this.Factory, "LicenseFeeKHAC", item.LicenseFeeKHAC);
+            comm.AddParameter<int>(this.Factory, "RoadTaxHCM", item.RoadTaxKHAC);
+            comm.AddParameter<int>(this.Factory, "InsuranceFeeKHAC", item.InsuranceFeeKHAC);
+            comm.AddParameter<int>(this.Factory, "CertificateFeeKHAC", item.CertificateFeeKHAC);
+
+            comm.AddParameter<bool>(this.Factory, "IsRegister", item.IsRegister);
             comm.AddParameter<bool>(this.Factory, "IsActive", item.IsActive);
             comm.AddParameter<int>(this.Factory, "OrderNo", item.OrderNo);
             comm.AddParameter<string>(this.Factory, "Culture", (item.Culture != null && item.Culture.Trim().Length > 0) ? item.Culture.Trim() : null);
@@ -127,7 +141,10 @@ namespace idn.AnPhu.Biz.Persistance.SqlServer
 
         public void Remove(ProductVersions item)
         {
-
+            var comm = this.GetCommand("Sp_ProductVersions_Delete");
+            if (comm == null) return;
+            comm.AddParameter<int>(this.Factory, "VersionID", item.VersionId);
+            this.SafeExecuteNonQuery(comm);
         }
 
         public void Import(List<ProductVersions> list, bool deleteExist)

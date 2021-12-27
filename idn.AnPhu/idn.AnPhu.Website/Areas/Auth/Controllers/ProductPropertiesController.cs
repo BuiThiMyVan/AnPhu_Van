@@ -12,17 +12,17 @@ using System.Web.Mvc;
 
 namespace idn.AnPhu.Website.Areas.Auth.Controllers
 {
-    public class ProductReviewsController : AdministratorController
+    public class ProductPropertiesController : AdministratorController
     {
-        private ProductReviewsManager ProductReviewsManager
+        private ProductPropertiesManager ProductPropertiesManager
         {
-            get { return ServiceFactory.ProductReviewsManager; }
+            get { return ServiceFactory.ProductPropertiesManager; }
         }
 
         #region["List danh sách review"]
         public ActionResult Index(int productId, int? page, int? pageSize, string txtSearch = "")
         {
-            var pageInfo = new PageInfo<ProductReviews>(0, PageSizeAdminConfig);
+            var pageInfo = new PageInfo<ProductProperties>(0, PageSizeAdminConfig);
             if (page != null && pageSize != null)
             {
                 pageInfo.PageIndex = (int)page;
@@ -37,7 +37,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
             var pageView = "";
             var lastRecord = 0;
 
-            pageInfo = ProductReviewsManager.Search(productId, txtSearch, pageInfo.PageIndex, pageInfo.PageSize);
+            pageInfo = ProductPropertiesManager.Search(productId, txtSearch, pageInfo.PageIndex, pageInfo.PageSize);
 
             if (pageInfo != null && pageInfo.DataList != null && pageInfo.DataList.Count > 0)
             {
@@ -71,18 +71,12 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(ProductReviews model)
+        public ActionResult Create(ProductProperties model)
         {
-            var createBy = "";
-            if (UserState != null && !CUtils.IsNullOrEmpty(UserState.UserName))
-            {
-                createBy = CUtils.StrTrim(UserState.UserName);
-                model.CreateBy = createBy;
-            }
             try
             {
-                ProductReviewsManager.Add(model);
-                ViewBag.message = "Thêm mới bài đánh giá thành công";
+                ProductPropertiesManager.Add(model);
+                ViewBag.message = "Thêm mới thuộc tính thành công";
                 ViewBag.ProductId = model.ProductId;
                 return View(model);
             }
@@ -99,19 +93,19 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
 
         #region["Thay đổi thông tin bài review"]
         [HttpGet]
-        public ActionResult Update(int productId, int reviewId)
+        public ActionResult Update(int productId, int productPropertyId)
         {
-            if (CUtils.IsNullOrEmpty(reviewId) || CUtils.IsNullOrEmpty(productId))
+            if (CUtils.IsNullOrEmpty(productPropertyId) || CUtils.IsNullOrEmpty(productId))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var review = ProductReviewsManager.Get(new ProductReviews() { ReviewId = reviewId, ProductId = productId });
+            var property = ProductPropertiesManager.Get(new ProductProperties() { ProductPropertyId = productPropertyId, ProductId = productId });
 
-            if (review != null)
+            if (property != null)
             {
                 ViewBag.message = "";
                 ViewBag.IsEdit = true;
-                return View(review);
+                return View(property);
             }
             else
             {
@@ -120,25 +114,25 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Update(ProductReviews model)
+        public ActionResult Update(ProductProperties model)
         {
             var message = "";
-            if (model != null && !CUtils.IsNullOrEmpty(model.ReviewId))
+            if (model != null && !CUtils.IsNullOrEmpty(model.ProductPropertyId))
             {
-                var review = ProductReviewsManager.Get(new ProductReviews() { ReviewId = model.ReviewId });
-                if (review != null)
+                var property = ProductPropertiesManager.Get(new ProductProperties() { ProductPropertyId = model.ProductPropertyId });
+                if (property != null)
                 {
-                    ProductReviewsManager.Update(model, review);
-                    message = "Cập nhật thông tin danh mục thành công!";
+                    ProductPropertiesManager.Update(model, property);
+                    message = "Cập nhật thông tin thuộc tính thành công!";
                 }
                 else
                 {
-                    message = "Mã danh mục tin tức '" + model.ReviewId + "' không có trong hệ thống!";
+                    message = "Mã thuộc tính '" + model.ProductPropertyId + "' không có trong hệ thống!";
                 }
             }
             else
             {
-                message = "Mã danh mục tin tức trống!";
+                message = "Mã thuộc tính xe trống!";
             }
             ViewBag.message = message;
             ViewBag.IsEdit = true;
@@ -149,22 +143,22 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
 
         #region["Xóa bài review"]
         [HttpGet]
-        public ActionResult Delete(int reviewId)
+        public ActionResult Delete(int propertyId)
         {
-            if (CUtils.IsNullOrEmpty(reviewId))
+            if (CUtils.IsNullOrEmpty(propertyId))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
             try
             {
-                ProductReviewsManager.Remove(new ProductReviews() { ReviewId = reviewId });
-                ViewBag.message = "Xóa tin tức mã " + reviewId + "thành công";
+                ProductPropertiesManager.Remove(new ProductProperties() { ProductPropertyId = propertyId });
+                ViewBag.message = "Xóa thuộc tính mã " + propertyId + "thành công";
                 return RedirectToAction("Index");
             }
             catch (Exception e)
             {
-                ViewBag.message = "Xóa tin tức mã " + reviewId + "thất bại";
+                ViewBag.message = "Xóa thuộc tính mã " + propertyId + "thất bại";
                 return RedirectToAction("Index");
             }
         }

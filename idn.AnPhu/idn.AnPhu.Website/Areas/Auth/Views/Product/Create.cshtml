@@ -226,7 +226,7 @@
                 <div class="space-4"></div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-2">
-                       Brochure:
+                        Brochure:
                     </label>
 
                     <div class="col-sm-9">
@@ -289,7 +289,6 @@
         $('#btn_submit_save').click(function () {
             $("#manageForm").attr("action", '@Url.ActionLocalized("Create")').submit();
         });
-
         function ChooseImage(e) {
             var finder = new CKFinder();
             finder.selectActionFunction = function (fileUrl) {
@@ -297,7 +296,6 @@
             }
             finder.popup();
         }
-
         function choosePrdCategory(e) {
             if ($('select option').filter(':selected').val() == '0') {
                 $(e.target).next().text('Bạn không được để trống');
@@ -305,7 +303,6 @@
                 $(e.target).next().text('');
             }
         }
-
         function validateEmpty(e) {
             if ($(e.target).val() == '' && $(e.target).attr('id') != 'ProductImage' && $(e.target).attr('id') != 'ProductBackground' && $(e.target).attr('id') != 'ProductBrochure' && $(e.target).attr('id') != 'ProductVideo') {
                 $(e.target).next().text('Bạn không được để trống');
@@ -313,32 +310,26 @@
                 $(e.target).next().text('');
             }
         }
-
         function checkValid(e) {
             var inputs = $('input, textarea');
             var bug = 0;
-
             for (var i = 1; i < inputs.length; i++) {
                 if ($(inputs[i]).val() == '' && $(inputs[i]).attr('id') != 'ProductImage' && $(inputs[i]).attr('id') != 'ProductBackground' && $(inputs[i]).attr('id') != 'ProductBrochure' && $(inputs[i]).attr('id') != 'ProductVideo') {
                     $(inputs[i]).next().text('Bạn không được để trống');
                     bug++;
                 }
             }
-
             if ($('select option').filter(':selected').val() == '0') {
                 bug++;
                 $('#PrdCategoryId').next().text('Bạn cần chọn loại xe');
             }
-
             if (bug > 0) {
                 e.preventDefault();
             } else {
                 return true;
             }
         }
-
         var message = '@MvcHtmlString.Create(message)';
-
         $(document).ready(function () {
             if (message.trim() != null && message.trim() != '') {
                 alert(message);
@@ -347,5 +338,3 @@
         })
     </script>
 }
-
-

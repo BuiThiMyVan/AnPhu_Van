@@ -12,17 +12,17 @@ using System.Web.Mvc;
 
 namespace idn.AnPhu.Website.Areas.Auth.Controllers
 {
-    public class ProductReviewsController : AdministratorController
+    public class ProductVersionsController : AdministratorController
     {
-        private ProductReviewsManager ProductReviewsManager
+        private ProductVersionsManager ProductVersionsManager
         {
-            get { return ServiceFactory.ProductReviewsManager; }
+            get { return ServiceFactory.ProductVersionsManager; }
         }
 
         #region["List danh sách review"]
         public ActionResult Index(int productId, int? page, int? pageSize, string txtSearch = "")
         {
-            var pageInfo = new PageInfo<ProductReviews>(0, PageSizeAdminConfig);
+            var pageInfo = new PageInfo<ProductVersions>(0, PageSizeAdminConfig);
             if (page != null && pageSize != null)
             {
                 pageInfo.PageIndex = (int)page;
@@ -37,7 +37,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
             var pageView = "";
             var lastRecord = 0;
 
-            pageInfo = ProductReviewsManager.Search(productId, txtSearch, pageInfo.PageIndex, pageInfo.PageSize);
+            pageInfo = ProductVersionsManager.Search(productId, txtSearch, pageInfo.PageIndex, pageInfo.PageSize);
 
             if (pageInfo != null && pageInfo.DataList != null && pageInfo.DataList.Count > 0)
             {
@@ -71,7 +71,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(ProductReviews model)
+        public ActionResult Create(ProductVersions model)
         {
             var createBy = "";
             if (UserState != null && !CUtils.IsNullOrEmpty(UserState.UserName))
@@ -81,7 +81,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
             }
             try
             {
-                ProductReviewsManager.Add(model);
+                ProductVersionsManager.Add(model);
                 ViewBag.message = "Thêm mới bài đánh giá thành công";
                 ViewBag.ProductId = model.ProductId;
                 return View(model);
@@ -99,13 +99,13 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
 
         #region["Thay đổi thông tin bài review"]
         [HttpGet]
-        public ActionResult Update(int productId, int reviewId)
+        public ActionResult Update(int productId, int versionId)
         {
-            if (CUtils.IsNullOrEmpty(reviewId) || CUtils.IsNullOrEmpty(productId))
+            if (CUtils.IsNullOrEmpty(versionId) || CUtils.IsNullOrEmpty(productId))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var review = ProductReviewsManager.Get(new ProductReviews() { ReviewId = reviewId, ProductId = productId });
+            var review = ProductVersionsManager.Get(new ProductVersions() { VersionId = versionId, ProductId = productId });
 
             if (review != null)
             {
@@ -120,25 +120,25 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Update(ProductReviews model)
+        public ActionResult Update(ProductVersions model)
         {
             var message = "";
-            if (model != null && !CUtils.IsNullOrEmpty(model.ReviewId))
+            if (model != null && !CUtils.IsNullOrEmpty(model.VersionId))
             {
-                var review = ProductReviewsManager.Get(new ProductReviews() { ReviewId = model.ReviewId });
+                var review = ProductVersionsManager.Get(new ProductVersions() { VersionId = model.VersionId });
                 if (review != null)
                 {
-                    ProductReviewsManager.Update(model, review);
-                    message = "Cập nhật thông tin danh mục thành công!";
+                    ProductVersionsManager.Update(model, review);
+                    message = "Cập nhật thông tin phiên bản thành công!";
                 }
                 else
                 {
-                    message = "Mã danh mục tin tức '" + model.ReviewId + "' không có trong hệ thống!";
+                    message = "Mã phiên bản '" + model.VersionId + "' không có trong hệ thống!";
                 }
             }
             else
             {
-                message = "Mã danh mục tin tức trống!";
+                message = "Mã phiên bản trống!";
             }
             ViewBag.message = message;
             ViewBag.IsEdit = true;
@@ -149,22 +149,22 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
 
         #region["Xóa bài review"]
         [HttpGet]
-        public ActionResult Delete(int reviewId)
+        public ActionResult Delete(int versionId)
         {
-            if (CUtils.IsNullOrEmpty(reviewId))
+            if (CUtils.IsNullOrEmpty(versionId))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
             try
             {
-                ProductReviewsManager.Remove(new ProductReviews() { ReviewId = reviewId });
-                ViewBag.message = "Xóa tin tức mã " + reviewId + "thành công";
+                ProductVersionsManager.Remove(new ProductVersions() { VersionId = versionId });
+                ViewBag.message = "Xóa phiên bản mã " + versionId + "thành công";
                 return RedirectToAction("Index");
             }
             catch (Exception e)
             {
-                ViewBag.message = "Xóa tin tức mã " + reviewId + "thất bại";
+                ViewBag.message = "Xóa phiên bản mã " + versionId + "thất bại";
                 return RedirectToAction("Index");
             }
         }
