@@ -26,7 +26,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <TypeScriptToolsVersion>4.3</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>4.2</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -1085,6 +1085,11 @@
     <Content Include="Areas\Auth\Views\ProductReviews\Create.cshtml" />
     <Content Include="Areas\Auth\Views\ProductReviews\Update.cshtml" />
     <Content Include="Areas\Auth\Views\ProductProperties\Index.cshtml" />
+    <Content Include="Areas\Auth\Views\ProductProperties\Create.cshtml" />
+    <Content Include="Areas\Auth\Views\ProductProperties\Update.cshtml" />
+    <Content Include="Areas\Auth\Views\ProductVersions\Index.cshtml" />
+    <Content Include="Areas\Auth\Views\ProductVersions\Create.cshtml" />
+    <Content Include="Areas\Auth\Views\ProductVersions\Update.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -1263,7 +1268,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Auth\Models\" />
-    <Folder Include="Areas\Auth\Views\ProductVersions\" />
     <Folder Include="Content\css\" />
     <Folder Include="UploadsFile\" />
     <Folder Include="Views\Administrator\" />

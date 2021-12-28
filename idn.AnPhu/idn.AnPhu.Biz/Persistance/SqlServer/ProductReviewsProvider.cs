@@ -84,7 +84,6 @@ namespace idn.AnPhu.Biz.Persistance.SqlServer
             var comm = this.GetCommand("Sp_ProductReviews_Update");
             if (comm == null) return;
             comm.AddParameter<int>(this.Factory, "ReviewId", item.ReviewId);
-            comm.AddParameter<int>(this.Factory, "ProductId", item.ProductId);
             comm.AddParameter<string>(this.Factory, "ReviewTitle", (item.ReviewTitle != null && item.ReviewTitle.Trim().Length > 0) ? item.ReviewTitle.Trim() : null);
             comm.AddParameter<string>(this.Factory, "ReviewLogo", (item.ReviewLogo != null && item.ReviewLogo.Trim().Length > 0) ? item.ReviewLogo.Trim() : null);
             comm.AddParameter<string>(this.Factory, "ReviewKeyword", (item.ReviewKeyword != null && item.ReviewKeyword.Trim().Length > 0) ? item.ReviewKeyword.Trim() : null);

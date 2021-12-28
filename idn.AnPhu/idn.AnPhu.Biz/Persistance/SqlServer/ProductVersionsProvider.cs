@@ -19,8 +19,7 @@ namespace idn.AnPhu.Biz.Persistance.SqlServer
         {
             DbCommand comm = this.GetCommand("Sp_ProductVersions_GetById");
 
-            comm.AddParameter<int>(this.Factory, "productId", dummy.ProductId);
-            comm.AddParameter<int>(this.Factory, "reviewId", dummy.VersionId);
+            comm.AddParameter<int>(this.Factory, "versionId", dummy.VersionId);
 
             var table = this.GetTable(comm);
             table.TableName = TableName.ProductVersions;
@@ -65,7 +64,7 @@ namespace idn.AnPhu.Biz.Persistance.SqlServer
             comm.AddParameter<int>(this.Factory, "ProductId", item.ProductId);
             comm.AddParameter<string>(this.Factory, "VersionTitle", (item.VersionTitle != null && item.VersionTitle.Trim().Length > 0) ? item.VersionTitle.Trim() : null);
             comm.AddParameter<string>(this.Factory, "VersionCode", (item.VersionCode != null && item.VersionCode.Trim().Length > 0) ? item.VersionCode.Trim() : null);
-            comm.AddParameter<float>(this.Factory, "VersionPrice", item.VersionPrice);
+            comm.AddParameter<int>(this.Factory, "VersionPrice", item.VersionPrice);
             comm.AddParameter<string>(this.Factory, "VersionDescription", (item.VersionDescription != null && item.VersionDescription.Trim().Length > 0) ? item.VersionDescription.Trim() : null);
             comm.AddParameter<string>(this.Factory, "CreateBy", (item.CreateBy != null && item.CreateBy.Trim().Length > 0) ? item.CreateBy.Trim() : null);
             comm.AddParameter<int>(this.Factory, "RegistrationFeeHN", item.RegistrationFeeHN);
@@ -79,10 +78,10 @@ namespace idn.AnPhu.Biz.Persistance.SqlServer
             comm.AddParameter<int>(this.Factory, "InsuranceFeeHCM", item.InsuranceFeeHCM);
             comm.AddParameter<int>(this.Factory, "RegistrationFeeKHAC", item.RegistrationFeeKHAC);
             comm.AddParameter<int>(this.Factory, "LicenseFeeKHAC", item.LicenseFeeKHAC);
-            comm.AddParameter<int>(this.Factory, "RoadTaxHCM", item.RoadTaxKHAC);
+            comm.AddParameter<int>(this.Factory, "RoadTaxKHAC", item.RoadTaxKHAC);
             comm.AddParameter<int>(this.Factory, "InsuranceFeeKHAC", item.InsuranceFeeKHAC);
             comm.AddParameter<int>(this.Factory, "CertificateFeeKHAC", item.CertificateFeeKHAC);
-     
+            comm.AddParameter<int>(this.Factory, "CertificateFeeHN", item.CertificateFeeHN);
             comm.AddParameter<bool>(this.Factory, "IsRegister", item.IsRegister);
             comm.AddParameter<bool>(this.Factory, "IsActive", item.IsActive);
             comm.AddParameter<int>(this.Factory, "OrderNo", item.OrderNo);
@@ -97,13 +96,11 @@ namespace idn.AnPhu.Biz.Persistance.SqlServer
             item.VersionId = old.VersionId;
             var comm = this.GetCommand("Sp_ProductVersions_Update");
             if (comm == null) return;
-            comm.AddParameter<int>(this.Factory, "ProductId", item.ProductId);
-            comm.AddParameter<int>(this.Factory, "VersionID", item.VersionId);
+            comm.AddParameter<int>(this.Factory, "VersionId", item.VersionId);
             comm.AddParameter<string>(this.Factory, "VersionTitle", (item.VersionTitle != null && item.VersionTitle.Trim().Length > 0) ? item.VersionTitle.Trim() : null);
             comm.AddParameter<string>(this.Factory, "VersionCode", (item.VersionCode != null && item.VersionCode.Trim().Length > 0) ? item.VersionCode.Trim() : null);
-            comm.AddParameter<float>(this.Factory, "VersionPrice", item.VersionPrice);
-            comm.AddParameter<string>(this.Factory, "VersionDescription", (item.VersionDescription != null && item.VersionDescription.Trim().Length > 0) ? item.VersionDescription.Trim() : null);
-            comm.AddParameter<string>(this.Factory, "CreateBy", (item.CreateBy != null && item.CreateBy.Trim().Length > 0) ? item.CreateBy.Trim() : null);
+            comm.AddParameter<int>(this.Factory, "VersionPrice", item.VersionPrice);
+            comm.AddParameter<string>(this.Factory, "VersionDescription", (item.VersionDescription != null && item.VersionDescription.Trim().Length > 0) ? item.VersionDescription.Trim() : null);           
             comm.AddParameter<int>(this.Factory, "RegistrationFeeHN", item.RegistrationFeeHN);
             comm.AddParameter<int>(this.Factory, "LicenseFeeHN", item.LicenseFeeHN);
             comm.AddParameter<int>(this.Factory, "RoadTaxHN", item.RoadTaxHN);
@@ -115,10 +112,10 @@ namespace idn.AnPhu.Biz.Persistance.SqlServer
             comm.AddParameter<int>(this.Factory, "InsuranceFeeHCM", item.InsuranceFeeHCM);
             comm.AddParameter<int>(this.Factory, "RegistrationFeeKHAC", item.RegistrationFeeKHAC);
             comm.AddParameter<int>(this.Factory, "LicenseFeeKHAC", item.LicenseFeeKHAC);
-            comm.AddParameter<int>(this.Factory, "RoadTaxHCM", item.RoadTaxKHAC);
+            comm.AddParameter<int>(this.Factory, "RoadTaxKHAC", item.RoadTaxKHAC);
             comm.AddParameter<int>(this.Factory, "InsuranceFeeKHAC", item.InsuranceFeeKHAC);
             comm.AddParameter<int>(this.Factory, "CertificateFeeKHAC", item.CertificateFeeKHAC);
-
+            comm.AddParameter<int>(this.Factory, "CertificateFeeHN", item.CertificateFeeHN);
             comm.AddParameter<bool>(this.Factory, "IsRegister", item.IsRegister);
             comm.AddParameter<bool>(this.Factory, "IsActive", item.IsActive);
             comm.AddParameter<int>(this.Factory, "OrderNo", item.OrderNo);
@@ -143,7 +140,7 @@ namespace idn.AnPhu.Biz.Persistance.SqlServer
         {
             var comm = this.GetCommand("Sp_ProductVersions_Delete");
             if (comm == null) return;
-            comm.AddParameter<int>(this.Factory, "VersionID", item.VersionId);
+            comm.AddParameter<int>(this.Factory, "VersionId", item.VersionId);
             this.SafeExecuteNonQuery(comm);
         }
 

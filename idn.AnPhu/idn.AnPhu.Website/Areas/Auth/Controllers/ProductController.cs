@@ -116,9 +116,9 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
 
             if (product != null)
             {
-                ViewBag.ListPrdCategories = PrdCategoriesManager.GetAll();
                 ViewBag.message = "";
                 ViewBag.IsEdit = true;
+                ViewBag.ListPrdCategories = PrdCategoriesManager.GetAll();
                 return View(product);
             }
             else
@@ -149,8 +149,8 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
                 message = "Mã sản phẩm trống!";
             }
             ViewBag.message = message;
-            ViewBag.ListPrdCategories = PrdCategoriesManager.GetAll();
             ViewBag.IsEdit = true;
+            ViewBag.ListPrdCategories = PrdCategoriesManager.GetAll();
             return View(model);
 
 

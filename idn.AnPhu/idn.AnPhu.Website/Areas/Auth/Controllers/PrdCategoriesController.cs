@@ -19,7 +19,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
             get { return ServiceFactory.PrdCategoriesManager; }
         }
 
-        #region["List loại xe"]
+        #region["List thuộc tính xe"]
         // GET: Auth/PrdCategories
         public ActionResult Index(int? page, int? pageSize, string txtSearch = "")
         {
@@ -64,9 +64,8 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            ViewBag.Title = "Tạo mới danh mục tin tức";
+            ViewBag.Title = "Tạo mới thuộc tính";
             ViewBag.Today = Today;
-            ViewBag.ListPrdCategories = PrdCategoriesManager.GetAll();
             ViewBag.message = "";
             return View();
         }

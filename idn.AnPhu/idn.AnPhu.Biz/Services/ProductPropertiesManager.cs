@@ -17,15 +17,7 @@ namespace idn.AnPhu.Biz.Services
         {
         }
 
-        public ProductPropertiesManager(ProductPropertiesManager productPropertiesManager)
-        {
-        }
-
-        public ProductPropertiesManager()
-        {
-        }
-
-        IProductPropertiesProvider ProductPropertiesProvider
+        IProductPropertiesProvider ProductReviewsProvider
         {
             get
             {
@@ -36,7 +28,7 @@ namespace idn.AnPhu.Biz.Services
         public List<ProductProperties> GetAll(int productId)
         {
             int total = 0;
-            return ProductPropertiesProvider.GetAllProperties(productId, 0, 0, ref total);
+            return ProductReviewsProvider.GetAllProperties(productId, 0, 0, ref total);
         }
 
         public override void Add(ProductProperties item)
@@ -49,7 +41,7 @@ namespace idn.AnPhu.Biz.Services
             int totalItems = 0;
             var pageInfo = new PageInfo<ProductProperties>(pageIndex, pageSize);
             var startIndex = (pageIndex - 1) * pageSize;
-            pageInfo.DataList = ProductPropertiesProvider.Search(productId, txtSearch, startIndex, pageSize, ref totalItems);
+            pageInfo.DataList = ProductReviewsProvider.Search(productId, txtSearch, startIndex, pageSize, ref totalItems);
             pageInfo.ItemCount = totalItems;
             return pageInfo;
         }

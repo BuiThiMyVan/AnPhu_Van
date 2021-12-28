@@ -57,6 +57,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
             ViewBag.listPageSize = listPageSize;
             ViewBag.txtSearch = txtSearch;
             ViewBag.message = "";
+            ViewBag.ProductId = productId;
             return View(pageInfo);
         }
         #endregion
@@ -125,7 +126,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
             var message = "";
             if (model != null && !CUtils.IsNullOrEmpty(model.ReviewId))
             {
-                var review = ProductReviewsManager.Get(new ProductReviews() { ReviewId = model.ReviewId });
+                var review = ProductReviewsManager.Get(new ProductReviews() { ReviewId = model.ReviewId, ProductId = model.ProductId });
                 if (review != null)
                 {
                     ProductReviewsManager.Update(model, review);
@@ -149,7 +150,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
 
         #region["Xóa bài review"]
         [HttpGet]
-        public ActionResult Delete(int reviewId)
+        public ActionResult Delete(int reviewId, int productId)
         {
             if (CUtils.IsNullOrEmpty(reviewId))
             {
@@ -160,12 +161,12 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
             {
                 ProductReviewsManager.Remove(new ProductReviews() { ReviewId = reviewId });
                 ViewBag.message = "Xóa tin tức mã " + reviewId + "thành công";
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new {productId = productId });
             }
             catch (Exception e)
             {
                 ViewBag.message = "Xóa tin tức mã " + reviewId + "thất bại";
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { productId = productId });
             }
         }
         #endregion

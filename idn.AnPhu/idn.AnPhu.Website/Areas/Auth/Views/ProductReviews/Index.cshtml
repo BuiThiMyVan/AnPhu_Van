@@ -149,10 +149,10 @@
 
                             <td>
                                 <div class="hidden-sm hidden-xs btn-group">
-                                    <button class="btn btn-xs btn-info" onclick="window.location.href='/vi/quan-tri/danh-sach-review/cap-nhat?reviewId='+ @item.ReviewId">
+                                    <button class="btn btn-xs btn-info" onclick="window.location.href='/vi/quan-tri/danh-sach-review/cap-nhat?productId=@ViewBag.ProductId'+ '&reviewId='+ @item.ReviewId">
                                         <i class="ace-icon fa fa-pencil bigger-120"></i>
                                     </button>
-                                    <button class="btn btn-xs btn-info" onclick="window.location.href='/vi/quan-tri/danh-sach-review/xoa?reviewId='+ @item.ProductId">
+                                    <button class="btn btn-xs btn-info" onclick="confirmDelete(@item.ReviewId, @ViewBag.ProductId)">
                                         <i class="ace-icon fa fa-trash-o bigger-120"></i>
                                     </button>
                                 </div>
@@ -220,7 +220,7 @@
                     </li>
                 </ul>
             </div>
-            <a href="/vi/quan-tri/danh-sach-review/tao-moi" class="btn btn-success">Tạo mới</a>
+            <a href="/vi/quan-tri/danh-sach-review/tao-moi?productId=@ViewBag.ProductId" class="btn btn-success">Tạo mới</a>
         </div>
     </div>
 </div>
@@ -265,7 +265,14 @@
             window.location.href = "/vi/quan-tri/danh-sach-review/danh-sach?page=" + index + "&pageSize=" + pageSize + "&txtSearch=" + txtSearch;
         }
 
+        function confirmDelete(reviewId, productId) {
 
+        if (confirm("Bạn muốn xóa bài viết có mã " + reviewId + " ?") == true) {
+            window.location.href = '/vi/quan-tri/danh-sach-review/xoa?reviewId=' + reviewId + '&productId=' + productId;
+        } else {
+            return false;
+        }
+    }
     </script>
 }
 

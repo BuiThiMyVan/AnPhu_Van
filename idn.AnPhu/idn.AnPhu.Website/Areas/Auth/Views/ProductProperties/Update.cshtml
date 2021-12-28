@@ -1,9 +1,9 @@
-﻿@model ProductReviews
+﻿@model ProductProperties
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Update";
     Layout = "~/Areas/Auth/Views/Shared/_LayoutAuth.cshtml";
     var message = CUtils.StrValue(ViewBag.message);
-    var productId = (int)ViewBag.ProductId;
+    var productId = (int)@ViewBag.ProductId;
 }
 
 @section StyleSheet {
@@ -59,7 +59,7 @@
     <li><a href="@Url.Action("Index", "ProductReviews")">Danh sách bài viết đánh giá</a></li>
     @if (ViewBag.IsEdit != null && ViewBag.IsEdit == true)
     {
-        <li class="active">@Model.ReviewTitle</li>
+        <li class="active">@Model.ProductPropertyTitle</li>
     }
     else
     {
@@ -71,103 +71,54 @@
     <div class="header-admin">Tạo mới bài viết đánh giá</div>
     <div class="content-admin">
         <div class="content-table">
-            @using (Html.BeginForm("Create", "ProductReviews", FormMethod.Post, new { id = "manageForm", @class = "form-horizontal", onsubmit = "checkValid(event)" }))
+            @using (Html.BeginForm("Update", "ProductProperties", FormMethod.Post, new { id = "manageForm", @class = "form-horizontal", onsubmit = "checkValid(event)" }))
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true)
                 <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1">
-                        Tiêu đề:
+                        Tên thuộc tính:
                     </label>
 
                     <div class="col-sm-9 box-input">
-                        <input type="hidden" name="ProductId" value="@ViewBag.ProductId" id="ProductId" class="col-xs-12 col-sm-6" oninput="validateEmpty(event)" />
-                        <input type="text" name="ReviewTitle" class="col-xs-12 col-sm-6" oninput="validateEmpty(event)" />
+                        <input type="hidden" name="ProductId" value="@Model.ProductId" id="ProductId" class="col-xs-12 col-sm-6" />
+                        <input type="hidden" name="ProductPropertyId" value="@Model.ProductPropertyId" id="ProductPropertyId" class="col-xs-12 col-sm-6" />
+                        <input type="text" name="ProductPropertyTitle" value="@Model.ProductPropertyTitle" class="col-xs-12 col-sm-6" oninput="validateEmpty(event)" />
                         <div class="text-danger"></div>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-2">
-                        Logo bài viết:
-                    </label>
-
-                    <div class="col-sm-9">
-                        <div>
-                            <div style="display: flex">
-                                <input type="text" name="ReviewLogo" id="ReviewLogo" class="col-xs-12 col-sm-6" style="width: 300px" />
-                                <span type="button" onclick="ChooseImage(event)" class="btn btn-sm btn-success">Browse..</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-2">
-                        Mô tả:
+                        Nội dung:
                     </label>
 
                     <div class="col-sm-9 box-input">
-                        <textarea type="text" name="ReviewDescription" rows="2" class="col-xs-12 col-sm-6" oninput="validateEmpty(event)"></textarea>
+                        <input type="hidden" name="ProductPropertyBody" value="@Model.ProductPropertyBody" id="property_body" />
+                        <textarea type="text" id="ProductPropertyBody" rows="2" class="col-xs-12 col-sm-6">@Model.ProductPropertyBody</textarea>
                         <div class="text-danger"></div>
                     </div>
                 </div>
 
-
-                <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-input-readonly">
-                        Keyword:
-                    </label>
-
-                    <div class="col-sm-9 box-input">
-                        <textarea type="text" name="ReviewKeyword" class="col-xs-12 col-sm-6" oninput="validateEmpty(event)"></textarea>
-                        <div class="text-danger" id="error_keyword"></div>
-                    </div>
-                </div>
-
-
-                <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-2">
-                        Nội dung
-                    </label>
-
-                    <div class="col-sm-9 box-input">
-                        <input type="hidden" name="ReviewBody" id="review_body" />
-                        <textarea type="text" id="ReviewBody" rows="2" class="col-xs-12 col-sm-6" oninput="validateEmpty(event)"></textarea>
-                        <div class="text-danger"></div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1">
-                        Nguồn tin:
-                    </label>
-
-                    <div class="col-sm-9 box-input">
-                        <input type="text" name="ReviewSource" class="col-xs-12 col-sm-6" oninput="validateEmpty(event)" />
-                        <div class="text-danger"></div>
-                    </div>
-                </div>
-
-                <div class="form-group">
+                <div class="form-group">                   
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-2">
                         Thứ tự:
                     </label>
 
                     <div class="col-sm-9">
-                        <input type="number" name="OrderNo" class="col-xs-12 col-sm-6 input-number" value="0" />
+                        <input type="number" name="OrderNo" class="col-xs-12 col-sm-6 input-number" value="@Model.OrderNo" />
                     </div>
                 </div>
 
                 <div class="form-group">
+                    @{var check = Model.IsActive ? "checked" : "";}
                     <label class="col-sm-3 control-label no-padding-right">
                         Trạng thái:
                     </label>
 
                     <div class="checkbox">
                         <label>
-                            <input name="IsActive" type="checkbox" class="ace" value="true">
+                            <input name="IsActive" type="checkbox" class="ace" value="true" @check>
 
                             <span class="lbl"> Ẩn/Hiện danh mục</span>
                             <input name="IsActive" type="hidden" value="false" />
@@ -181,36 +132,27 @@
 
 </div>
 @section Scripts {
-    <script src="/Content/js/ckfinder/ckfinder.js"></script>
     <script src="/Scripts/tinymce/tinymce.min.js"></script>
     <script>
         $('#btn_submit_save').click(function () {
-            $("#manageForm").attr("action", '@Url.ActionLocalized("Create")').submit();
+            $("#manageForm").attr("action", '@Url.ActionLocalized("Update")').submit();
         });
 
         tinymce.init({
-            selector: "#ReviewBody",
+            selector: "#ProductPropertyBody",
             init_instance_callback: function (editor) {
                 editor.on('input', function (e) {
-                    var value = tinymce.get("ReviewBody").getContent();
+                    var value = tinymce.get("ProductPropertyBody").getContent();
                     var div = document.createElement("div");
                     div.innerHTML = value;
                     var text = div.textContent || div.innerText || "";
-                    $('#review_body').val(text);
+                    $('#property_body').val(text);
                 });
             }
         });
 
-        function ChooseImage(e) {
-            var finder = new CKFinder();
-            finder.selectActionFunction = function (fileUrl) {
-                $(e.target).prev().val(fileUrl);
-            }
-            finder.popup();
-        }
-
         function validateEmpty(e) {
-            if ($(e.target).val() == '' && $(e.target).attr('id') != 'ReviewBody' && $(e.target).attr('id') != 'ReviewLogo' && $(e.target).attr('id') != 'ProductId') {
+            if ($(e.target).val() == '' && $(e.target).attr('id') != 'ProductPropertyBody') {
                 $(e.target).next().text('Bạn không được để trống');
             } else {
                 $(e.target).next().text('');
@@ -220,9 +162,9 @@
         function checkValid(e) {
             var inputs = $('input, textarea');
             var bug = 0;
-
+            debugger
             for (var i = 1; i < inputs.length; i++) {
-                if ($(inputs[i]).val() == '' && $(inputs[i]).attr('id') != 'ReviewBody' && $(inputs[i]).attr('id') != 'ReviewLogo' && $(inputs[i]).attr('id') != 'ProductId') {
+                if ($(inputs[i]).val() == '' && $(inputs[i]).attr('id') != 'ProductPropertyBody') {
                     $(inputs[i]).next().text('Bạn không được để trống');
                     bug++;
                 }
@@ -233,14 +175,14 @@
             } else {
                 return true;
             }
+            debugger
         }
 
         var message = '@MvcHtmlString.Create(message)';
-
+        console.log(message);
         $(document).ready(function () {
             if (message.trim() != null && message.trim() != '') {
                 alert(message);
-                window.location.href = '/vi/quan-tri/danh-sach-review/danh-sach?productId=' + @productId;
             }
         })
     </script>

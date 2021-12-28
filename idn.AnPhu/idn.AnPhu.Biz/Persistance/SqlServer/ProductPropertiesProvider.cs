@@ -20,7 +20,7 @@ namespace idn.AnPhu.Biz.Persistance.SqlServer
             DbCommand comm = this.GetCommand("Sp_ProductProperties_GetById");
 
             comm.AddParameter<int>(this.Factory, "productId", dummy.ProductId);
-            comm.AddParameter<int>(this.Factory, "reviewId", dummy.ProductPropertyId);
+            comm.AddParameter<int>(this.Factory, "propertyId", dummy.ProductPropertyId);
 
             var table = this.GetTable(comm);
             table.TableName = TableName.ProductProperties;
@@ -104,7 +104,7 @@ namespace idn.AnPhu.Biz.Persistance.SqlServer
         {
             var comm = this.GetCommand("Sp_ProductProperties_Delete");
             if (comm == null) return;
-            comm.AddParameter<int>(this.Factory, "ProductPropertyId", item.ProductPropertyId);
+            comm.AddParameter<int>(this.Factory, "propertiesId", item.ProductPropertyId);
             this.SafeExecuteNonQuery(comm);
         }
 

@@ -323,15 +323,14 @@
             } else {
                 return true;
             }
-
-            var message = '@MvcHtmlString.Create(message)';
-            console.log(message);
-            $(document).ready(function () {
-                if (message.trim() != null && message.trim() != '') {
-                    alert(message);
-                }
-            })
         }
+
+        var message = '@MvcHtmlString.Create(message)';
+        $(document).ready(function () {
+            if (message.trim() != null && message.trim() != '') {
+                alert(message);
+            }
+        })
     </script>
 }
 

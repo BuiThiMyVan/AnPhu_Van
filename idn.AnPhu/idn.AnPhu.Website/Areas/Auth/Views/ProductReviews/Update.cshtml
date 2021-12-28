@@ -55,7 +55,7 @@
     </li>
     <li><a href="@Url.Action("Index", "Home")">Dashboard</a></li>
     <li><a href="@Url.Action("Index", "Product")">Danh sách xe</a></li>
-    <li><a href="@Url.Action("Index", "ProductReviews")">Danh sách bài viết đánh giá</a></li>
+    <li><a href="@Url.Action("Index", "ProductReviews", new { productId = ViewBag.ProductId })">Danh sách bài viết đánh giá</a></li>
     @if (ViewBag.IsEdit != null && ViewBag.IsEdit == true)
     {
         <li class="active">@Model.ReviewTitle</li>
@@ -80,7 +80,8 @@
                     </label>
 
                     <div class="col-sm-9 box-input">
-                        <input type="hidden" name="ProductId" value="@Model.ProductId" class="col-xs-12 col-sm-6" oninput="validateEmpty(event)" />
+                        <input type="hidden" name="ReviewId"value="@Model.ReviewId" class="col-xs-12 col-sm-6" />
+                        <input type="hidden" name="ProductId" id="ProductId" value="@Model.ProductId" class="col-xs-12 col-sm-6" />
                         <input type="text" name="ReviewTitle" value="@Model.ReviewTitle" class="col-xs-12 col-sm-6" oninput="validateEmpty(event)" />
                         <div class="text-danger"></div>
                     </div>
@@ -94,7 +95,7 @@
                     <div class="col-sm-9">
                         <div>
                             <div style="display: flex">
-                                <input type="text" name="ReviewLogo" value="@Model.ReviewLogo" id="ReviewLogo" class="col-xs-12 col-sm-6" style="width: 300px" oninput="validateEmpty(event)" />
+                                <input type="text" name="ReviewLogo" value="@Model.ReviewLogo" id="ReviewLogo" class="col-xs-12 col-sm-6" style="width: 300px" />
                                 <span type="button" onclick="ChooseImage(event)" class="btn btn-sm btn-success">Browse..</span>
                             </div>
                         </div>
@@ -132,8 +133,8 @@
                     </label>
 
                     <div class="col-sm-9 box-input">
-                        <input type="hidden" name="ReviewBody" id="review_body" />
-                        <textarea type="text" id="ReviewBody" rows="2" class="col-xs-12 col-sm-6" oninput="validateEmpty(event)">@Model.ReviewBody</textarea>
+                        <input type="hidden" name="ReviewBody" id="review_body" value="@Model.ReviewBody" />
+                        <textarea type="text" id="ReviewBody" rows="2" class="col-xs-12 col-sm-6">@Model.ReviewBody</textarea>
                         <div class="text-danger"></div>
                     </div>
                 </div>
@@ -182,18 +183,21 @@
 </div>
 @section Scripts {
     <script src="/Content/js/ckfinder/ckfinder.js"></script>
-
+    <script src="/Scripts/tinymce/tinymce.min.js"></script>
     <script>
         $('#btn_submit_save').click(function () {
             $("#manageForm").attr("action", '@Url.ActionLocalized("Update")').submit();
         });
 
         tinymce.init({
-            selector: "#ReviewsBody",
+            selector: "#ReviewBody",
             init_instance_callback: function (editor) {
                 editor.on('input', function (e) {
-                    var value = tinymce.get("ReviewsBody").getContent();
-                    $('#review_body').val(value);
+                    var value = tinymce.get("ReviewBody").getContent();
+                    var div = document.createElement("div");
+                    div.innerHTML = value;
+                    var text = div.textContent || div.innerText || "";
+                    $('#review_body').val(text);
                 });
             }
         });
@@ -206,16 +210,8 @@
             finder.popup();
         }
 
-        function choosePrdCategory(e) {
-            if ($('select option').filter(':selected').val() == '0') {
-                $(e.target).next().text('Bạn không được để trống');
-            } else {
-                $(e.target).next().text('');
-            }
-        }
-
         function validateEmpty(e) {
-            if ($(e.target).val() == '' && $(e.target).attr('id') != 'ReviewBody' && $(e.target).attr('id') != 'ReviewLogo') {
+            if ($(e.target).val() == '' && $(e.target).attr('id') != 'ReviewBody' && $(e.target).attr('id') != 'ReviewLogo' && $(e.target).attr('id') != 'ProductId') {
                 $(e.target).next().text('Bạn không được để trống');
             } else {
                 $(e.target).next().text('');
@@ -225,21 +221,18 @@
         function checkValid(e) {
             var inputs = $('input, textarea');
             var bug = 0;
-
             for (var i = 1; i < inputs.length; i++) {
-                if ($(inputs[i]).val() == '' && $(inputs[i]).attr('id') != 'ReviewBody' && $(inputs[i]).attr('id') != 'ReviewLogo') {
+                if ($(inputs[i]).val() == '' && $(inputs[i]).attr('id') != 'ReviewBody' && $(inputs[i]).attr('id') != 'ReviewLogo' && $(inputs[i]).attr('id') != 'ProductId') {
                     $(inputs[i]).next().text('Bạn không được để trống');
                     bug++;
                 }
             }
-
             if (bug > 0) {
                 e.preventDefault();
             } else {
                 return true;
             }
         }
-
         var message = '@MvcHtmlString.Create(message)';
 
         $(document).ready(function () {

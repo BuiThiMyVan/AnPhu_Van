@@ -19,7 +19,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
             get { return ServiceFactory.ProductVersionsManager; }
         }
 
-        #region["List danh sách review"]
+        #region["List danh sách version"]
         public ActionResult Index(int productId, int? page, int? pageSize, string txtSearch = "")
         {
             var pageInfo = new PageInfo<ProductVersions>(0, PageSizeAdminConfig);
@@ -54,6 +54,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
 
             ViewBag.pageView = pageView;
             var listPageSize = new int[3] { 10, 15, 20 };
+            ViewBag.ProductId = productId;
             ViewBag.listPageSize = listPageSize;
             ViewBag.txtSearch = txtSearch;
             ViewBag.message = "";
@@ -61,7 +62,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
         }
         #endregion
 
-        #region["Tạo mới bài review"]
+        #region["Tạo mới version"]
         [HttpGet]
         public ActionResult Create(int productId)
         {
@@ -78,6 +79,8 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
             {
                 createBy = CUtils.StrTrim(UserState.UserName);
                 model.CreateBy = createBy;
+                var title = model.VersionTitle;
+                model.VersionCode = title.Trim().Replace(" ", "-").ToLower();
             }
             try
             {
@@ -97,7 +100,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
         }
         #endregion
 
-        #region["Thay đổi thông tin bài review"]
+        #region["Thay đổi thông tin version"]
         [HttpGet]
         public ActionResult Update(int productId, int versionId)
         {
@@ -111,6 +114,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
             {
                 ViewBag.message = "";
                 ViewBag.IsEdit = true;
+                ViewBag.ProductId = productId;
                 return View(review);
             }
             else
@@ -142,14 +146,15 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
             }
             ViewBag.message = message;
             ViewBag.IsEdit = true;
+            ViewBag.ProductId = model.ProductId;
             return View(model);
         }
 
         #endregion
 
-        #region["Xóa bài review"]
+        #region["Xóa version"]
         [HttpGet]
-        public ActionResult Delete(int versionId)
+        public ActionResult Delete(int versionId, int productId)
         {
             if (CUtils.IsNullOrEmpty(versionId))
             {
@@ -160,12 +165,12 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
             {
                 ProductVersionsManager.Remove(new ProductVersions() { VersionId = versionId });
                 ViewBag.message = "Xóa phiên bản mã " + versionId + "thành công";
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { productId = productId });
             }
             catch (Exception e)
             {
                 ViewBag.message = "Xóa phiên bản mã " + versionId + "thất bại";
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { productId = productId });
             }
         }
         #endregion

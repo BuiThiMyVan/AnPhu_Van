@@ -18,7 +18,7 @@ namespace idn.AnPhu.Biz.Models
         public string VersionTitle { get; set; }
 
         [DataColum]
-        public float VersionPrice { get; set; }
+        public int VersionPrice { get; set; }
 
         [DataColum]
         public string VersionDescription { get; set; }
@@ -86,7 +86,8 @@ namespace idn.AnPhu.Biz.Models
         [DataColum]
         public string CreateBy { get; set; }
 
-
+        [DataColum]
+        public int CertificateFeeHN { get; set; }
 
     }
 }

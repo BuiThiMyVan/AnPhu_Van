@@ -19,7 +19,12 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
             get { return ServiceFactory.ProductPropertiesManager; }
         }
 
-        #region["List danh sách review"]
+        private ProductManager ProductManager
+        {
+            get { return ServiceFactory.ProductManager; }
+        }
+
+        #region["List thuộc tính"]
         public ActionResult Index(int productId, int? page, int? pageSize, string txtSearch = "")
         {
             var pageInfo = new PageInfo<ProductProperties>(0, PageSizeAdminConfig);
@@ -52,6 +57,9 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
                 pageView = "Showing " + ((pageInfo.PageIndex - 1) * pageInfo.PageSize + 1) + " to " + lastRecord + " of " + pageInfo.ItemCount + " entries";
             }
 
+            var product = ProductManager.Get(new Product() { ProductId = productId });
+            ViewBag.ProductName = product.ProductName;
+            ViewBag.ProductId = productId;
             ViewBag.pageView = pageView;
             var listPageSize = new int[3] { 10, 15, 20 };
             ViewBag.listPageSize = listPageSize;
@@ -61,7 +69,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
         }
         #endregion
 
-        #region["Tạo mới bài review"]
+        #region["Tạo mới thuộc tính"]
         [HttpGet]
         public ActionResult Create(int productId)
         {
@@ -82,7 +90,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
             }
             catch (Exception e)
             {
-                ViewBag.message = "Đã xảy ra lỗi khi thêm mới bài đánh giá";
+                ViewBag.message = "Đã xảy ra lỗi khi thêm mới thuộc tính";
                 ViewBag.ProductId = model.ProductId;
                 return View(model);
             }
@@ -91,7 +99,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
         }
         #endregion
 
-        #region["Thay đổi thông tin bài review"]
+        #region["Thay đổi thông tin thuộc tính"]
         [HttpGet]
         public ActionResult Update(int productId, int productPropertyId)
         {
@@ -105,6 +113,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
             {
                 ViewBag.message = "";
                 ViewBag.IsEdit = true;
+                ViewBag.ProductId = productId;
                 return View(property);
             }
             else
@@ -119,7 +128,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
             var message = "";
             if (model != null && !CUtils.IsNullOrEmpty(model.ProductPropertyId))
             {
-                var property = ProductPropertiesManager.Get(new ProductProperties() { ProductPropertyId = model.ProductPropertyId });
+                var property = ProductPropertiesManager.Get(new ProductProperties() { ProductPropertyId = model.ProductPropertyId, ProductId = model.ProductId });
                 if (property != null)
                 {
                     ProductPropertiesManager.Update(model, property);
@@ -135,15 +144,16 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
                 message = "Mã thuộc tính xe trống!";
             }
             ViewBag.message = message;
+            ViewBag.ProductId = model.ProductId;
             ViewBag.IsEdit = true;
             return View(model);
         }
 
         #endregion
 
-        #region["Xóa bài review"]
+        #region["Xóa thuộc tính"]
         [HttpGet]
-        public ActionResult Delete(int propertyId)
+        public ActionResult Delete(int propertyId, int productId)
         {
             if (CUtils.IsNullOrEmpty(propertyId))
             {
@@ -154,12 +164,12 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
             {
                 ProductPropertiesManager.Remove(new ProductProperties() { ProductPropertyId = propertyId });
                 ViewBag.message = "Xóa thuộc tính mã " + propertyId + "thành công";
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { productId = productId});
             }
             catch (Exception e)
             {
                 ViewBag.message = "Xóa thuộc tính mã " + propertyId + "thất bại";
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { productId = productId });
             }
         }
         #endregion

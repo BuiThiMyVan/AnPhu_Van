@@ -29,5 +29,8 @@ namespace idn.AnPhu.Biz.Models
 
         [DataColum]
         public string Culture { get; set; }
+
+        [DataColum]
+        public string ProductName { get; set; }
     }
 }

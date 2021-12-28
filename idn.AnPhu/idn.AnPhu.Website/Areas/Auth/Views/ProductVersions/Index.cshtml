@@ -1,7 +1,8 @@
-﻿@model PageInfo<Product>
+﻿@model PageInfo<ProductVersions>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Auth/Views/Shared/_LayoutAuth.cshtml";
+    var productId = (int)@ViewBag.ProductId;
 }
 
 @section StyleSheet {
@@ -67,11 +68,12 @@
         </li>
         <li><a href="@Url.Action("Index", "Home")">Dashboard</a></li>
         <li><a href="@Url.Action("Index", "Product")">Danh sách sản phẩm</a></li>
+        <li><a href="@Url.Action("Index", "ProductVersions", new { productId = productId})">Danh sách phiên bản</a></li>
     </ul>
 </div>
 
 <div class="container-admin">
-    <div class="header-admin">Danh sách sản phẩm</div>
+    <div class="header-admin">Danh sách phiên bản</div>
     <div class="content-admin">
         <div class="header-table">
             <div class="filter-select">
@@ -101,21 +103,21 @@
                 <thead>
                     <tr>
                         <th class="head-sort">
-                            Mã sản phẩm
+                            Mã mẫu xe
                             <div class="sort-icon">
                                 <i class="fa fa-caret-up"></i>
                                 <i class="fa fa-sort-down"></i>
                             </div>
                         </th>
                         <th class="head-sort">
-                            Tên sản phẩm
+                            Tên mẫu xe
                             <div class="sort-icon">
                                 <i class="fa fa-caret-up"></i>
                                 <i class="fa fa-sort-down"></i>
                             </div>
                         </th>
-                        <th class="hidden-480 head-sort">
-                            Loại sản phẩm
+                        <th class="head-sort">
+                            Mô tả
                             <div class="sort-icon">
                                 <i class="fa fa-caret-up"></i>
                                 <i class="fa fa-sort-down"></i>
@@ -128,88 +130,86 @@
                                 <i class="fa fa-sort-down"></i>
                             </div>
                         </th>
+                        <th class="hidden-480 head-sort">
+                            Lái thử
+                            <div class="sort-icon">
+                                <i class="fa fa-caret-up"></i>
+                                <i class="fa fa-sort-down"></i>
+                            </div>
+                        </th>
 
                         <th></th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    @foreach (Product item in Model.DataList)
+                    @foreach (ProductVersions item in Model.DataList)
                     {
-                        <tr>
-                            <td>@item.ProductCode</td>
-                            <td class="hidden-480">@item.ProductName</td>
-                            <td>@item.PrdCategoryTitle</td>
+                    <tr>
+                        <td>@item.VersionCode</td>
+                        <td class="hidden-480">@item.VersionTitle</td>
+                        <td class="hidden-480">@item.VersionDescription</td>
+                        <td class="hidden-480">
+                            @if (item.IsActive == true)
+                            {
+                                <span class="label label-sm label-success">Is Active</span>
 
-                            <td class="hidden-480">
-                                @if (item.IsActive == true)
-                                {
-                                    <span class="label label-sm label-success">Is Active</span>
+                            }
+                            else
+                            {
+                                <span class="label label-sm label-danger">UnActive</span>
 
-                                }
-                                else
-                                {
-                                    <span class="label label-sm label-danger">UnActive</span>
+                            }
+                        </td>
+                        <td class="hidden-480">
+                            @if (item.IsRegister == true)
+                            {
+                                <span class="label label-sm label-success">Active</span>
 
-                                }
-                            </td>
+                            }
+                            else
+                            {
+                                <span class="label label-sm label-danger">UnActive</span>
 
-                            <td>
-                                <div class="hidden-sm hidden-xs btn-group">
-                                    <button class="btn btn-xs btn-info" onclick="window.location.href='/vi/quan-tri/danh-sach-san-pham/cap-nhat?productId='+ @item.ProductId">
-                                        <i class="ace-icon fa fa-pencil bigger-120"></i>
+                            }
+                        </td>
+
+                        <td>
+                            <div class="hidden-sm hidden-xs btn-group">
+                                <button class="btn btn-xs btn-info" onclick="window.location.href='/vi/quan-tri/danh-sach-version/cap-nhat?productId=@ViewBag.ProductId'+ '&versionId='+ @item.VersionId">
+                                    <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                </button>
+                                <button class="btn btn-xs btn-danger" onclick="confirmDelete(@item.VersionId, @productId)">
+                                    <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                </button>
+                            </div>
+
+                            <div class="hidden-md hidden-lg">
+                                <div class="inline pos-rel">
+                                    <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown" data-position="auto">
+                                        <i class="ace-icon fa fa-cog icon-only bigger-110"></i>
                                     </button>
-                                    <button class="btn btn-xs btn-info" onclick="window.location.href='/vi/quan-tri/danh-sach-review/danh-sach?productId='+ @item.ProductId">
-                                        <i class="ace-icon fa fa-file-text-o bigger-120"></i>
-                                    </button>
-                                    <button class="btn btn-xs btn-info" onclick="window.location.href='/vi/quan-tri/danh-sach-thuoc-tinh/danh-sach?productId='+ @item.ProductId">
-                                        <i class="ace-icon fa fa-gear bigger-120"></i>
-                                    </button>
-                                    <button class="btn btn-xs btn-info" onclick="window.location.href='/vi/quan-tri/danh-sach-version/danh-sach?productId='+ @item.ProductId">
-                                        <i class="ace-icon fa fa-th bigger-120"></i>
-                                    </button>
+
+                                    <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+                                        <li>
+                                            <a href="'/vi/quan-tri/danh-sach-version/cap-nhat?reviewId='+ @item.VersionId" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                <span class="green">
+                                                    <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="'/vi/quan-tri/danh-sach-version/xoa?reviewId='+ @item.VersionId" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                <span class="green">
+                                                    <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                                </span>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </div>
-
-                                <div class="hidden-md hidden-lg">
-                                    <div class="inline pos-rel">
-                                        <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown" data-position="auto">
-                                            <i class="ace-icon fa fa-cog icon-only bigger-110"></i>
-                                        </button>
-
-                                        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
-                                            <li>
-                                                <a href="'/vi/quan-tri/danh-sach-san-pham/cap-nhat?productId='+ @item.ProductId" class="tooltip-success" data-rel="tooltip" title="Edit">
-                                                    <span class="green">
-                                                        <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
-                                                    </span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="'/vi/quan-tri/danh-sach-review-sp/danh-sach?productId='+ @item.ProductId" class="tooltip-success" data-rel="tooltip" title="Edit">
-                                                    <span class="green">
-                                                        <i class="ace-icon fa fa-file-text-o bigger-120"></i>
-                                                    </span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="'/vi/quan-tri/danh-sach-thuoc-tinh-sp/danh-sach?productId='+ @item.ProductId" class="tooltip-success" data-rel="tooltip" title="Edit">
-                                                    <span class="green">
-                                                        <i class="ace-icon fa fa-gear bigger-120"></i>
-                                                    </span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="'/vi/quan-tri/danh-sach-version/danh-sach?productId='+ @item.ProductId" class="tooltip-success" data-rel="tooltip" title="Edit">
-                                                    <span class="green">
-                                                        <i class="ace-icon fa fa-th bigger-120"></i>
-                                                    </span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
+                            </div>
+                        </td>
+                    </tr>
                     }
 
                 </tbody>
@@ -247,7 +247,7 @@
                     </li>
                 </ul>
             </div>
-            <a href="/vi/quan-tri/danh-sach-san-pham/tao-moi" class="btn btn-success">Tạo mới</a>
+            <a href="/vi/quan-tri/danh-sach-version/tao-moi?productId=@ViewBag.ProductId" class="btn btn-success">Tạo mới</a>
         </div>
     </div>
 </div>
@@ -259,14 +259,14 @@
     function updatePageSize() {
         var pageSizeUpdate = $('#pageSize').val();
         debugger
-        window.location.href = "/vi/quan-tri/danh-sach-san-pham/danh-sach?page=" + pageIndex + "&pageSize=" + pageSizeUpdate;
+        window.location.href = "/vi/quan-tri/danh-sach-version/danh-sach?productId=" + @productId + "&page=" + pageIndex + "&pageSize=" + pageSizeUpdate;
         debugger
     }
 
     function search(e) {
         var txtSearch = $('#txtSearch').val().trim();
         if (e.key === 'Enter' || e.keyCode === 13) {
-            window.location.href = "/vi/quan-tri/danh-sach-san-pham/danh-sach?page=" + pageIndex + "&pageSize=" + pageSize + "&txtSearch=" + txtSearch;
+            window.location.href = "/vi/quan-tri/danh-sach-version/danh-sach?productId=" + @productId + "&page=" + pageIndex + "&pageSize=" + pageSize + "&txtSearch=" + txtSearch;
         }
 
     }
@@ -274,7 +274,7 @@
     function prev() {
         if (pageIndex > 1) {
             pageIndex--;
-            window.location.href = "/vi/quan-tri/danh-sach-san-pham/danh-sach?page=" + pageIndex + "&pageSize=" + pageSize;
+            window.location.href = "/vi/quan-tri/danh-sach-version/danh-sach?productId=" + @productId + "&page=" + pageIndex + "&pageSize=" + pageSize;
         }
 
     }
@@ -282,15 +282,24 @@
     function next() {
         if (pageIndex < @Model.PageCount) {
             pageIndex++;
-            window.location.href = "/vi/quan-tri/danh-sach-san-pham/danh-sach?page=" + pageIndex + "&pageSize=" + pageSize;
+            window.location.href = "/vi/quan-tri/danh-sach-version/danh-sach?productId=" + @productId + "&page=" + pageIndex + "&pageSize=" + pageSize;
         }
 
     }
 
     function goToPage(index) {
         var txtSearch = $('#txtSearch').val().trim();
-            window.location.href = "/vi/quan-tri/danh-sach-san-pham/danh-sach?page=" + index + "&pageSize=" + pageSize + "&txtSearch=" + txtSearch;
+            window.location.href = "/vi/quan-tri/danh-sach-version/danh-sach?productId=" + @productId + "&page=" + index + "&pageSize=" + pageSize + "&txtSearch=" + txtSearch;
         }
+
+        function confirmDelete(versionId, productId) {
+
+            if (confirm("Bạn muốn xóa bài viết có mã " + versionId + " ?") == true) {
+            window.location.href = '/vi/quan-tri/danh-sach-version/xoa?versionId=' + versionId + '&productId=' + productId;
+        } else {
+            return false;
+        }
+    }
     </script>
 }
 
