@@ -1,9 +1,11 @@
-﻿@model News
+﻿@using idn.AnPhu.Website.Areas.Auth.Models
+@model News
 
 
 @{
     ViewBag.Title = "Create";
     Layout = "~/Areas/Auth/Views/Shared/_LayoutAuth.cshtml";
+    var message = CUtils.StrValue(ViewBag.message);
 }
 
 
@@ -94,21 +96,25 @@
 
                     <div class="col-sm-9">
                         <div class="clearfix">
-                            <select data-val="true" data-val-number="The field ParentId must be a number." data-val-required="The ParentId field is required." name="NewsCategoryId">
+                            <select name="NewsCategoryId" id="NewsCategoryId" onchange="chooseNewsCategory(event)">
+                                <option value="0">-- Tất cả --</option>
                                 @foreach (NewsCategories item in ViewBag.ListCategoriesNews)
                                 {
-                                    if (item.ParentId > 0)
-                                    {
-                                        <option value="@item.NewsCategoryId">&nbsp;&nbsp;| --@item.NewsCategoryTitle</option>
-                                    }
-                                    else
+                                    if (item.ParentId == 0)
                                     {
                                         <option value="@item.NewsCategoryId">@item.NewsCategoryTitle</option>
+                                        var childs = new NewsCategoriesModel().GetChildCategories(ViewBag.ListCategoriesNews, item.NewsCategoryId);
+                                        foreach (var child in childs)
+                                        {
+                                            <option value="@child.NewsCategoryId">&nbsp;&nbsp;| --@child.NewsCategoryTitle</option>
+                                        }
                                     }
+
 
                                 }
 
                             </select>
+                            <div class="text-danger"></div>
                         </div>
                     </div>
                 </div>
@@ -264,6 +270,14 @@
             }
         });
 
+        function chooseNewsCategory(e) {
+            if ($(e.target).find(":selected").val() == '0') {
+                $(e.target).next().text('Bạn cần chọn danh mục tin tức');
+            } else {
+                $(e.target).next().text('');
+            }
+        }
+
         function ChooseImage(e) {
             var finder = new CKFinder();
             finder.selectActionFunction = function (fileUrl) {
@@ -296,12 +310,26 @@
                 }
             }
 
+            if ($('#NewsCategoryId').find(":selected").val() == '0') {
+                $('#NewsCategoryId').next().text('Bạn cần chọn danh mục tin tức');
+                bug++;
+            }
+
             if (bug > 0) {
                 e.preventDefault();
             } else {
                 return true;
             }
         }
+
+        var message = '@MvcHtmlString.Create(message)';
+
+        $(document).ready(function () {
+            if (message.trim() != null && message.trim() != '') {
+                alert(message);
+                window.location.href = '/vi/quan-tri/danh-sach-tin-tuc/danh-sach';
+            }
+        })
     </script>
 
 

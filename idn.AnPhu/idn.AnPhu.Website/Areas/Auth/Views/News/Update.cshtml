@@ -1,7 +1,9 @@
-﻿@model News
+﻿@using idn.AnPhu.Website.Areas.Auth.Models
+@model News
 @{
     ViewBag.Title = "Update";
     Layout = "~/Areas/Auth/Views/Shared/_LayoutAuth.cshtml";
+    var message = CUtils.StrValue(ViewBag.message);
 }
 
 
@@ -93,33 +95,35 @@
                     <div class="col-sm-9">
                         <div class="clearfix">
                             <select name="NewsCategoryId">
-                                <option selected="selected" value="0">-- Tất cả --</option>
                                 @foreach (NewsCategories item in ViewBag.ListCategoriesNews)
                                 {
-                                    if (item.ParentId > 0)
+                                    if (item.ParentId == 0)
                                     {
                                         if (item.NewsCategoryId == Model.NewsCategoryId)
                                         {
-                                            <option value="@item.NewsCategoryId" selected>&nbsp;|--@item.NewsCategoryTitle</option>
-                                        }
-                                        else
-                                        {
-                                            <option value="@item.NewsCategoryId">&nbsp;|--@item.NewsCategoryTitle</option>
-                                        }
-
-                                    }
-                                    else
-                                    {
-                                        if (item.NewsCategoryId == Model.NewsCategoryId)
-                                        {
-                                            <option value="@item.NewsCategoryId" selected>@item.NewsCategoryTitle</option>
+                                            <option value="@item.NewsCategoryId" selected="selected">@item.NewsCategoryTitle</option>
                                         }
                                         else
                                         {
                                             <option value="@item.NewsCategoryId">@item.NewsCategoryTitle</option>
                                         }
 
+
+                                        var childs = new NewsCategoriesModel().GetChildCategories(ViewBag.ListCategoriesNews, item.NewsCategoryId);
+                                        foreach (var child in childs)
+                                        {
+                                            if (child.NewsCategoryId == Model.NewsCategoryId)
+                                            {
+                                                <option value="@child.NewsCategoryId" selected="selected">&nbsp;&nbsp;| --@child.NewsCategoryTitle</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@child.NewsCategoryId">&nbsp;&nbsp;| --@child.NewsCategoryTitle</option>
+                                            }
+
+                                        }
                                     }
+
 
                                 }
 
@@ -288,7 +292,7 @@
     </script>
     <script>
         $('#btn_submit_save').click(function () {
-            $("#manageForm").attr("action", '@Url.ActionLocalized("Create")').submit();
+            $("#manageForm").attr("action", '@Url.ActionLocalized("Update")').submit();
         });
 
         function validateEmpty(e) {
@@ -316,6 +320,14 @@
                 return true;
             }
         }
+
+        var message = '@MvcHtmlString.Create(message)';
+
+        $(document).ready(function () {
+            if (message.trim() != null && message.trim() != '') {
+                alert(message);
+            }
+        })
     </script>
 }
 

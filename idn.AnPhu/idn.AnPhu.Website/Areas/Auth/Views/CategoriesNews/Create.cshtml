@@ -1,9 +1,10 @@
-﻿@model NewsCategories
-
+﻿@using idn.AnPhu.Website.Areas.Auth.Models
+@model NewsCategories
 
 @{
     ViewBag.Title = "Create";
     Layout = "~/Areas/Auth/Views/Shared/_LayoutAuth.cshtml";
+    var message = CUtils.StrValue(ViewBag.message);
 }
 
 @section StyleSheet {
@@ -88,18 +89,20 @@
 
                     <div class="col-sm-9">
                         <div class="clearfix">
-                            <select data-val="true" data-val-number="The field ParentId must be a number." data-val-required="The ParentId field is required." id="ParentId" name="ParentId" required="required">
+                            <select name="ParentId">
                                 <option selected="selected" value="0">-- Tất cả --</option>
                                 @foreach (NewsCategories item in ViewBag.ListCategoriesNews)
                                 {
-                                    if (item.ParentId > 0)
-                                    {
-                                        <option value="@item.NewsCategoryId">&nbsp;&nbsp;| --@item.NewsCategoryTitle</option>
-                                    }
-                                    else
+                                    if (item.ParentId == 0)
                                     {
                                         <option value="@item.NewsCategoryId">@item.NewsCategoryTitle</option>
+                                        var childs = new NewsCategoriesModel().GetChildCategories(ViewBag.ListCategoriesNews, item.NewsCategoryId);
+                                        foreach (var child in childs)
+                                        {
+                                            <option value="@child.NewsCategoryId">&nbsp;&nbsp;| --@child.NewsCategoryTitle</option>
+                                        }
                                     }
+
 
                                 }
 
@@ -209,6 +212,15 @@
                 return true;
             }
         }
+
+        var message = '@MvcHtmlString.Create(message)';
+
+        $(document).ready(function () {
+            if (message.trim() != null && message.trim() != '') {
+                alert(message);
+                window.location.href = '/vi/quan-tri/danh-muc-tin-tuc/danh-sach';
+            }
+        })
     </script>
 }
 

@@ -74,6 +74,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
         {
             ViewBag.Title = "Tạo mới danh mục tin tức";
             ViewBag.Today = Today;
+            ViewBag.message = "";
             ViewBag.ListCategoriesNews = NewsCategoriesManager.GetAll();
             return View();
         }
@@ -90,13 +91,15 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
             try
             {
                 NewsManager.Add(model);
-                //ViewBag.message = "Thêm mới tin tức thành công";
-                return RedirectToAction("Index");
+                ViewBag.ListCategoriesNews = NewsCategoriesManager.GetAll();
+                ViewBag.message = "Thêm mới tin tức thành công";
+                return View(model);
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
-                return RedirectToAction("Index");
+                ViewBag.message = "Thêm mới tin tức thất bại";
+                ViewBag.ListCategoriesNews = NewsCategoriesManager.GetAll();
+                return View(model);
 
             }
 
@@ -116,7 +119,6 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
 
             if (news != null)
             {
-                //ViewBag.Categories = new SelectList(NewsCategoriesManager.GetAll(), "NewsCategoryId", "HlevelTitle");
                 ViewBag.ListCategoriesNews = NewsCategoriesManager.GetAll();
                 ViewBag.message = "";
                 ViewBag.IsEdit = true;
@@ -138,16 +140,16 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
                 if (news != null)
                 {
                     NewsManager.Update(model, news);
-                    message = "Cập nhật thông tin danh mục thành công!";
+                    message = "Cập nhật tin tức thành công!";
                 }
                 else
                 {
-                    message = "Mã danh mục tin tức '" + model.NewsCategoryId + "' không có trong hệ thống!";
+                    message = "Mã tin tức '" + model.NewsId + "' không có trong hệ thống!";
                 }
             }
             else
             {
-                message = "Mã danh mục tin tức trống!";
+                message = "Mã tin tức trống!";
             }
             ViewBag.message = message;
             ViewBag.ListCategoriesNews = NewsCategoriesManager.GetAll();

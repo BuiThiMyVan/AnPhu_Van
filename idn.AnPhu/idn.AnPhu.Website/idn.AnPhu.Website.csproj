@@ -142,6 +142,7 @@
     <Compile Include="Areas\Auth\Controllers\ProductReviewsController.cs" />
     <Compile Include="Areas\Auth\Controllers\ProductVersionsController.cs" />
     <Compile Include="Areas\Auth\Controllers\Sys_UserController.cs" />
+    <Compile Include="Areas\Auth\Models\NewsCategoriesModel.cs" />
     <Compile Include="Controllers\AdministratorController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -1267,7 +1268,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Auth\Models\" />
     <Folder Include="Content\css\" />
     <Folder Include="UploadsFile\" />
     <Folder Include="Views\Administrator\" />

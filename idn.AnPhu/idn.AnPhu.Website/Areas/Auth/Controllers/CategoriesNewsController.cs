@@ -67,6 +67,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
         {
             ViewBag.Title = "Tạo mới danh mục tin tức";
             ViewBag.Today = Today;
+            ViewBag.message = "";
             ViewBag.ListCategoriesNews = NewsCategoriesManager.GetAll();
             return View();
         }
@@ -74,18 +75,24 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
         [HttpPost]
         public ActionResult Create(NewsCategories model)
         {
-            var resultEntry = new JsonResultEntry() { Success = false };
-
-            var createBy = "";
-            if (UserState != null && !CUtils.IsNullOrEmpty(UserState.UserName))
+            try
             {
-                createBy = CUtils.StrTrim(UserState.UserName);
+                var createBy = "";
+                if (UserState != null && !CUtils.IsNullOrEmpty(UserState.UserName))
+                {
+                    createBy = CUtils.StrTrim(UserState.UserName);
+                }
+                model.CreateBy = createBy;
+                NewsCategoriesManager.Add(model);
+                ViewBag.ListCategoriesNews = NewsCategoriesManager.GetAll();
+                ViewBag.message = "Tạo mới danh mục tin tức thành công!";
+                return View(model);
+            } catch (Exception e)
+            {
+                ViewBag.message = "Tạo mới danh mục tin tức thất bại!";
+                return View(model);
             }
-            model.CreateBy = createBy;
-            NewsCategoriesManager.Add(model);
-            resultEntry.Success = true;
-            resultEntry.AddMessage("Tạo mới danh mục tin tức thành công!");            
-            return RedirectToAction("Index");
+
         }
         #endregion
 
