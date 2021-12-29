@@ -25,7 +25,6 @@ namespace idn.AnPhu.Biz.Services
             }
         }
 
-        //private INewsCategoriesProvider NewsCategoryProvider        //{        //    get { return (INewsCategoriesProvider)Provider; }        //}
         public List<NewsCategories> GetAll()
         {
             int total = 0;

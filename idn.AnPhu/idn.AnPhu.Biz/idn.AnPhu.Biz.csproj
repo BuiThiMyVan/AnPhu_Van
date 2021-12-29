@@ -58,6 +58,7 @@
     <Compile Include="Models\Sys_PermissionInGroup.cs" />
     <Compile Include="Models\Sys_User.cs" />
     <Compile Include="Models\Sys_UserInGroup.cs" />
+    <Compile Include="Models\Users.cs" />
     <Compile Include="Persistance\Caching\CacheDataProviderBase.cs" />
     <Compile Include="Persistance\Interface\IImportableDataProvider.cs" />
     <Compile Include="Persistance\Interface\INewsCategoriesProvider.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="Persistance\Interface\IProductVersionsProvider.cs" />
     <Compile Include="Persistance\Interface\ISys_GroupProvider.cs" />
     <Compile Include="Persistance\Interface\ISys_UserProvider.cs" />
+    <Compile Include="Persistance\Interface\IUsersProvider.cs" />
     <Compile Include="Persistance\SqlServer\NewsCategoriesProvider.cs" />
     <Compile Include="Persistance\SqlServer\NewsProvider.cs" />
     <Compile Include="Persistance\SqlServer\PrdCategoriesProvider.cs" />
@@ -78,6 +80,7 @@
     <Compile Include="Persistance\SqlServer\ProductVersionsProvider.cs" />
     <Compile Include="Persistance\SqlServer\Sys_GroupProvider.cs" />
     <Compile Include="Persistance\SqlServer\Sys_UserProvider.cs" />
+    <Compile Include="Persistance\SqlServer\UsersProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\NewsCategoriesManager.cs" />
     <Compile Include="Services\NewsManager.cs" />
@@ -89,6 +92,7 @@
     <Compile Include="Services\ServiceFactory.cs" />
     <Compile Include="Services\Sys_GroupManager.cs" />
     <Compile Include="Services\Sys_UserManager.cs" />
+    <Compile Include="Services\UsersManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Extensions\" />

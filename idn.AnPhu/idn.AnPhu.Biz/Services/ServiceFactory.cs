@@ -24,6 +24,7 @@ namespace idn.AnPhu.Biz.Services
             services.Add(typeof(ProductReviewsManager), new ProductReviewsManager(new ProductReviewsProvider()));
             services.Add(typeof(ProductVersionsManager), new ProductVersionsManager(new ProductVersionsProvider()));
             services.Add(typeof(ProductPropertiesManager), new ProductPropertiesManager(new ProductPropertiesProvider()));
+            services.Add(typeof(UsersManager), new UsersManager(new UsersProvider()));
 
             #endregion
         }
@@ -142,6 +143,18 @@ namespace idn.AnPhu.Biz.Services
             set
             {
                 services[typeof(ProductPropertiesManager)] = value;
+            }
+        }
+
+        public static UsersManager UsersManager
+        {
+            get
+            {
+                return (UsersManager)services[typeof(UsersManager)];
+            }
+            set
+            {
+                services[typeof(UsersManager)] = value;
             }
         }
     }

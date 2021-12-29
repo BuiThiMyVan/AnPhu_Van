@@ -28,7 +28,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
 
         //
         // GET: /Auth/Sys_User/
-
+        #region["List người dùng"]
         public ActionResult Index(string usercode = "", string fullname = "", string birthdayfrom = "", string birthdayto = "", string createdtimefrom = "", string createdtimeto = "", string email = "", string flagactive = "", string init = "init", int page = 0)
         {
             var startCount = "0";
@@ -61,7 +61,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
             ViewBag.StartCount = startCount;
             return View(pageInfo);
         }
-
+        #endregion
         #region["Tạo mới người dùng"]
         [HttpGet]
         public ActionResult Create()

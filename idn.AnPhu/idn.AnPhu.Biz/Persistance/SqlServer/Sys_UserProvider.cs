@@ -80,6 +80,27 @@ namespace idn.AnPhu.Biz.Persistance.SqlServer
             return EntityBase.ParseListFromTable<Sys_User>(table);
         }
 
+        public List<Sys_User> SearchUsers(string txtSearch, int startIndex, int pageSize, ref int totalItems)
+        {
+            DbCommand comm = this.GetCommand("Sp_SysUsers_Search");
+            comm.AddParameter<string>(this.Factory, "txtSearch", (txtSearch != null && txtSearch.Trim().Length > 0) ? txtSearch : null);
+            comm.AddParameter<int>(this.Factory, "startIndex", startIndex);
+            comm.AddParameter<int>(this.Factory, "count", pageSize);
+
+            DbParameter totalItemsParam = comm.AddParameter(this.Factory, "totalItems", DbType.Int32, null);
+            totalItemsParam.Direction = ParameterDirection.Output;
+
+            var table = this.GetTable(comm);
+            table.TableName = TableName.Sys_User;
+
+            if (totalItemsParam.Value != DBNull.Value)
+            {
+                totalItems = Convert.ToInt32(totalItemsParam.Value);
+            }
+            return EntityBase.ParseListFromTable<Sys_User>(table);
+        }
+
+
         public void Add(Sys_User item)
         {
             var comm = this.GetCommand("Sp_Sys_User_Create");

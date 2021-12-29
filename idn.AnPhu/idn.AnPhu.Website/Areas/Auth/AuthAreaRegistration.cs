@@ -417,6 +417,84 @@ namespace idn.AnPhu.Website.Areas.Auth
               },
               namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
             );
+
+            context.MapRoute(
+              name: "auth_users",
+              url: "{culture}/quan-tri/danh-sach-user/danh-sach",
+              defaults: new
+              {
+                  culture = "vi",
+                  area = "Auth",
+                  controller = "Users",
+                  action = "Index",
+              },
+              namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+            );
+
+            context.MapRoute(
+              name: "auth_users_promote",
+              url: "{culture}/quan-tri/danh-sach-user/promote",
+              defaults: new
+              {
+                  culture = "vi",
+                  area = "Auth",
+                  controller = "Users",
+                  action = "Promote",
+              },
+              namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+            );
+
+            context.MapRoute(
+              name: "auth_users_demote",
+              url: "{culture}/quan-tri/danh-sach-user/demote",
+              defaults: new
+              {
+                  culture = "vi",
+                  area = "Auth",
+                  controller = "Users",
+                  action = "Demote",
+              },
+              namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+            );
+
+            context.MapRoute(
+              name: "auth_users_update",
+              url: "{culture}/quan-tri/danh-sach-user/cap-nhat",
+              defaults: new
+              {
+                  culture = "vi",
+                  area = "Auth",
+                  controller = "Users",
+                  action = "Update",
+              },
+              namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+            );
+
+            context.MapRoute(
+              name: "auth_users_xoa",
+              url: "{culture}/quan-tri/danh-sach-user/xoa",
+              defaults: new
+              {
+                  culture = "vi",
+                  area = "Auth",
+                  controller = "Users",
+                  action = "Delete",
+              },
+              namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+            );
+
+            context.MapRoute(
+              name: "auth_users_active",
+              url: "{culture}/quan-tri/danh-sach-user/active",
+              defaults: new
+              {
+                  culture = "vi",
+                  area = "Auth",
+                  controller = "Users",
+                  action = "Active",
+              },
+              namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+            );
             //context.MapRoute(
             //    "Auth_default",
             //    "Auth/{controller}/{action}/{id}",
