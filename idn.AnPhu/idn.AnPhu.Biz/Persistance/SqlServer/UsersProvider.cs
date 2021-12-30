@@ -94,6 +94,16 @@ namespace idn.AnPhu.Biz.Persistance.SqlServer
             this.SafeExecuteNonQuery(comm);
         }
 
+        public void ChangePass(string userName, string pass, string passSalt)
+        {
+            var comm = this.GetCommand("Sp_Users_UpdatePassword");
+            if (comm == null) return;
+            comm.AddParameter<string>(this.Factory, "Username", userName);
+            comm.AddParameter<string>(this.Factory, "Password", (pass != null && pass.Trim().Length > 0) ? pass : null);
+            comm.AddParameter<string>(this.Factory, "PasswordSalt", (passSalt != null && passSalt.Trim().Length > 0) ? passSalt : null);
+            this.SafeExecuteNonQuery(comm);
+        }
+
         public void Add(Users item)
         {
         }

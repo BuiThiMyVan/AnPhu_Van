@@ -1,5 +1,6 @@
 ﻿using Client.Core.Data;
 using Client.Core.Data.Entities.Paging;
+using Client.Core.Utils;
 using idn.AnPhu.Biz.Models;
 using idn.AnPhu.Biz.Persistance.Interface;
 using System;
@@ -44,6 +45,13 @@ namespace idn.AnPhu.Biz.Services
         public void Active(string userId)
         {
             UsersProvider.Active(userId);
+        }
+
+        public void ChangePass(string userName, string pass)
+        {
+            var passSalt = EncryptUtils.GenerateSalt();
+            pass = EncryptUtils.EncryptPassword(pass, passSalt);
+            UsersProvider.ChangePass(userName, pass, passSalt);
         }
 
 

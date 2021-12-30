@@ -122,5 +122,19 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
 
         }
         #endregion
+
+        [HttpPost]
+        public ActionResult ChangePass(string userName, string pass)
+        {
+            try
+            {
+                UsersManager.ChangePass(userName, pass);
+                return RedirectToAction("Index");
+            } catch(Exception e)
+            {
+                return RedirectToAction("Index");
+            }
+            
+        }
     }
 }

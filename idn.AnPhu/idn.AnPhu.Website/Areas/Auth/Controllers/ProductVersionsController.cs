@@ -132,6 +132,8 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
                 var review = ProductVersionsManager.Get(new ProductVersions() { VersionId = model.VersionId });
                 if (review != null)
                 {
+                    var title = model.VersionTitle;
+                    model.VersionCode = title.Trim().Replace(" ", "-").ToLower();
                     ProductVersionsManager.Update(model, review);
                     message = "Cập nhật thông tin phiên bản thành công!";
                 }

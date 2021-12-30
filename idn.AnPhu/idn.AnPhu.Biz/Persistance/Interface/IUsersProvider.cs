@@ -15,5 +15,7 @@ namespace idn.AnPhu.Biz.Persistance.Interface
         void Demote(string userId);
 
         void Active(string userId);
+
+        void ChangePass(string userId, string pass, string passSalt);
     }
 }

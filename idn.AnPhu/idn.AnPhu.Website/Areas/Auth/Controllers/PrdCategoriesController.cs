@@ -67,6 +67,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
             ViewBag.Title = "Tạo mới thuộc tính";
             ViewBag.Today = Today;
             ViewBag.message = "";
+            ViewBag.ListPrdCategories = PrdCategoriesManager.GetAll();
             return View();
         }
 
