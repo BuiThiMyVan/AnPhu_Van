@@ -45,6 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\HtmlPageCategories.cs" />
+    <Compile Include="Models\HtmlPages.cs" />
     <Compile Include="Models\News.cs" />
     <Compile Include="Models\NewsCategories.cs" />
     <Compile Include="Models\PrdCategories.cs" />
@@ -60,6 +62,8 @@
     <Compile Include="Models\Sys_UserInGroup.cs" />
     <Compile Include="Models\Users.cs" />
     <Compile Include="Persistance\Caching\CacheDataProviderBase.cs" />
+    <Compile Include="Persistance\Interface\IHtmlPageCategoriesProvider.cs" />
+    <Compile Include="Persistance\Interface\IHtmlPagesProvider.cs" />
     <Compile Include="Persistance\Interface\IImportableDataProvider.cs" />
     <Compile Include="Persistance\Interface\INewsCategoriesProvider.cs" />
     <Compile Include="Persistance\Interface\INewsProvider.cs" />
@@ -71,6 +75,7 @@
     <Compile Include="Persistance\Interface\ISys_GroupProvider.cs" />
     <Compile Include="Persistance\Interface\ISys_UserProvider.cs" />
     <Compile Include="Persistance\Interface\IUsersProvider.cs" />
+    <Compile Include="Persistance\SqlServer\HtmlPageCategoriesProvider.cs" />
     <Compile Include="Persistance\SqlServer\NewsCategoriesProvider.cs" />
     <Compile Include="Persistance\SqlServer\NewsProvider.cs" />
     <Compile Include="Persistance\SqlServer\PrdCategoriesProvider.cs" />
@@ -82,6 +87,7 @@
     <Compile Include="Persistance\SqlServer\Sys_UserProvider.cs" />
     <Compile Include="Persistance\SqlServer\UsersProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\HtmlPageCategoriesManager.cs" />
     <Compile Include="Services\NewsCategoriesManager.cs" />
     <Compile Include="Services\NewsManager.cs" />
     <Compile Include="Services\PrdCategoriesManager.cs" />

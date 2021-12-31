@@ -50,7 +50,8 @@ namespace idn.AnPhu.Constants
         public const string ProductVersions = "ProductVersions";
         public const string ProductProperties = "ProductProperties";
         public const string Users = "Users";
-
+        public const string HtmlPageCategories = "HtmlPageCategories";
+        public const string HtmlPages = "HtmlPages";
     }
 
     #region["Columns Table"]

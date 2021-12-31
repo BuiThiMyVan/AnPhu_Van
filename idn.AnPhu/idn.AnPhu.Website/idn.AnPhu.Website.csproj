@@ -135,6 +135,8 @@
     <Compile Include="Areas\Auth\Controllers\AccountController.cs" />
     <Compile Include="Areas\Auth\Controllers\CategoriesNewsController.cs" />
     <Compile Include="Areas\Auth\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Auth\Controllers\HtmlPageCategoriesController.cs" />
+    <Compile Include="Areas\Auth\Controllers\HtmlPageController.cs" />
     <Compile Include="Areas\Auth\Controllers\NewsController.cs" />
     <Compile Include="Areas\Auth\Controllers\PrdCategoriesController.cs" />
     <Compile Include="Areas\Auth\Controllers\ProductController.cs" />
@@ -154,6 +156,7 @@
     <Compile Include="Extensions\Pager\Pager.cs" />
     <Compile Include="Extensions\Pager\PagerExtensions.cs" />
     <Compile Include="Extensions\UrlExtensions.cs" />
+    <Compile Include="Extensions\ViewDataExtensions.cs" />
     <Compile Include="Filters\CustomAuthorizeAttribute.cs" />
     <Compile Include="Filters\CustomErrorHandlerAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -1093,6 +1096,8 @@
     <Content Include="Areas\Auth\Views\ProductVersions\Create.cshtml" />
     <Content Include="Areas\Auth\Views\ProductVersions\Update.cshtml" />
     <Content Include="Areas\Auth\Views\Users\Index.cshtml" />
+    <Content Include="Areas\Auth\Views\HtmlPageCategories\Index.cshtml" />
+    <Content Include="Areas\Auth\Views\HtmlPageCategories\Create.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -1270,6 +1275,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Auth\Views\HtmlPage\" />
     <Folder Include="Content\css\" />
     <Folder Include="UploadsFile\" />
     <Folder Include="Views\Administrator\" />

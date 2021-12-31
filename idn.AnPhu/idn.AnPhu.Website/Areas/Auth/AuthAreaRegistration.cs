@@ -495,6 +495,45 @@ namespace idn.AnPhu.Website.Areas.Auth
               },
               namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
             );
+
+            context.MapRoute(
+              name: "auth_htmpagecate",
+              url: "{culture}/quan-tri/danh-muc-trang-tinh/danh-sach",
+              defaults: new
+              {
+                  culture = "vi",
+                  area = "Auth",
+                  controller = "HtmlPageCategories",
+                  action = "Index",
+              },
+              namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+            );
+
+            context.MapRoute(
+              name: "auth_htmpagecate_create",
+              url: "{culture}/quan-tri/danh-muc-trang-tinh/tao-moi",
+              defaults: new
+              {
+                  culture = "vi",
+                  area = "Auth",
+                  controller = "HtmlPageCategories",
+                  action = "Create",
+              },
+              namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+            );
+
+            context.MapRoute(
+              name: "auth_htmpagecate_update",
+              url: "{culture}/quan-tri/danh-muc-trang-tinh/cap-nhat",
+              defaults: new
+              {
+                  culture = "vi",
+                  area = "Auth",
+                  controller = "HtmlPageCategories",
+                  action = "Update",
+              },
+              namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+            );
             //context.MapRoute(
             //    "Auth_default",
             //    "Auth/{controller}/{action}/{id}",
