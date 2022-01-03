@@ -52,7 +52,7 @@
         <a href="#">Home</a>
     </li>
     <li><a href="@Url.Action("Index", "Home")">Dashboard</a></li>
-    <li><a href="@Url.Action("Index", "CategoriesNews")">Danh sách danh mục trang tĩnh</a></li>
+    <li><a href="@Url.Action("Index", "HtmlPageCategories")">Danh sách danh mục trang tĩnh</a></li>
     @if (ViewBag.IsEdit != null && ViewBag.IsEdit == true)
     {
         <li class="active">@Model.HtmlPageCategoryTitle</li>

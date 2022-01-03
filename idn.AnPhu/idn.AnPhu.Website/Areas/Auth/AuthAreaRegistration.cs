@@ -534,6 +534,163 @@ namespace idn.AnPhu.Website.Areas.Auth
               },
               namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
             );
+
+            context.MapRoute(
+              name: "auth_popupadvertisement",
+              url: "{culture}/quan-tri/popup-quang-cao/danh-sach",
+              defaults: new
+              {
+                  culture = "vi",
+                  area = "Auth",
+                  controller = "PopupAdvertisement",
+                  action = "Index",
+              },
+              namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+            );
+
+            context.MapRoute(
+              name: "auth_popupadvertisement_update",
+              url: "{culture}/quan-tri/popup-quang-cao/cap-nhat",
+              defaults: new
+              {
+                  culture = "vi",
+                  area = "Auth",
+                  controller = "PopupAdvertisement",
+                  action = "Update",
+              },
+              namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+            );
+
+            context.MapRoute(
+              name: "auth_newrightbanner",
+              url: "{culture}/quan-tri/new-right-banner/index",
+              defaults: new
+              {
+                  culture = "vi",
+                  area = "Auth",
+                  controller = "NewBannerRights",
+                  action = "Index",
+              },
+              namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+            );
+
+            context.MapRoute(
+              name: "auth_newrightbanner_update",
+              url: "{culture}/quan-tri/new-right-banner/update",
+              defaults: new
+              {
+                  culture = "vi",
+                  area = "Auth",
+                  controller = "NewBannerRights",
+                  action = "Update",
+              },
+              namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+            );
+
+            context.MapRoute(
+              name: "auth_newleftbanner",
+              url: "{culture}/quan-tri/new-left-banner/index",
+              defaults: new
+              {
+                  culture = "vi",
+                  area = "Auth",
+                  controller = "NewBannerLefts",
+                  action = "Index",
+              },
+              namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+            );
+
+            context.MapRoute(
+              name: "auth_newleftbanner_update",
+              url: "{culture}/quan-tri/new-left-banner/update",
+              defaults: new
+              {
+                  culture = "vi",
+                  area = "Auth",
+                  controller = "NewBannerLefts",
+                  action = "Update",
+              },
+              namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+            );
+
+            context.MapRoute(
+              name: "auth_adrightbanner",
+              url: "{culture}/quan-tri/ad-right-banner/index",
+              defaults: new
+              {
+                  culture = "vi",
+                  area = "Auth",
+                  controller = "AdBannerRights",
+                  action = "Index",
+              },
+              namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+            );
+
+            context.MapRoute(
+              name: "auth_adrightbanner_update",
+              url: "{culture}/quan-tri/ad-right-banner/update",
+              defaults: new
+              {
+                  culture = "vi",
+                  area = "Auth",
+                  controller = "AdBannerRights",
+                  action = "Update",
+              },
+              namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+            );
+
+            context.MapRoute(
+              name: "auth_adleftbanner",
+              url: "{culture}/quan-tri/ad-left-banner/index",
+              defaults: new
+              {
+                  culture = "vi",
+                  area = "Auth",
+                  controller = "AdBannerLefts",
+                  action = "Index",
+              },
+              namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+            );
+
+            context.MapRoute(
+              name: "auth_adleftbanner_update",
+              url: "{culture}/quan-tri/ad-left-banner/update",
+              defaults: new
+              {
+                  culture = "vi",
+                  area = "Auth",
+                  controller = "AdBannerLefts",
+                  action = "Update",
+              },
+              namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+            );
+
+            context.MapRoute(
+              name: "auth_company",
+              url: "{culture}/quan-tri/company/index",
+              defaults: new
+              {
+                  culture = "vi",
+                  area = "Auth",
+                  controller = "Company",
+                  action = "Index",
+              },
+              namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+            );
+
+            context.MapRoute(
+              name: "auth_company_update",
+              url: "{culture}/quan-tri/company/update",
+              defaults: new
+              {
+                  culture = "vi",
+                  area = "Auth",
+                  controller = "Company",
+                  action = "Update",
+              },
+              namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+            );
+
             //context.MapRoute(
             //    "Auth_default",
             //    "Auth/{controller}/{action}/{id}",

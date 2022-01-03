@@ -133,11 +133,17 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Auth\AuthAreaRegistration.cs" />
     <Compile Include="Areas\Auth\Controllers\AccountController.cs" />
+    <Compile Include="Areas\Auth\Controllers\AdBannerLeftsController.cs" />
+    <Compile Include="Areas\Auth\Controllers\AdBannerRightsController.cs" />
     <Compile Include="Areas\Auth\Controllers\CategoriesNewsController.cs" />
+    <Compile Include="Areas\Auth\Controllers\CompanyController.cs" />
     <Compile Include="Areas\Auth\Controllers\HomeController.cs" />
     <Compile Include="Areas\Auth\Controllers\HtmlPageCategoriesController.cs" />
     <Compile Include="Areas\Auth\Controllers\HtmlPageController.cs" />
+    <Compile Include="Areas\Auth\Controllers\NewBannerLeftsController.cs" />
+    <Compile Include="Areas\Auth\Controllers\NewBannerRightsController.cs" />
     <Compile Include="Areas\Auth\Controllers\NewsController.cs" />
+    <Compile Include="Areas\Auth\Controllers\PopupAdvertisementController.cs" />
     <Compile Include="Areas\Auth\Controllers\PrdCategoriesController.cs" />
     <Compile Include="Areas\Auth\Controllers\ProductController.cs" />
     <Compile Include="Areas\Auth\Controllers\ProductPropertiesController.cs" />
@@ -1098,6 +1104,19 @@
     <Content Include="Areas\Auth\Views\Users\Index.cshtml" />
     <Content Include="Areas\Auth\Views\HtmlPageCategories\Index.cshtml" />
     <Content Include="Areas\Auth\Views\HtmlPageCategories\Create.cshtml" />
+    <Content Include="Areas\Auth\Views\HtmlPageCategories\Update.cshtml" />
+    <Content Include="Areas\Auth\Views\PopupAdvertisement\Index.cshtml" />
+    <Content Include="Areas\Auth\Views\PopupAdvertisement\Update.cshtml" />
+    <Content Include="Areas\Auth\Views\NewBannerRights\Index.cshtml" />
+    <Content Include="Areas\Auth\Views\NewBannerRights\Update.cshtml" />
+    <Content Include="Areas\Auth\Views\NewBannerLefts\Index.cshtml" />
+    <Content Include="Areas\Auth\Views\NewBannerLefts\Update.cshtml" />
+    <Content Include="Areas\Auth\Views\AdBannerRights\Index.cshtml" />
+    <Content Include="Areas\Auth\Views\AdBannerRights\Update.cshtml" />
+    <Content Include="Areas\Auth\Views\AdBannerLefts\Index.cshtml" />
+    <Content Include="Areas\Auth\Views\AdBannerLefts\Update.cshtml" />
+    <Content Include="Areas\Auth\Views\Company\Index.cshtml" />
+    <Content Include="Areas\Auth\Views\Company\Update.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -1275,6 +1294,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Auth\Views\AdBannersRights\" />
     <Folder Include="Areas\Auth\Views\HtmlPage\" />
     <Folder Include="Content\css\" />
     <Folder Include="UploadsFile\" />

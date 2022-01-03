@@ -26,6 +26,18 @@ namespace idn.AnPhu.Biz.Services
             services.Add(typeof(ProductPropertiesManager), new ProductPropertiesManager(new ProductPropertiesProvider()));
             services.Add(typeof(UsersManager), new UsersManager(new UsersProvider()));
             services.Add(typeof(HtmlPageCategoriesManager), new HtmlPageCategoriesManager(new HtmlPageCategoriesProvider()));
+            services.Add(typeof(AdBannerRightsManager), new AdBannerRightsManager(new AdBannerRightsProvider()));
+            services.Add(typeof(AdBannerLeftsManager), new AdBannerLeftsManager(new AdBannerLeftsProvider()));
+            services.Add(typeof(NewBannerRightsManager), new NewBannerRightsManager(new NewBannerRightsProvider()));
+            services.Add(typeof(NewBannerLeftsManager), new NewBannerLeftsManager(new NewBannerLeftsProvider()));
+            services.Add(typeof(CompanyManager), new CompanyManager(new CompanyProvider()));
+            services.Add(typeof(PopupAdvertisementManager), new PopupAdvertisementManager(new PopupAdvertisementProvider()));
+            //services.Add(typeof(VideoCategoriesManager), new VideoCategoriesManager(new VideoCategoriesProvider()));
+            //services.Add(typeof(VideosManager), new VideosManager(new VideosProvider()));
+            //services.Add(typeof(SlideBannersManager), new SlideBannersManager(new SlideBannersProvider()));
+            //services.Add(typeof(PriceOptionsManager), new PriceOptionsManager(new PriceOptionsProvider()));
+            //services.Add(typeof(LocationDiscountsManager), new LocationDiscountsManager(new LocationDiscountsProvider()));
+            //services.Add(typeof(ImageFootersManager), new ImageFootersManager(new ImageFootersProvider()));
             #endregion
         }
 
@@ -167,6 +179,150 @@ namespace idn.AnPhu.Biz.Services
             set
             {
                 services[typeof(HtmlPageCategoriesManager)] = value;
+            }
+        }
+
+        public static AdBannerRightsManager AdBannerRightsManager
+        {
+            get
+            {
+                return (AdBannerRightsManager)services[typeof(AdBannerRightsManager)];
+            }
+            set
+            {
+                services[typeof(AdBannerRightsManager)] = value;
+            }
+        }
+
+        public static AdBannerLeftsManager AdBannerLeftsManager
+        {
+            get
+            {
+                return (AdBannerLeftsManager)services[typeof(AdBannerLeftsManager)];
+            }
+            set
+            {
+                services[typeof(AdBannerLeftsManager)] = value;
+            }
+        }
+
+        public static NewBannerLeftsManager NewBannerLeftsManager
+        {
+            get
+            {
+                return (NewBannerLeftsManager)services[typeof(NewBannerLeftsManager)];
+            }
+            set
+            {
+                services[typeof(NewBannerLeftsManager)] = value;
+            }
+        }
+
+        public static NewBannerRightsManager NewBannerRightsManager
+        {
+            get
+            {
+                return (NewBannerRightsManager)services[typeof(NewBannerRightsManager)];
+            }
+            set
+            {
+                services[typeof(NewBannerRightsManager)] = value;
+            }
+        }
+
+        public static CompanyManager CompanyManager
+        {
+            get
+            {
+                return (CompanyManager)services[typeof(CompanyManager)];
+            }
+            set
+            {
+                services[typeof(CompanyManager)] = value;
+            }
+        }
+
+        public static PopupAdvertisementManager PopupAdvertisementManager
+        {
+            get
+            {
+                return (PopupAdvertisementManager)services[typeof(PopupAdvertisementManager)];
+            }
+            set
+            {
+                services[typeof(PopupAdvertisementManager)] = value;
+            }
+        }
+
+        public static SlideBannersManager SlideBannersManager
+        {
+            get
+            {
+                return (SlideBannersManager)services[typeof(SlideBannersManager)];
+            }
+            set
+            {
+                services[typeof(SlideBannersManager)] = value;
+            }
+        }
+
+        public static ImageFootersManager ImageFootersManager
+        {
+            get
+            {
+                return (ImageFootersManager)services[typeof(ImageFootersManager)];
+            }
+            set
+            {
+                services[typeof(ImageFootersManager)] = value;
+            }
+        }
+
+        public static VideosManager VideosManager
+        {
+            get
+            {
+                return (VideosManager)services[typeof(VideosManager)];
+            }
+            set
+            {
+                services[typeof(VideosManager)] = value;
+            }
+        }
+
+        public static VideoCategoriesManager VideoCategoriesManager
+        {
+            get
+            {
+                return (VideoCategoriesManager)services[typeof(VideoCategoriesManager)];
+            }
+            set
+            {
+                services[typeof(VideoCategoriesManager)] = value;
+            }
+        }
+
+        public static LocationDiscountsManager LocationDiscountsManager
+        {
+            get
+            {
+                return (LocationDiscountsManager)services[typeof(LocationDiscountsManager)];
+            }
+            set
+            {
+                services[typeof(LocationDiscountsManager)] = value;
+            }
+        }
+
+        public static PriceOptionsManager PriceOptionsManager
+        {
+            get
+            {
+                return (PriceOptionsManager)services[typeof(PriceOptionsManager)];
+            }
+            set
+            {
+                services[typeof(PriceOptionsManager)] = value;
             }
         }
     }

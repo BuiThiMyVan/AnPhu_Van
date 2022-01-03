@@ -58,7 +58,7 @@ namespace idn.AnPhu.Biz.Persistance.SqlServer
 
         public void Add(HtmlPageCategories item)
         {
-            DbCommand comm = this.GetCommand("Sp_NewsCategories_Create");
+            DbCommand comm = this.GetCommand("Sp_HtmlPageCategories_Create");
 
             comm.AddParameter<int>(this.Factory, "ParentId", item.ParentId);
             comm.AddParameter<string>(this.Factory, "HtmlPageCategoryTitle", (item.HtmlPageCategoryTitle != null && item.HtmlPageCategoryTitle.Trim().Length > 0) ? item.HtmlPageCategoryTitle.Trim() : null);
@@ -78,7 +78,7 @@ namespace idn.AnPhu.Biz.Persistance.SqlServer
         {
             var item = @new;
             item.HtmlPageCategoryId = old.HtmlPageCategoryId;
-            var comm = this.GetCommand("Sp_NewsCategories_Update");
+            var comm = this.GetCommand("Sp_HtmlPageCategories_Update");
             if (comm == null) return;
             comm.AddParameter<int>(this.Factory, "HtmlPageCategoryId", item.HtmlPageCategoryId);
             comm.AddParameter<int>(this.Factory, "ParentId", item.ParentId);

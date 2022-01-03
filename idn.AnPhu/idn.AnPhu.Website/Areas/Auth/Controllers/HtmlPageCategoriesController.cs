@@ -16,7 +16,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
             get { return ServiceFactory.HtmlPageCategoriesManager; }
         }
 
-        #region["List danh mục tin tức"]
+        #region["List danh mục trang tĩnh"]
         // GET: Auth/CategoriesNews
         public ActionResult Index(int? page, int? pageSize, string txtSearch = "")
         {
@@ -57,7 +57,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
         }
         #endregion
 
-        #region["Tạo mới danh mục tin tức"]
+        #region["Tạo mới danh mục trang tĩnh"]
         [HttpGet]
         public ActionResult Create()
         {
@@ -95,7 +95,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
         }
         #endregion
 
-        #region["Thay đổi thông tin danh mục tin tức"]
+        #region["Thay đổi thông tin danh mục trang tĩnh"]
         [HttpGet]
         public ActionResult Update(int htmlPageCategoryId)
         {
@@ -107,7 +107,8 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
 
             if (newsCategory != null)
             {
-                ViewBag.ListHtmlPageCategories = HtmlPageCategoriesManager.GetAll();
+                var categories = HtmlPageCategoriesManager.GetAll();
+                ViewBag.Categories = new SelectList(categories, "HtmlPageCategoryId", "HlevelTitle");
                 ViewBag.message = "";
                 ViewBag.IsEdit = true;
                 return View(newsCategory);
@@ -140,7 +141,8 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
                 message = "Mã danh mục trang tĩnh trống!";
             }
             ViewBag.message = message;
-            ViewBag.ListHtmlPageCategories = HtmlPageCategoriesManager.GetAll();
+            var categories = HtmlPageCategoriesManager.GetAll();
+            ViewBag.Categories = new SelectList(categories, "HtmlPageCategoryId", "HlevelTitle");
             ViewBag.IsEdit = true;
             return View(model);
 

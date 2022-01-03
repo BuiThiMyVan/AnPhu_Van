@@ -7,19 +7,27 @@ using System.Threading.Tasks;
 
 namespace idn.AnPhu.Biz.Models
 {
-    public class HtmlPageCategories : EntityBase
+    public class HtmlPageCategories : HtmlPageCategoriesBase
     {
-        [DataColum]
-        public int HtmlPageCategoryId { get; set; }
+        public HtmlPageCategories()
+           : base()
+        {
+        }
+        public HtmlPageCategories(int id)
+            : this()
+        {
+
+            this.HtmlPageCategoryId = id;
+        }
+        public HtmlPageCategories(string name)
+            : this()
+        {
+
+            this.HtmlPageCategoryTitle = name;
+        }
 
         [DataColum]
-        public int ParentId { get; set; }
-
-        [DataColum]
-        public string HtmlPageCategoryTitle {get; set;}
-
-        [DataColum]
-        public string HtmlPageCategoryTilteParent { get; set; }
+        public string HtmlPageCategoryTitleParent { get; set; }
 
         [DataColum]
         public string HtmlPageCategoryShortName { get; set; }
@@ -48,29 +56,7 @@ namespace idn.AnPhu.Biz.Models
         [DataColum]
         public string Culture { get; set; }
 
-        public int HLevel
-        {
-            get;
-            set;
-        }
-        public string HlevelTitle
-        {
-            get
-            {
-                if (HLevel > 0)
-                {
-                    var l = "";
-                    for (var i = 1; i <= HLevel; ++i)
-                    {
-                        l += "|--";
-                    }
-                    return string.Format("{0}{1}", l, HtmlPageCategoryTitle);
 
-                }
-
-                return HtmlPageCategoryTitle;
-            }
-        }
 
     }
 }
