@@ -19,7 +19,7 @@ namespace idn.AnPhu.Biz.Models
         public int LocationDiscountValue { get; set; }
 
         [DataColum]
-        public decimal LocationValue { get; set; }
+        public int LocationValue { get; set; }
 
 
         [DataColum]
@@ -33,5 +33,16 @@ namespace idn.AnPhu.Biz.Models
 
         [DataColum]
         public string CreateBy { get; set; }
+
+        public string CreateDateFormat
+        {
+            get
+            {
+                return CreateDate == null ? "" : CreateDate.ToString("dd/MM/yyyy");
+            }
+        }
+
+        [DataColum]
+        public string Culture { get; set; }
     }
 }

@@ -34,9 +34,9 @@ namespace idn.AnPhu.Biz.Services
             services.Add(typeof(PopupAdvertisementManager), new PopupAdvertisementManager(new PopupAdvertisementProvider()));
             //services.Add(typeof(VideoCategoriesManager), new VideoCategoriesManager(new VideoCategoriesProvider()));
             //services.Add(typeof(VideosManager), new VideosManager(new VideosProvider()));
-            //services.Add(typeof(SlideBannersManager), new SlideBannersManager(new SlideBannersProvider()));
-            //services.Add(typeof(PriceOptionsManager), new PriceOptionsManager(new PriceOptionsProvider()));
-            //services.Add(typeof(LocationDiscountsManager), new LocationDiscountsManager(new LocationDiscountsProvider()));
+            services.Add(typeof(SlideBannersManager), new SlideBannersManager(new SlideBannersProvider()));
+            services.Add(typeof(PriceOptionsManager), new PriceOptionsManager(new PriceOptionsProvider()));
+            services.Add(typeof(LocationDiscountsManager), new LocationDiscountsManager(new LocationDiscountsProvider()));
             //services.Add(typeof(ImageFootersManager), new ImageFootersManager(new ImageFootersProvider()));
             #endregion
         }

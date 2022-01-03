@@ -16,7 +16,7 @@ namespace idn.AnPhu.Biz.Models
         public string PriceOptionTitle { get; set; }
 
         [DataColum]
-        public decimal PriceOptionValue { get; set; }
+        public int PriceOptionValue { get; set; }
 
         [DataColum]
         public bool IsActive { get; set; }
@@ -24,10 +24,22 @@ namespace idn.AnPhu.Biz.Models
         [DataColum]
         public DateTime CreateDate { get; set; }
 
+        public string CreateDateFormat
+        {
+            get
+            {
+                return CreateDate == null ? "" : CreateDate.ToString("dd/MM/yyyy");
+            }
+        }
+
         [DataColum]
         public int OrderNo { get; set; }
 
         [DataColum]
         public string CreateBy { get; set; }
+
+        [DataColum]
+        public string Culture { get; set; }
+
     }
 }

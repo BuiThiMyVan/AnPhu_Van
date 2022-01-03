@@ -9,6 +9,5 @@ namespace idn.AnPhu.Biz.Persistance.Interface
 {
     interface ILocationDiscountsProvider : IImportableDataProvider<LocationDiscounts>
     {
-        List<LocationDiscounts> Search(string txtSearch, int startIndex, int pageCount, ref int totalItems);
     }
 }

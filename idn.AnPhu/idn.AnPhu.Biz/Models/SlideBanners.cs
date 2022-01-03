@@ -24,6 +24,14 @@ namespace idn.AnPhu.Biz.Models
         [DataColum]
         public DateTime CreateDate { get; set; }
 
+        public string CreateDateFormat
+        {
+            get
+            {
+                return CreateDate == null ? "" : CreateDate.ToString("dd/MM/yyyy");
+            }
+        }
+
         [DataColum]
         public DateTime UpdateDate { get; set; }
 
@@ -47,5 +55,8 @@ namespace idn.AnPhu.Biz.Models
 
         [DataColum]
         public string Position { get; set; }
+
+        [DataColum]
+        public string Culture { get; set; }
     }
 }

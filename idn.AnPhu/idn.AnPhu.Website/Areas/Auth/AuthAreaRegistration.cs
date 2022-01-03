@@ -691,6 +691,161 @@ namespace idn.AnPhu.Website.Areas.Auth
               namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
             );
 
+            context.MapRoute(
+              name: "auth_locationdiscount",
+              url: "{culture}/quan-tri/location-discount/index",
+              defaults: new
+              {
+                  culture = "vi",
+                  area = "Auth",
+                  controller = "LocationDiscounts",
+                  action = "Index",
+              },
+              namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+            );
+
+            context.MapRoute(
+              name: "auth_locationdiscount_create",
+              url: "{culture}/quan-tri/location-discount/create",
+              defaults: new
+              {
+                  culture = "vi",
+                  area = "Auth",
+                  controller = "LocationDiscounts",
+                  action = "Create",
+              },
+              namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+            );
+
+            context.MapRoute(
+              name: "auth_locationdiscount_update",
+              url: "{culture}/quan-tri/location-discount/update",
+              defaults: new
+              {
+                  culture = "vi",
+                  area = "Auth",
+                  controller = "LocationDiscounts",
+                  action = "Update",
+              },
+              namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+            );
+
+            context.MapRoute(
+              name: "auth_locationdiscount_delete",
+              url: "{culture}/quan-tri/location-discount/delete",
+              defaults: new
+              {
+                  culture = "vi",
+                  area = "Auth",
+                  controller = "LocationDiscounts",
+                  action = "Delete",
+              },
+              namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+            );
+
+            context.MapRoute(
+              name: "auth_priceoptions_delete",
+              url: "{culture}/quan-tri/price-option/delete",
+              defaults: new
+              {
+                  culture = "vi",
+                  area = "Auth",
+                  controller = "PriceOptions",
+                  action = "Delete",
+              },
+              namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+            );
+
+            context.MapRoute(
+              name: "auth_priceoptions_update",
+              url: "{culture}/quan-tri/price-option/update",
+              defaults: new
+              {
+                  culture = "vi",
+                  area = "Auth",
+                  controller = "PriceOptions",
+                  action = "Update",
+              },
+              namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+            );
+
+            context.MapRoute(
+              name: "auth_priceoptions_create",
+              url: "{culture}/quan-tri/price-option/create",
+              defaults: new
+              {
+                  culture = "vi",
+                  area = "Auth",
+                  controller = "PriceOptions",
+                  action = "Create",
+              },
+              namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+            );
+
+            context.MapRoute(
+              name: "auth_priceoptions",
+              url: "{culture}/quan-tri/price-option/index",
+              defaults: new
+              {
+                  culture = "vi",
+                  area = "Auth",
+                  controller = "PriceOptions",
+                  action = "Index",
+              },
+              namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+            );
+
+            context.MapRoute(
+              name: "auth_slidebanners",
+              url: "{culture}/quan-tri/slide-banner/index",
+              defaults: new
+              {
+                  culture = "vi",
+                  area = "Auth",
+                  controller = "SlideBanners",
+                  action = "Index",
+              },
+              namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+            );
+
+            context.MapRoute(
+              name: "auth_slidebanners_update",
+              url: "{culture}/quan-tri/slide-banner/update",
+              defaults: new
+              {
+                  culture = "vi",
+                  area = "Auth",
+                  controller = "SlideBanners",
+                  action = "Update",
+              },
+              namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+            );
+
+            context.MapRoute(
+              name: "auth_slidebanners_delete",
+              url: "{culture}/quan-tri/slide-banner/delete",
+              defaults: new
+              {
+                  culture = "vi",
+                  area = "Auth",
+                  controller = "SlideBanners",
+                  action = "Delete",
+              },
+              namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+            );
+
+            context.MapRoute(
+              name: "auth_slidebanners_create",
+              url: "{culture}/quan-tri/slide-banner/create",
+              defaults: new
+              {
+                  culture = "vi",
+                  area = "Auth",
+                  controller = "SlideBanners",
+                  action = "Create",
+              },
+              namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+            );
             //context.MapRoute(
             //    "Auth_default",
             //    "Auth/{controller}/{action}/{id}",

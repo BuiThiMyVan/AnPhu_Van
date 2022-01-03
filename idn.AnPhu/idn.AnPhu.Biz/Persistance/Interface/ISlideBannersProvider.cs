@@ -9,6 +9,5 @@ namespace idn.AnPhu.Biz.Persistance.Interface
 {
     interface ISlideBannersProvider : IImportableDataProvider<SlideBanners>
     {
-        List<SlideBanners> Search(string txtSearch, int startIndex, int pageCount, ref int totalItems);
     }
 }
