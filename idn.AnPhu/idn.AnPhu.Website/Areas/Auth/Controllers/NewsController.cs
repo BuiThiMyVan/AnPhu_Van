@@ -181,5 +181,12 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
             }
         }
         #endregion
+
+        [HttpGet]
+        public JsonResult Filter(string search)
+        {
+            var model = NewsManager.SearchNewsOther(search);
+            return Json(model);
+        }
     }
 }

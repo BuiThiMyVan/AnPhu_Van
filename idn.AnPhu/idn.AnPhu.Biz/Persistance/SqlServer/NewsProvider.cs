@@ -102,6 +102,16 @@ namespace idn.AnPhu.Biz.Persistance.SqlServer
             this.SafeExecuteNonQuery(comm);
         }
 
+        public List<News> SearchNewsOther(string search)
+        {
+            DbCommand comm = this.GetCommand("Sp_News_SearchNewsOther");
+            comm.AddParameter<string>(this.Factory, "search", (search != null && search.Trim().Length > 0) ? search : null);
+
+            var table = this.GetTable(comm);
+            table.TableName = TableName.News;
+            return EntityBase.ParseListFromTable<News>(table);
+        }
+
         public void Remove(News item)
         {
             var comm = this.GetCommand("Sp_News_Delete");

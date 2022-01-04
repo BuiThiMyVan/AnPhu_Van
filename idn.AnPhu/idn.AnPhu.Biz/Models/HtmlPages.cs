@@ -16,6 +16,9 @@ namespace idn.AnPhu.Biz.Models
         public int HtmlPageCategoryId { get; set; }
 
         [DataColum]
+        public string HtmlPageCategoryTitle { get; set; }
+
+        [DataColum]
         public string HtmlPageTitle { get; set; }
 
         [DataColum]
@@ -34,7 +37,10 @@ namespace idn.AnPhu.Biz.Models
         public string HtmlPageShortName { get; set; }
 
         [DataColum]
-        public string CreatBy { get; set; }
+        public string CreateBy { get; set; }
+
+        [DataColum]
+        public DateTime CreateDate { get; set; }
 
         [DataColum]
         public bool IsActive { get; set; }
@@ -46,6 +52,6 @@ namespace idn.AnPhu.Biz.Models
         public string Culture { get; set; }
 
         [DataColum]
-        public string HtmlPageSumary { get; set; }
+        public string HtmlPageSummary { get; set; }
     }
 }

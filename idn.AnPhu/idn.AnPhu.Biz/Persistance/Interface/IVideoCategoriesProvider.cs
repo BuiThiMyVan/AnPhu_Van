@@ -9,6 +9,5 @@ namespace idn.AnPhu.Biz.Persistance.Interface
 {
     interface IVideoCategoriesProvider : IImportableDataProvider<VideoCategories>
     {
-        List<VideoCategories> Search(string txtSearch, int startIndex, int pageCount, ref int totalItems);
     }
 }

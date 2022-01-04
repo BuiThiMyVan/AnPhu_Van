@@ -7,24 +7,16 @@ using System.Threading.Tasks;
 
 namespace idn.AnPhu.Biz.Models
 {
-    public class HtmlPageCategories : HtmlPageCategoriesBase
+    public class HtmlPageCategories : EntityBase
     {
-        public HtmlPageCategories()
-           : base()
-        {
-        }
-        public HtmlPageCategories(int id)
-            : this()
-        {
+        [DataColum]
+        public int HtmlPageCategoryId { get; set; }
 
-            this.HtmlPageCategoryId = id;
-        }
-        public HtmlPageCategories(string name)
-            : this()
-        {
+        [DataColum]
+        public int ParentId { get; set; }
 
-            this.HtmlPageCategoryTitle = name;
-        }
+        [DataColum]
+        public string HtmlPageCategoryTitle { get; set; }
 
         [DataColum]
         public string HtmlPageCategoryTitleParent { get; set; }

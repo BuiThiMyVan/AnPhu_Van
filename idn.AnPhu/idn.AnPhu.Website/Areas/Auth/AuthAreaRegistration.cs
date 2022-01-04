@@ -846,6 +846,214 @@ namespace idn.AnPhu.Website.Areas.Auth
               },
               namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
             );
+
+            context.MapRoute(
+             name: "auth_imagefooters_create",
+             url: "{culture}/quan-tri/image-footer/create",
+             defaults: new
+             {
+                 culture = "vi",
+                 area = "Auth",
+                 controller = "ImageFooters",
+                 action = "Create",
+             },
+             namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+           );
+
+            context.MapRoute(
+             name: "auth_imagefooters_update",
+             url: "{culture}/quan-tri/image-footer/update",
+             defaults: new
+             {
+                 culture = "vi",
+                 area = "Auth",
+                 controller = "ImageFooters",
+                 action = "Update",
+             },
+             namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+           );
+
+            context.MapRoute(
+             name: "auth_imagefooters_delete",
+             url: "{culture}/quan-tri/image-footer/delete",
+             defaults: new
+             {
+                 culture = "vi",
+                 area = "Auth",
+                 controller = "ImageFooters",
+                 action = "Delete",
+             },
+             namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+           );
+
+            context.MapRoute(
+             name: "auth_imagefooters",
+             url: "{culture}/quan-tri/image-footer/index",
+             defaults: new
+             {
+                 culture = "vi",
+                 area = "Auth",
+                 controller = "ImageFooters",
+                 action = "Index",
+             },
+             namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+           );
+
+            context.MapRoute(
+             name: "auth_videocategories",
+             url: "{culture}/quan-tri/video-categories/index",
+             defaults: new
+             {
+                 culture = "vi",
+                 area = "Auth",
+                 controller = "VideoCategories",
+                 action = "Index",
+             },
+             namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+           );
+
+            context.MapRoute(
+             name: "auth_videocategories_create",
+             url: "{culture}/quan-tri/video-categories/create",
+             defaults: new
+             {
+                 culture = "vi",
+                 area = "Auth",
+                 controller = "VideoCategories",
+                 action = "Create",
+             },
+             namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+           );
+
+            context.MapRoute(
+             name: "auth_videocategories_update",
+             url: "{culture}/quan-tri/video-categories/update",
+             defaults: new
+             {
+                 culture = "vi",
+                 area = "Auth",
+                 controller = "VideoCategories",
+                 action = "Update",
+             },
+             namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+           );
+
+            context.MapRoute(
+             name: "auth_videocategories_delete",
+             url: "{culture}/quan-tri/video-categories/delete",
+             defaults: new
+             {
+                 culture = "vi",
+                 area = "Auth",
+                 controller = "VideoCategories",
+                 action = "Delete",
+             },
+             namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+           );
+
+            context.MapRoute(
+             name: "auth_video_update",
+             url: "{culture}/quan-tri/video/update",
+             defaults: new
+             {
+                 culture = "vi",
+                 area = "Auth",
+                 controller = "Videos",
+                 action = "Update",
+             },
+             namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+           );
+
+            context.MapRoute(
+             name: "auth_video_create",
+             url: "{culture}/quan-tri/video/create",
+             defaults: new
+             {
+                 culture = "vi",
+                 area = "Auth",
+                 controller = "Videos",
+                 action = "Create",
+             },
+             namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+           );
+
+            context.MapRoute(
+             name: "auth_video_delete",
+             url: "{culture}/quan-tri/video/delete",
+             defaults: new
+             {
+                 culture = "vi",
+                 area = "Auth",
+                 controller = "Videos",
+                 action = "Delete",
+             },
+             namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+           );
+
+            context.MapRoute(
+             name: "auth_video",
+             url: "{culture}/quan-tri/video/index",
+             defaults: new
+             {
+                 culture = "vi",
+                 area = "Auth",
+                 controller = "Videos",
+                 action = "Index",
+             },
+             namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+           );
+
+            context.MapRoute(
+              name: "auth_htmlpage",
+              url: "{culture}/quan-tri/danh-sach-trang-tinh/danh-sach",
+              defaults: new
+              {
+                  culture = "vi",
+                  area = "Auth",
+                  controller = "HtmlPages",
+                  action = "Index",
+              },
+              namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+            );
+
+            context.MapRoute(
+              name: "auth_htmlpage_create",
+              url: "{culture}/quan-tri/danh-sach-trang-tinh/tao-moi",
+              defaults: new
+              {
+                  culture = "vi",
+                  area = "Auth",
+                  controller = "HtmlPages",
+                  action = "Create",
+              },
+              namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+            );
+
+            context.MapRoute(
+              name: "auth_htmlpage_update",
+              url: "{culture}/quan-tri/danh-sach-trang-tinh/cap-nhat",
+              defaults: new
+              {
+                  culture = "vi",
+                  area = "Auth",
+                  controller = "HtmlPages",
+                  action = "Update",
+              },
+              namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+            );
+
+            context.MapRoute(
+              name: "auth_htmlpage_delete",
+              url: "{culture}/quan-tri/danh-sach-trang-tinh/xoa",
+              defaults: new
+              {
+                  culture = "vi",
+                  area = "Auth",
+                  controller = "HtmlPages",
+                  action = "Delete",
+              },
+              namespaces: new[] { "idn.AnPhu.Website.Areas.Auth.Controllers" }
+            );
             //context.MapRoute(
             //    "Auth_default",
             //    "Auth/{controller}/{action}/{id}",

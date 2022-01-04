@@ -42,5 +42,8 @@ namespace idn.AnPhu.Biz.Models
         [DataColum]
         public int OrderNo { get; set; }
 
+        [DataColum]
+        public string Culture { get; set; }
+
     }
 }

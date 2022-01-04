@@ -49,7 +49,6 @@
     <Compile Include="Models\AdBannerRights.cs" />
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\HtmlPageCategories.cs" />
-    <Compile Include="Models\HtmlPageCategoriesBase.cs" />
     <Compile Include="Models\HtmlPages.cs" />
     <Compile Include="Models\ImageFooters.cs" />
     <Compile Include="Models\LocationDiscounts.cs" />
@@ -104,6 +103,8 @@
     <Compile Include="Persistance\SqlServer\AdBannerRightsProvider.cs" />
     <Compile Include="Persistance\SqlServer\CompanyProvider.cs" />
     <Compile Include="Persistance\SqlServer\HtmlPageCategoriesProvider.cs" />
+    <Compile Include="Persistance\SqlServer\HtmlPagesProvider.cs" />
+    <Compile Include="Persistance\SqlServer\ImageFootersProvider.cs" />
     <Compile Include="Persistance\SqlServer\LocationDiscountsProvider.cs" />
     <Compile Include="Persistance\SqlServer\NewBannerLeftsProvider.cs" />
     <Compile Include="Persistance\SqlServer\NewBannerRightsProvider.cs" />
@@ -120,11 +121,14 @@
     <Compile Include="Persistance\SqlServer\Sys_GroupProvider.cs" />
     <Compile Include="Persistance\SqlServer\Sys_UserProvider.cs" />
     <Compile Include="Persistance\SqlServer\UsersProvider.cs" />
+    <Compile Include="Persistance\SqlServer\VideoCategoriesProvider.cs" />
+    <Compile Include="Persistance\SqlServer\VideosProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AdBannerLeftsManager.cs" />
     <Compile Include="Services\AdBannerRightsManager.cs" />
     <Compile Include="Services\CompanyManager.cs" />
     <Compile Include="Services\HtmlPageCategoriesManager.cs" />
+    <Compile Include="Services\HtmlPagesManager.cs" />
     <Compile Include="Services\ImageFootersManager.cs" />
     <Compile Include="Services\LocationDiscountsManager.cs" />
     <Compile Include="Services\NewBannerLeftsManager.cs" />

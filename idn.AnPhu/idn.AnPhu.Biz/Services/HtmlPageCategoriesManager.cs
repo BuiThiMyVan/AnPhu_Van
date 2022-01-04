@@ -35,15 +35,5 @@ namespace idn.AnPhu.Biz.Services
         {
             base.Add(item);
         }
-
-        public PageInfo<HtmlPageCategories> Search(string txtSearch, int pageIndex, int pageSize)
-        {
-            int totalItems = 0;
-            var pageInfo = new PageInfo<HtmlPageCategories>(pageIndex, pageSize);
-            var startIndex = (pageIndex - 1) * pageSize;
-            pageInfo.DataList = HtmlPageCategoriesProvider.Search(txtSearch, startIndex, pageSize, ref totalItems);
-            pageInfo.ItemCount = totalItems;
-            return pageInfo;
-        }
     }
 }

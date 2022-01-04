@@ -46,5 +46,10 @@ namespace idn.AnPhu.Biz.Services
             pageInfo.ItemCount = totalItems;
             return pageInfo;
         }
+
+        public List<News> SearchNewsOther(string search)
+        {
+            return NewsProvider.SearchNewsOther(search);
+        }
     }
 }

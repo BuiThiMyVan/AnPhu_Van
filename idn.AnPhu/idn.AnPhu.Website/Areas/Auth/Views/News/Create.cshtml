@@ -241,7 +241,8 @@
                     </label>
                     <div class="col-sm-9">
                         <input type="text" id="NewsOther" name="NewsOther" class="col-xs-12 col-sm-6" style="width: 175px" oninput="validateEmpty(event)" />
-                        <button class="btn btn-default">Lọc</button>
+                        @*<input type="text" id="search" name="txtSearch" class="col-xs-12 col-sm-6" style="width: 175px" />*@
+                        <button class="btn btn-success" onclick="Filter()">Lọc</button>
                     </div>
                 </div>
                 <div class="space-4"></div>
@@ -321,6 +322,21 @@
                 return true;
             }
         }
+
+        @*function Filter() {
+            var key = $('input[name="txtSearch"]').val();
+            var newsOther = '';
+            var url = '@Url.Action("Filter", "News")';
+            jQuery.ajax({
+                url: '/vi/Auth/News/Filter?search=' + key,
+                dataType: 'json',
+                type: 'get',
+                traditional: true,
+                success: function (data) {
+                    console.log(data);
+                }
+            });
+        }*@
 
         var message = '@MvcHtmlString.Create(message)';
 

@@ -26,7 +26,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <TypeScriptToolsVersion>4.3</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>4.2</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -140,6 +140,8 @@
     <Compile Include="Areas\Auth\Controllers\HomeController.cs" />
     <Compile Include="Areas\Auth\Controllers\HtmlPageCategoriesController.cs" />
     <Compile Include="Areas\Auth\Controllers\HtmlPageController.cs" />
+    <Compile Include="Areas\Auth\Controllers\HtmlPagesController.cs" />
+    <Compile Include="Areas\Auth\Controllers\ImageFootersController.cs" />
     <Compile Include="Areas\Auth\Controllers\LocationDiscountsController.cs" />
     <Compile Include="Areas\Auth\Controllers\NewBannerLeftsController.cs" />
     <Compile Include="Areas\Auth\Controllers\NewBannerRightsController.cs" />
@@ -154,6 +156,8 @@
     <Compile Include="Areas\Auth\Controllers\SlideBannersController.cs" />
     <Compile Include="Areas\Auth\Controllers\Sys_UserController.cs" />
     <Compile Include="Areas\Auth\Controllers\UsersController.cs" />
+    <Compile Include="Areas\Auth\Controllers\VideoCategoriesController.cs" />
+    <Compile Include="Areas\Auth\Controllers\VideosController.cs" />
     <Compile Include="Areas\Auth\Models\NewsCategoriesModel.cs" />
     <Compile Include="Controllers\AdministratorController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -1128,6 +1132,20 @@
     <Content Include="Areas\Auth\Views\PriceOptions\Update.cshtml" />
     <Content Include="Areas\Auth\Views\SlideBanners\Index.cshtml" />
     <Content Include="Areas\Auth\Views\SlideBanners\Create.cshtml" />
+    <Content Include="Areas\Auth\Views\SlideBanners\Update.cshtml" />
+    <Content Include="Areas\Auth\Views\ImageFooters\Index.cshtml" />
+    <Content Include="Areas\Auth\Views\ImageFooters\Create.cshtml" />
+    <Content Include="Areas\Auth\Views\ImageFooters\Update.cshtml" />
+    <Content Include="Areas\Auth\Views\VideoCategories\Index.cshtml" />
+    <Content Include="Areas\Auth\Views\VideoCategories\Create.cshtml" />
+    <Content Include="Areas\Auth\Views\VideoCategories\Update.cshtml" />
+    <Content Include="Areas\Auth\Views\Videos\Index.cshtml" />
+    <Content Include="Areas\Auth\Views\Videos\Create.cshtml" />
+    <Content Include="Areas\Auth\Views\Videos\Update.cshtml" />
+    <Content Include="Areas\Auth\Views\HtmlPages\Index.cshtml" />
+    <Content Include="Areas\Auth\Views\HtmlPages\Create.cshtml" />
+    <Content Include="Areas\Auth\Views\HtmlPages\Update.cshtml" />
+    <Content Include="Areas\Auth\Views\Shared\FilterNews.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

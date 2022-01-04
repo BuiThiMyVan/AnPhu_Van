@@ -26,18 +26,19 @@ namespace idn.AnPhu.Biz.Services
             services.Add(typeof(ProductPropertiesManager), new ProductPropertiesManager(new ProductPropertiesProvider()));
             services.Add(typeof(UsersManager), new UsersManager(new UsersProvider()));
             services.Add(typeof(HtmlPageCategoriesManager), new HtmlPageCategoriesManager(new HtmlPageCategoriesProvider()));
+            services.Add(typeof(HtmlPagesManager), new HtmlPagesManager(new HtmlPagesProvider()));
             services.Add(typeof(AdBannerRightsManager), new AdBannerRightsManager(new AdBannerRightsProvider()));
             services.Add(typeof(AdBannerLeftsManager), new AdBannerLeftsManager(new AdBannerLeftsProvider()));
             services.Add(typeof(NewBannerRightsManager), new NewBannerRightsManager(new NewBannerRightsProvider()));
             services.Add(typeof(NewBannerLeftsManager), new NewBannerLeftsManager(new NewBannerLeftsProvider()));
             services.Add(typeof(CompanyManager), new CompanyManager(new CompanyProvider()));
             services.Add(typeof(PopupAdvertisementManager), new PopupAdvertisementManager(new PopupAdvertisementProvider()));
-            //services.Add(typeof(VideoCategoriesManager), new VideoCategoriesManager(new VideoCategoriesProvider()));
-            //services.Add(typeof(VideosManager), new VideosManager(new VideosProvider()));
+            services.Add(typeof(VideoCategoriesManager), new VideoCategoriesManager(new VideoCategoriesProvider()));
+            services.Add(typeof(VideosManager), new VideosManager(new VideosProvider()));
             services.Add(typeof(SlideBannersManager), new SlideBannersManager(new SlideBannersProvider()));
             services.Add(typeof(PriceOptionsManager), new PriceOptionsManager(new PriceOptionsProvider()));
             services.Add(typeof(LocationDiscountsManager), new LocationDiscountsManager(new LocationDiscountsProvider()));
-            //services.Add(typeof(ImageFootersManager), new ImageFootersManager(new ImageFootersProvider()));
+            services.Add(typeof(ImageFootersManager), new ImageFootersManager(new ImageFootersProvider()));
             #endregion
         }
 
@@ -323,6 +324,18 @@ namespace idn.AnPhu.Biz.Services
             set
             {
                 services[typeof(PriceOptionsManager)] = value;
+            }
+        }
+
+        public static HtmlPagesManager HtmlPagesManager
+        {
+            get
+            {
+                return (HtmlPagesManager)services[typeof(HtmlPagesManager)];
+            }
+            set
+            {
+                services[typeof(HtmlPagesManager)] = value;
             }
         }
     }

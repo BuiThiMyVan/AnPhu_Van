@@ -9,6 +9,5 @@ namespace idn.AnPhu.Biz.Persistance.Interface
 {
     interface IHtmlPagesProvider : IImportableDataProvider<HtmlPages>
     {
-        List<HtmlPages> Search(string txtSearch, int startIndex, int pageCount, ref int totalItems);
     }
 }

@@ -89,7 +89,23 @@
 
                     <div class="col-sm-9">
                         <div class="clearfix">
-                            @Html.DropDownListDefault("ParentId", ViewData.Get<SelectList>("Categories"), "0", "-- Tất cả --", new { @required = "required" })
+                            <select name="VideoCategoryId">
+                                <option selected="selected" value="0">-- Tất cả --</option>
+                                @foreach (HtmlPageCategories item in ViewBag.ListCategories)
+                                {
+                                    if (item.ParentId > 0)
+                                    {
+                                        <option value="@item.HtmlPageCategoryId">&nbsp;|--@item.HtmlPageCategoryTitle</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.HtmlPageCategoryId">@item.HtmlPageCategoryTitle</option>
+                                    }
+
+
+                                }
+
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -142,7 +158,21 @@
                         <input type="number" name="OrderNo" class="col-xs-12 col-sm-6 input-number" value="0" />
                     </div>
                 </div>
-                <div class="space-4"></div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right">
+                        Trạng thái:
+                    </label>
+
+                    <div class="checkbox">
+                        <label>
+                            <input name="IsActive" type="checkbox" class="ace" value="true">
+
+                            <span class="lbl"> Ẩn/Hiện bài viết</span>
+                            <input name="IsActive" type="hidden" value="false" />
+                        </label>
+                    </div>
+                </div>
                 <button type="submit" href="#" id="btn_submit_save" class="btn btn-success">Lưu</button>
             }
         </div>

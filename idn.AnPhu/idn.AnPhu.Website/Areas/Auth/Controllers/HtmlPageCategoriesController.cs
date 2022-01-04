@@ -16,44 +16,12 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
             get { return ServiceFactory.HtmlPageCategoriesManager; }
         }
 
-        #region["List danh mục trang tĩnh"]
-        // GET: Auth/CategoriesNews
-        public ActionResult Index(int? page, int? pageSize, string txtSearch = "")
+        #region["List danh mục danh mục trang tĩnh"]
+        // GET: Auth/HtmlPageCategories
+        public ActionResult Index()
         {
-            var pageInfo = new PageInfo<HtmlPageCategories>(0, PageSizeAdminConfig);
-            if (page != null && pageSize != null)
-            {
-                pageInfo.PageIndex = (int)page;
-                pageInfo.PageSize = (int)pageSize;
-            }
-            else
-            {
-                pageInfo.PageIndex = 1;
-                pageInfo.PageSize = 10;
-            }
-
-            var pageView = "";
-            var lastRecord = 0;
-
-            pageInfo = HtmlPageCategoriesManager.Search(txtSearch, pageInfo.PageIndex, pageInfo.PageSize);
-
-            if (pageInfo != null && pageInfo.DataList != null && pageInfo.DataList.Count > 0)
-            {
-                if ((pageInfo.PageIndex * pageInfo.PageSize) > pageInfo.ItemCount)
-                {
-                    lastRecord = pageInfo.ItemCount;
-                }
-                else
-                {
-                    lastRecord = pageInfo.PageIndex * pageInfo.PageSize;
-                }
-                pageView = "Showing " + ((pageInfo.PageIndex - 1) * pageInfo.PageSize + 1) + " to " + lastRecord + " of " + pageInfo.ItemCount + " entries";
-            }
-
-            ViewBag.pageView = pageView;
-            var listPageSize = new int[3] { 10, 15, 20 };
-            ViewBag.listPageSize = listPageSize;
-            return View(pageInfo);
+            var model = HtmlPageCategoriesManager.GetAll();
+            return View(model);
         }
         #endregion
 
@@ -61,57 +29,56 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            ViewBag.Title = "Tạo mới danh mục trang tĩnh";
-            ViewBag.Today = Today;
+            ViewBag.Title = "Tạo mới danh mục danh mục trang tĩnh";
             ViewBag.message = "";
-            var categories = HtmlPageCategoriesManager.GetAll();
-            ViewBag.Categories = new SelectList(categories, "HtmlPageCategoryId", "HlevelTitle");
+            ViewBag.ListCategories = HtmlPageCategoriesManager.GetAll();
             return View();
         }
 
         [HttpPost]
         public ActionResult Create(HtmlPageCategories model)
         {
+            var createBy = "";
+            if (UserState != null && !CUtils.IsNullOrEmpty(UserState.UserName))
+            {
+                createBy = CUtils.StrTrim(UserState.UserName);
+                model.CreateBy = createBy;
+            }
             try
             {
-                var createBy = "";
-                if (UserState != null && !CUtils.IsNullOrEmpty(UserState.UserName))
-                {
-                    createBy = CUtils.StrTrim(UserState.UserName);
-                }
-                model.CreateBy = createBy;
                 HtmlPageCategoriesManager.Add(model);
-                var categories = HtmlPageCategoriesManager.GetAll();
-                ViewBag.Categories = new SelectList(categories, "HtmlPageCategoryId", "HlevelTitle");
-                ViewBag.message = "Tạo mới danh mục trang tĩnh thành công!";
+                ViewBag.message = "Thêm mới danh mục trang tĩnh thành công";
+                ViewBag.ListCategories = HtmlPageCategoriesManager.GetAll();
                 return View(model);
             }
             catch (Exception e)
             {
-                ViewBag.message = "Tạo mới danh mục trang tĩnh thất bại!";
+                ViewBag.message = "Thêm mới danh mục trang tĩnh thất bại";
+                ViewBag.ListCategoriesVideo = HtmlPageCategoriesManager.GetAll();
                 return View(model);
+
             }
+
 
         }
         #endregion
 
         #region["Thay đổi thông tin danh mục trang tĩnh"]
         [HttpGet]
-        public ActionResult Update(int htmlPageCategoryId)
+        public ActionResult Update(int id)
         {
-            if (CUtils.IsNullOrEmpty(htmlPageCategoryId))
+            if (CUtils.IsNullOrEmpty(id))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var newsCategory = HtmlPageCategoriesManager.Get(new HtmlPageCategories() { HtmlPageCategoryId = htmlPageCategoryId });
+            var HtmlPageCategories = HtmlPageCategoriesManager.Get(new HtmlPageCategories() { HtmlPageCategoryId = id });
 
-            if (newsCategory != null)
+            if (HtmlPageCategories != null)
             {
-                var categories = HtmlPageCategoriesManager.GetAll();
-                ViewBag.Categories = new SelectList(categories, "HtmlPageCategoryId", "HlevelTitle");
                 ViewBag.message = "";
                 ViewBag.IsEdit = true;
-                return View(newsCategory);
+                ViewBag.ListCategories = HtmlPageCategoriesManager.GetAll();
+                return View(HtmlPageCategories);
             }
             else
             {
@@ -125,11 +92,11 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
             var message = "";
             if (model != null && !CUtils.IsNullOrEmpty(model.HtmlPageCategoryId))
             {
-                var htmlPageCategory = HtmlPageCategoriesManager.Get(new HtmlPageCategories() { HtmlPageCategoryId = model.HtmlPageCategoryId });
-                if (htmlPageCategory != null)
+                var HtmlPageCategories = HtmlPageCategoriesManager.Get(new HtmlPageCategories() { HtmlPageCategoryId = model.HtmlPageCategoryId });
+                if (HtmlPageCategories != null)
                 {
-                    HtmlPageCategoriesManager.Update(model, htmlPageCategory);
-                    message = "Cập nhật thông tin danh mục thành công!";
+                    HtmlPageCategoriesManager.Update(model, HtmlPageCategories);
+                    message = "Cập nhật danh mục trang tĩnh thành công!";
                 }
                 else
                 {
@@ -141,12 +108,9 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
                 message = "Mã danh mục trang tĩnh trống!";
             }
             ViewBag.message = message;
-            var categories = HtmlPageCategoriesManager.GetAll();
-            ViewBag.Categories = new SelectList(categories, "HtmlPageCategoryId", "HlevelTitle");
             ViewBag.IsEdit = true;
+            ViewBag.ListCategories = HtmlPageCategoriesManager.GetAll();
             return View(model);
-
-
         }
 
         #endregion

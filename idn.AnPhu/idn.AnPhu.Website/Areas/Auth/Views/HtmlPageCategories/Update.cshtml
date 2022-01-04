@@ -77,8 +77,8 @@
                     </label>
 
                     <div class="col-sm-9 box-input">
-                        <input type="hidden" name="HtmlPageCategoryId" class="col-xs-12 col-sm-6"/>
-                        <input type="text" name="HtmlPageCategoryTitle" class="col-xs-12 col-sm-6" oninput="validateEmpty(event)" />
+                        <input type="hidden" name="HtmlPageCategoryId" value="@Model.HtmlPageCategoryId" class="col-xs-12 col-sm-6" />
+                        <input type="text" name="HtmlPageCategoryTitle" value="@Model.HtmlPageCategoryTitle" class="col-xs-12 col-sm-6" oninput="validateEmpty(event)" />
                         <div class="text-danger" id="error_title"></div>
                     </div>
                 </div>
@@ -91,37 +91,42 @@
                     <div class="col-sm-9">
                         <div class="clearfix">
                             <select name="ParentId">
-                                @*@foreach (NewsCategories item in ViewBag.ListCategoriesNews)
+                                @if (Model.ParentId == 0)
+                                {
+                                    <option value="0" selected>-- Tất cả --</option>
+                                }
+                                else
+                                {
+                                    <option value="0">-- Tất cả --</option>
+                                }
+
+                                @foreach (HtmlPageCategories item in ViewBag.ListCategories)
                                 {
                                     if (item.ParentId == 0)
                                     {
-                                        if (item.ParentId == Model.NewsCategoryId)
+                                        if (item.HtmlPageCategoryId == Model.ParentId)
                                         {
-                                            <option value="@item.NewsCategoryId" selected="selected">@item.NewsCategoryTitle</option>
+                                            <option value="@item.HtmlPageCategoryId" selected="selected">@item.HtmlPageCategoryTitle</option>
                                         }
                                         else
                                         {
-                                            <option value="@item.NewsCategoryId">@item.NewsCategoryTitle</option>
+                                            <option value="@item.HtmlPageCategoryId">@item.HtmlPageCategoryTitle</option>
                                         }
-
-
-                                        var childs = new NewsCategoriesModel().GetChildCategories(ViewBag.ListCategoriesNews, item.NewsCategoryId);
-                                        foreach (var child in childs)
+                                    }
+                                    else
+                                    {
+                                        if (item.HtmlPageCategoryId == Model.ParentId)
                                         {
-                                            if (child.ParentId == Model.NewsCategoryId)
-                                            {
-                                                <option value="@child.NewsCategoryId" selected="selected">&nbsp;&nbsp;| --@child.NewsCategoryTitle</option>
-                                            }
-                                            else
-                                            {
-                                                <option value="@child.NewsCategoryId">&nbsp;&nbsp;| --@child.NewsCategoryTitle</option>
-                                            }
-
+                                            <option value="@item.HtmlPageCategoryId" selected="selected">&nbsp;|--@item.HtmlPageCategoryTitle</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@item.HtmlPageCategoryId">&nbsp;|--@item.HtmlPageCategoryTitle</option>
                                         }
                                     }
 
 
-                                }*@
+                                }
 
 
                             </select>
@@ -135,7 +140,7 @@
                     </label>
 
                     <div class="col-sm-9 box-input">
-                        <textarea type="text" name="HtmlPageCategoryDescription" rows="2" class="col-xs-12 col-sm-6" oninput="validateEmpty(event)"></textarea>
+                        <textarea type="text" name="HtmlPageCategoryDescription" rows="2" class="col-xs-12 col-sm-6" oninput="validateEmpty(event)">@Model.HtmlPageCategoryDescription</textarea>
                         <div class="text-danger" id="error_description"></div>
                     </div>
                 </div>
@@ -148,7 +153,7 @@
                     </label>
 
                     <div class="col-sm-9 box-input">
-                        <textarea type="text" name="HtmlPageCategoryKeyword" class="col-xs-12 col-sm-6" oninput="validateEmpty(event)"></textarea>
+                        <textarea type="text" name="HtmlPageCategoryKeyword" class="col-xs-12 col-sm-6" oninput="validateEmpty(event)">@Model.HtmlPageCategoryKeyword</textarea>
                         <div class="text-danger" id="error_keyword"></div>
                     </div>
                 </div>
@@ -161,7 +166,7 @@
                     </label>
 
                     <div class="col-sm-9 box-input">
-                        <textarea type="text" name="HtmlPageCategorySummary" class="col-xs-12 col-sm-6" oninput="validateEmpty(event)"></textarea>
+                        <textarea type="text" name="HtmlPageCategorySummary" class="col-xs-12 col-sm-6" oninput="validateEmpty(event)">@Model.HtmlPageCategorySummary</textarea>
                         <div class="text-danger" id="error_summary"></div>
                     </div>
                 </div>
@@ -174,10 +179,25 @@
                     </label>
 
                     <div class="col-sm-9">
-                        <input type="number" name="OrderNo" class="col-xs-12 col-sm-6 input-number" value="0" />
+                        <input type="number" name="OrderNo" class="col-xs-12 col-sm-6 input-number" value="@Model.OrderNo" />
                     </div>
                 </div>
-                <div class="space-4"></div>
+
+                <div class="form-group">
+                    @{var check = Model.IsActive ? "checked" : "";}
+                    <label class="col-sm-3 control-label no-padding-right">
+                        Trạng thái:
+                    </label>
+
+                    <div class="checkbox">
+                        <label>
+                            <input name="IsActive" type="checkbox" class="ace" value="true" @check>
+
+                            <span class="lbl"> Ẩn/Hiện bài viết</span>
+                            <input name="IsActive" type="hidden" value="false" />
+                        </label>
+                    </div>
+                </div>
                 <button type="submit" href="#" id="btn_submit_save" class="btn btn-success">Lưu</button>
             }
         </div>
@@ -221,7 +241,6 @@
         $(document).ready(function () {
             if (message.trim() != null && message.trim() != '') {
                 alert(message);
-                window.location.href = '/vi/quan-tri/danh-muc-trang-tinh/danh-sach';
             }
         })
     </script>

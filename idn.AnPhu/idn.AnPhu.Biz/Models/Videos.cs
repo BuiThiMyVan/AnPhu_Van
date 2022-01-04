@@ -48,5 +48,8 @@ namespace idn.AnPhu.Biz.Models
 
         [DataColum]
         public string VideoUrl { get; set; }
+
+        [DataColum]
+        public string Culture { get; set; }
     }
 }

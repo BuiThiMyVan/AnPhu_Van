@@ -1,0 +1,10 @@
+﻿@model List<News>
+@foreach (News i in Model)
+{
+    <label>
+        <input type="checkbox" name="name" value="@i.NewsId" />
+        @i.NewsTitle
+    </label>
+}
+
+

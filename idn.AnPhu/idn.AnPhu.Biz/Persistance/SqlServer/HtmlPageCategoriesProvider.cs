@@ -36,26 +36,6 @@ namespace idn.AnPhu.Biz.Persistance.SqlServer
             return EntityBase.ParseListFromTable<HtmlPageCategories>(table);
         }
 
-        public List<HtmlPageCategories> Search(string txtSearch, int startIndex, int pageSize, ref int totalItems)
-        {
-            DbCommand comm = this.GetCommand("Sp_HtmlPageCategories_Search");
-            comm.AddParameter<string>(this.Factory, "txtSearch", (txtSearch != null && txtSearch.Trim().Length > 0) ? txtSearch : null);
-            comm.AddParameter<int>(this.Factory, "startIndex", startIndex);
-            comm.AddParameter<int>(this.Factory, "count", pageSize);
-
-            DbParameter totalItemsParam = comm.AddParameter(this.Factory, "totalItems", DbType.Int32, null);
-            totalItemsParam.Direction = ParameterDirection.Output;
-
-            var table = this.GetTable(comm);
-            table.TableName = TableName.HtmlPageCategories;
-
-            if (totalItemsParam.Value != DBNull.Value)
-            {
-                totalItems = Convert.ToInt32(totalItemsParam.Value);
-            }
-            return EntityBase.ParseListFromTable<HtmlPageCategories>(table);
-        }
-
         public void Add(HtmlPageCategories item)
         {
             DbCommand comm = this.GetCommand("Sp_HtmlPageCategories_Create");
