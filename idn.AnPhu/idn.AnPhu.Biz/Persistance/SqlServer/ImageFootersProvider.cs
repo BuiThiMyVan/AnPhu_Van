@@ -35,6 +35,17 @@ namespace idn.AnPhu.Biz.Persistance.SqlServer
             return EntityBase.ParseListFromTable<ImageFooters>(table);
         }
 
+        public List<ImageFooters> GetTop(int top)
+        {
+            DbCommand comm = this.GetCommand("Sp_ImageFooters_GetTop");
+            comm.AddParameter<int>(this.Factory, "top", top);
+
+            var table = this.GetTable(comm);
+            table.TableName = TableName.ImageFooters;
+
+            return EntityBase.ParseListFromTable<ImageFooters>(table);
+        }
+
         public void Add(ImageFooters item)
         {
             DbCommand comm = this.GetCommand("Sp_ImageFooters_Create");

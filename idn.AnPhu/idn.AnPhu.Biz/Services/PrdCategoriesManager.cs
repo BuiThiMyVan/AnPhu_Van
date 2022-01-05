@@ -30,6 +30,11 @@ namespace idn.AnPhu.Biz.Services
             return PrdCategoriesProvider.GetAll(0, 0, ref total);
         }
 
+        public List<PrdCategories> GetAllActive()
+        {
+            return PrdCategoriesProvider.GetAllActive();
+        }
+
         public override void Add(PrdCategories item)
         {
             base.Add(item);

@@ -35,6 +35,17 @@ namespace idn.AnPhu.Biz.Persistance.SqlServer
             return EntityBase.ParseListFromTable<HtmlPages>(table);
         }
 
+        public List<HtmlPages> GetHtmlPageByCateId(int id)
+        {
+            DbCommand comm = this.GetCommand("Sp_HtmlPages_GetHtmlPageByCateId");
+            comm.AddParameter<int>(this.Factory, "id", id);
+
+            var table = this.GetTable(comm);
+            table.TableName = TableName.HtmlPages;
+
+            return EntityBase.ParseListFromTable<HtmlPages>(table);
+        }
+
         public void Add(HtmlPages item)
         {
             DbCommand comm = this.GetCommand("Sp_HtmlPages_Create");

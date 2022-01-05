@@ -9,5 +9,6 @@ namespace idn.AnPhu.Biz.Persistance.Interface
 {
     interface IImageFootersProvider : IImportableDataProvider<ImageFooters>
     {
+        List<ImageFooters> GetTop(int top);
     }
 }

@@ -1,0 +1,73 @@
+﻿@using idn.AnPhu.Biz.Models
+@using idn.AnPhu.Biz.Services
+@{
+    Layout = null;
+    var listNewsCate = idn.AnPhu.Biz.Services.ServiceFactory.NewsCategoriesManager.GetAllActive();
+    var services = idn.AnPhu.Biz.Services.ServiceFactory.HtmlPageCategoriesManager.GetAllActiveByShortName("dich-vu");
+    var listPrdCate = idn.AnPhu.Biz.Services.ServiceFactory.PrdCategoriesManager.GetAllActive();
+}
+
+<header id="header">
+    <ul id="nav">
+        <li class="huyndai-logo">
+            <a href="#">
+                <img src="/Content/images/hyundai-logo.png" id="huyndai-logo" alt="">
+            </a>
+        </li>
+        <li>
+            <a href="#">Giới thiệu</a>
+        </li>
+        <li class="nav-menu-sp">
+            <a href="#">Sản phẩm</a>
+            <ul class="subnav display-none js-subnav-item">
+                @foreach (PrdCategories prdcate in listPrdCate)
+                {
+                    <li><a href="#">@prdcate.PrdCategoryTitle</a></li>
+                }
+            </ul>
+        </li>
+        <li>
+            <a href="#">Tin tức</a>
+            <ul class="subnav display-none js-subnav-item">
+                @foreach (NewsCategories newsCate in listNewsCate)
+                {
+                    <li><a href="#">@newsCate.NewsCategoryTitle</a></li>
+                }
+
+            </ul>
+        </li>
+        <li>
+            <a href="#">Dịch vụ</a>
+            <ul class="subnav display-none js-subnav-item">
+                <li><a href="#">Chăm sóc khách hàng</a></li>
+                <li><a href="#">Hướng dẫn bảo hành</a></li>
+                <li><a href="#">Bảo dưỡng định kỳ</a></li>
+                <li><a href="#">Phụ tùng & phụ kiện</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">Đăng ký lái thử</a>
+            <ul class="subnav display-none js-subnav-item">
+                <li><a href="#">Đăng ký lái thử</a></li>
+                <li><a href="#">Đặt lịch bảo dưỡng</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">Mua xe</a>
+            <ul class="subnav display-none js-subnav-item">
+                <li><a href="#">Bảng giá</a></li>
+                <li><a href="#">Dự toán chi phí</a></li>
+                <li><a href="#">Hỗ trợ trả góp</a></li>
+                <li><a href="#">Hướng dẫn thủ tục</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">Liên hệ</a>
+        </li>
+        <li class="daily-logo">
+            <a href="#">
+                <img src="/Content/images/daily-logo.png" id="daily-logo" alt="">
+            </a>
+        </li>
+    </ul>
+</header>

@@ -38,6 +38,16 @@ namespace idn.AnPhu.Biz.Persistance.SqlServer
             return EntityBase.ParseListFromTable<NewsCategories>(table);
         }
 
+        public List<NewsCategories> GetAllActive()
+        {
+            DbCommand comm = this.GetCommand("Sp_NewsCategories_GetAllActive");
+
+            var table = this.GetTable(comm);
+            table.TableName = TableName.NewsCategories;
+
+            return EntityBase.ParseListFromTable<NewsCategories>(table);
+        }
+
         public List<NewsCategories> Search(string txtSearch, int startIndex, int pageSize, ref int totalItems)
         {
             DbCommand comm = this.GetCommand("Sp_NewsCategories_Search");

@@ -1,0 +1,106 @@
+tr td h3 {
+	text-align: center;
+}
+tr td p {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+html {
+	font-size: 8pt !important;
+}
+ul {
+	padding: 0;
+}
+.col-sm-12.col-md-7.slide-title-header.no-padding {
+	width: 100%;
+}
+
+@media screen and (max-width: 767px) {
+	.row {
+		margin: 0;
+		text-align: -webkit-center;
+	}
+}
+
+
+@media screen and (max-width: 900px){
+    .text1 {
+	width:100% ; margin: 0 auto; float: none !important; }
+	.text2{width:100%; 
+     float:none !important; }
+	.text_play{margin:0 auto;}
+	.left .subject h3 { width:100%; text-align: center;}
+}
+@media only screen and (max-width:768px){
+ .fix-img-mobile{ width:100%;}
+}
+@media screen and (max-width: 768px) and (min-width: 600px) {
+	#divVideo {
+	 height: 435px !important;
+ }
+}
+@media only screen and (max-width: 800px){
+ .left .subject.fix-mobile{margin-top: 700px !important;}
+ }
+ .left .subject.fix-mobile{    z-index: 1;
+    margin-top: 731px;
+}
+.text_play .text1{
+	color: #222; font-size: 42px; text-transform: uppercase; font-family: ModernHEcoLight; text-align: center;
+}
+.text_play .text2{
+	color: #666; font-size: 1.6rem; line-height: 24px; font-family: ModernHEcoLight; text-align: center;
+}
+@media screen and (max-width: 1024px) {
+	.pip_cont .text_play .text1, .pip_cont .text_play .text2 {
+		margin-left: auto !important;
+		margin-right: auto !important;
+	}
+}
+@media screen and (max-width: 425px) {
+	.highlight_twin.col-xs-10.col-xs-offset-1  {
+		padding-left: 0 !important;
+		margin-left: 0 !important;
+	}
+	.highlight_twin.col-xs-10.col-xs-offset-1 .left {
+		width: 425px !important;
+		margin-left: 0 !important;
+	}
+	.highlight_twin.col-xs-10.col-xs-offset-1 .right {
+		width: 425px !important;
+		float: left !important;
+	}
+	.highlight_twin.col-xs-10.col-xs-offset-1 .left .subject h3 {
+		margin-left: 0 !important;
+	}
+	.sub_wrap.col-xs-6, .clearfix .col-xs-4, .row .col-xs-4, .row .col-xs-3  {
+		width: 100%;
+	}
+	.fancybox img {
+		max-width: 100%;
+		height: auto;
+	}
+}
+@media screen and (max-width: 375px) {
+	.highlight_twin.col-xs-10.col-xs-offset-1 .left {
+		width: 375px !important;
+		
+	}
+	.highlight_twin.col-xs-10.col-xs-offset-1 .right {
+		width: 375px !important;
+	}
+}
+@media screen and (max-width: 375px) {
+	.highlight_twin.col-xs-10.col-xs-offset-1 .left {
+		width: 320px !important;
+		
+	}
+	.highlight_twin.col-xs-10.col-xs-offset-1 .right {
+		width: 320px !important;
+	}
+}
+@media screen and (max-width: 320px) {
+	.overflow {
+		overflow-x: scroll;
+	}
+}

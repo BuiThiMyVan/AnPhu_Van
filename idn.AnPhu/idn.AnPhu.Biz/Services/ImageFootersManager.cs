@@ -31,6 +31,11 @@ namespace idn.AnPhu.Biz.Services
             return Provider.GetAll(0, 0, ref total);
         }
 
+        public List<ImageFooters> GetTop(int top)
+        {
+            return ImageFootersProvider.GetTop(top);
+        }
+
         public override void Add(ImageFooters item)
         {
             item.IsActive = true;

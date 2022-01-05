@@ -36,6 +36,18 @@ namespace idn.AnPhu.Biz.Persistance.SqlServer
             return EntityBase.ParseListFromTable<HtmlPageCategories>(table);
         }
 
+        public List<HtmlPageCategories> GetAllActiveByShortName(string shortname)
+        {
+            DbCommand comm = this.GetCommand("Sp_HtmlPageCategories_GetAllActiveByShortName");
+
+            comm.AddParameter<string>(this.Factory, "shortname", shortname);
+
+            var table = this.GetTable(comm);
+            table.TableName = TableName.HtmlPageCategories;
+
+            return EntityBase.ParseListFromTable<HtmlPageCategories>(table);
+        }
+
         public void Add(HtmlPageCategories item)
         {
             DbCommand comm = this.GetCommand("Sp_HtmlPageCategories_Create");

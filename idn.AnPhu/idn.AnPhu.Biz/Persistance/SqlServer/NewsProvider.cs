@@ -36,6 +36,16 @@ namespace idn.AnPhu.Biz.Persistance.SqlServer
             return EntityBase.ParseListFromTable<News>(table);
         }
 
+        public List<News> GetHot(int top)
+        {
+            DbCommand comm = this.GetCommand("Sp_News_GetHot");
+            comm.AddParameter<int>(this.Factory, "top", top);
+            var table = this.GetTable(comm);
+            table.TableName = TableName.News;
+
+            return EntityBase.ParseListFromTable<News>(table);
+        }
+
         public List<News> Search(string txtSearch, int startIndex, int pageSize, ref int totalItems)
         {
             DbCommand comm = this.GetCommand("Sp_News_Search");

@@ -107,7 +107,7 @@
                             <select name="PrdCategoryId">
                                 @foreach (PrdCategories item in ViewBag.ListPrdCategories)
                                 {
-                                    if (item.ParentId == Model.PrdCategoryId)
+                                    if (item.PrdCategoryId == Model.PrdCategoryId)
                                     {
                                         <option value="@item.PrdCategoryId" selected="selected">@item.PrdCategoryTitle</option>
                                     }
@@ -321,6 +321,7 @@
             if (bug > 0) {
                 e.preventDefault();
             } else {
+
                 return true;
             }
         }

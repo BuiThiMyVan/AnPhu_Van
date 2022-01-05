@@ -9,5 +9,7 @@ namespace idn.AnPhu.Biz.Persistance.Interface
 {
     interface IHtmlPagesProvider : IImportableDataProvider<HtmlPages>
     {
+        List<HtmlPages> GetHtmlPageByCateId(int id);
     }
+
 }

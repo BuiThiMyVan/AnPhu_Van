@@ -31,6 +31,11 @@ namespace idn.AnPhu.Biz.Services
             return Provider.GetAll(0, 0, ref total);
         }
 
+        public List<News> GetHot(int top)
+        {            
+            return NewsProvider.GetHot(top);
+        }
+
         public override void Add(News item)
         {
             item.IsActive = true;

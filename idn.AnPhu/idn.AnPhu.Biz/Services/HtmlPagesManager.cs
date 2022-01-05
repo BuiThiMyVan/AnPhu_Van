@@ -30,6 +30,11 @@ namespace idn.AnPhu.Biz.Services
             return HtmlPagesProvider.GetAll(0, 0, ref total);
         }
 
+        public List<HtmlPages> GetHtmlPageByCateId(int id)
+        {
+            return HtmlPagesProvider.GetHtmlPageByCateId(id);
+        }
+
         public override void Add(HtmlPages item)
         {
             base.Add(item);

@@ -1,0 +1,133 @@
+﻿.PhiloShowList .item .btnShow {
+    display: block;
+    text-indent: -9999px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 180px;
+    width: 40px;
+    height: 40px;
+    background: url(../images/btn_show_sp.png) no-repeat;
+    margin: 0 auto;
+    border: 0;
+    padding: 0;
+    overflow: hidden;
+    text-decoration: none;
+    color: #000;
+}
+.PhiloShowList .item .info {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 6% 0 0 0;
+}
+@media screen and (max-width: 425px) {
+	.PhiloShowList .item .info {
+		padding: 0;
+	}
+	.PhiloShowList .item .btnShow {
+		top: 50px;
+	}
+}
+.item .info .subTit {
+    color: #fff;
+}
+.subTit {
+    font-size: 19px;
+    line-height: 20px;
+    font-weight: normal;
+    font-weight: bolder;
+    text-align: -webkit-center;
+    margin: 10px 0;
+}
+.PhiloShowList .item .info .conArea {
+    color: #fff;
+    margin-top: 10px;
+    font-size: 20px;
+    line-height: 28px;
+}
+.PhiloShowList .item {
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+}
+.text_play {
+    padding: 20px 0;
+}
+.infoList_wrap .info_list {
+    margin: 0 -13px;
+    overflow: hidden;
+}
+.infoList_wrap .item {
+    float: left;
+    width: 25%;
+    padding: 0 13px;
+}
+.infoList_wrap .info_item {
+    height: 220px;
+    padding: 50px 0 0 0;
+    background-color: #35719E;
+    text-align: center;
+}
+@media screen and (max-width: 768px) {
+	.infoList_wrap .info_item {
+		height: 170px;
+		padding: 20px 0 0 0;
+	}
+}
+@media screen and (max-width: 700px) {
+	.infoList_wrap .item {
+		width: 50%;
+		margin-bottom: 10px;
+	}
+}
+@media screen and (max-width: 320px) {
+	.infoList_wrap .item {
+		width: 100%;
+		margin-bottom: 10px;
+	}
+}
+.infoList_wrap .info_item .ico {
+    display: block;
+    width: 40px;
+    height: 40px;
+    margin: 0 auto;
+	vertical-align: top;
+	position: relative;
+}
+em.ico:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    margin-top: -20px;
+    background: url(/Images/icon_all.svg) no-repeat;
+}
+.infoList_wrap .info_item.emission .ico:after {
+    background-position: -360px -140px;
+}
+.infoList_wrap .info_item.displace .ico:after {
+    background-position: -320px -140px;
+}
+.infoList_wrap .info_item.power .ico:after {
+    background-position: -240px -140px;
+}
+.infoList_wrap .info_item.torque .ico:after {
+    background-position: -280px -140px;
+}
+.infoList_wrap .info_item dl {
+    padding-top: 8px;
+    color: #fff;
+}
+.infoList_wrap .info_item dt {
+    font-size: 32px;
+    font-family: ModernHBold;
+    line-height: 42px;
+}
+.infoList_wrap .info_item dd {
+    padding-top: 8px;
+    opacity: 0.6;
+}

@@ -123,5 +123,44 @@ namespace idn.AnPhu.Website.Extensions
             list.Insert(0, item);
             return htmlHelper.DropDownList(name, list, htmAttribute);
         }
+
+        public static MvcHtmlString CanonicalUrl(this HtmlHelper html, string path)
+        {
+            if (String.IsNullOrWhiteSpace(path))
+            {
+                var rawUrl = html.ViewContext.RequestContext.HttpContext.Request.Url;
+                path = String.Format("{0}://{1}{2}", rawUrl.Scheme, rawUrl.Host, rawUrl.AbsolutePath);
+            }
+
+            path = path.ToLower();
+
+            if (path.Count(c => c == '/') > 3)
+            {
+                path = path.TrimEnd('/');
+            }
+
+            if (path.EndsWith("/index"))
+            {
+                path = path.Substring(0, path.Length - 6);
+            }
+
+            var canonical = new TagBuilder("link");
+            canonical.MergeAttribute("rel", "canonical");
+            canonical.MergeAttribute("href", path);
+            return new MvcHtmlString(canonical.ToString(TagRenderMode.SelfClosing));
+        }
+
+        public static MvcHtmlString CanonicalUrl(this HtmlHelper html)
+        {
+            var rawUrl = html.ViewContext.RequestContext.HttpContext.Request.Url;
+            if (rawUrl.Host.Contains("www"))
+            {
+                return CanonicalUrl(html, String.Format("{0}://{1}{2}", rawUrl.Scheme, rawUrl.Host.Substring(4), rawUrl.AbsolutePath));
+            }
+            else
+            {
+                return CanonicalUrl(html, String.Format("{0}://{1}{2}", rawUrl.Scheme, rawUrl.Host, rawUrl.AbsolutePath));
+            }
+        }
     }
 }

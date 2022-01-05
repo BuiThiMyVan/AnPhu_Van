@@ -1,0 +1,163 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hyundai Grand i10 - Giá xe grand i10 tốt nhất - Hyundai An Phú</title>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/Content/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/Content/css/font-awesome.css">
+    <link rel="stylesheet" href="/Content/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="/Content/css/styles.css">
+    <link rel="stylesheet" href="/Content/css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pannellum/2.5.6/pannellum.css"
+          integrity="sha512-UoT/Ca6+2kRekuB1IDZgwtDt0ZUfsweWmyNhMqhG4hpnf7sFnhrLrO0zHJr2vFp7eZEvJ3FN58dhVx+YMJMt2A=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pannellum/2.5.6/pannellum.js"
+            integrity="sha512-EmZuy6vd0ns9wP+3l1hETKq/vNGELFRuLfazPnKKBbDpgZL0sZ7qyao5KgVbGJKOWlAFPNn6G9naB/8WnKN43Q=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- End Pannellum library -->
+    <script src="/Content/js/jquery-3.5.1.js"></script>
+    <script src="/Content/js/bootstrap.min.js"></script>
+    <script src="/Content/js/rotate.js"></script>
+</head>
+<body>
+    <div id="main">
+        @Html.Partial("NavBar")
+
+        @RenderBody()
+        
+        @Html.Partial("Footer")
+    </div>
+
+</body>
+</html>
+
+
+<script src="/Content/js/bootstrap.js"></script>
+<script>
+    window.onscroll = function () { scrollFunction() };
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+            document.getElementById("back-to-top").style.visibility = "visible";
+        } else {
+            document.getElementById("back-to-top").style.visibility = "hidden";
+        }
+    }
+
+    document.getElementById('back-to-top').addEventListener("click", function () {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    });
+</script>
+<script>
+    function changeColorHover(e) {
+        e.target.parentNode.style.setProperty("--submenu-color", "#dc7b5b");
+    }
+
+    function changeColorLeave(e) {
+        e.target.parentNode.style.setProperty("--submenu-color", "#fff");
+    }
+
+    function activeBtn(e) {
+        var btn_carousel = document.querySelectorAll('.btn-carousel');
+        var btn_current = document.querySelector('.btn-carousel.active').childNodes[1].childNodes[1].getAttribute('src');
+        var new_src = '';
+        var pos = btn_current.indexOf('.png', 0);
+
+        for (var item of btn_carousel) {
+            new_src = item.childNodes[1].childNodes[1].getAttribute('src').replace('-active', '');
+            item.childNodes[1].childNodes[1].setAttribute('src', new_src);
+        }
+
+        if (btn_current.indexOf('-active') === -1) {
+            new_src = btn_current.substring(0, pos) + '-active' + btn_current.substring(pos);
+            document.querySelector('.btn-carousel.active').childNodes[1].childNodes[1].setAttribute('src', new_src);
+        }
+
+        document.getElementById("header").scrollIntoView();
+
+    }
+
+    function getInfoCate(e) {
+        console.log([e.target]);
+        var name_color = e.target.getAttribute('data-text');
+        var link_img_color = e.target.getAttribute('src');
+        var box_name = document.getElementById('name-color');
+        box_name.childNodes[1].setAttribute('src', link_img_color);
+        box_name.childNodes[3].innerText = name_color;
+    }
+
+    function openSubMenu(e) {
+        var element = e.target.parentNode.parentNode.parentNode.childNodes[3];
+        if (element.classList.contains('display-none')) {
+            element.classList.remove('display-none');
+        } else {
+            element.classList.add('display-none');
+        }
+    }
+
+    function openMbMenu() {
+        var element = document.getElementById('mb-menu');
+        if (element.classList.contains('display-none')) {
+            element.classList.remove('display-none');
+        } else {
+            element.classList.add('display-none');
+        }
+    }
+
+    function openChatBox() {
+        var chatBox = document.getElementById('chat-box');
+        var chatBoxHeader = document.querySelector('.chat-box-header');
+        var chatBoxHeaderClose = document.querySelector('.chat-box-header-close');
+        var chatBoxBody = document.querySelector('.chat-box-body');
+        chatBox.style.width = "300px";
+        chatBoxHeader.style.display = "flex";
+        chatBoxHeaderClose.style.display = "none";
+        chatBoxBody.classList.remove('display-none');
+    }
+
+    function closeChatBox() {
+        var chatBox = document.getElementById('chat-box');
+        var chatBoxHeader = document.querySelector('.chat-box-header');
+        var chatBoxHeaderClose = document.querySelector('.chat-box-header-close');
+        var chatBoxBody = document.querySelector('.chat-box-body');
+        chatBox.style.width = "158px";
+        chatBoxHeader.style.display = "none";
+        chatBoxHeaderClose.style.display = "flex";
+        chatBoxBody.classList.add('display-none');
+    }
+
+    $(window).scroll(function () {
+        // debugger
+        var heightwin = $(this).scrollTop();
+        var heightelement = $('#top-menu').offset().top;
+        if (heightwin >= heightelement) {
+            $("#top-menu").addClass("top-menu-fixed");
+            $("#top-menu").removeClass("top-menu");
+        }
+        if ($(this).scrollTop() <= $('#product').scrollTop() + $("#product").height()) {
+            // debugger
+            $("#top-menu").removeClass("top-menu-fixed");
+            $("#top-menu").addClass("top-menu");
+        }
+    });
+
+    $(document).ready(function () {
+        $(".nav-top-link").click(function () {
+            $(".nav-top-link").removeClass("on");
+            // $(".tab").addClass("active"); // instead of this do the below
+            $(this).addClass("on");
+        });
+
+        $('#es-sand').rotate3d({
+            'source': 'images/ex_xeb/es_',
+            'ext': '.png',
+            'count': 35,
+        });
+
+
+    });
+</script>

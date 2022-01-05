@@ -36,6 +36,16 @@ namespace idn.AnPhu.Biz.Persistance.SqlServer
             return EntityBase.ParseListFromTable<PrdCategories>(table);
         }
 
+        public List<PrdCategories> GetAllActive()
+        {
+            DbCommand comm = this.GetCommand("Sp_PrdCategories_GetAllActive");
+
+            var table = this.GetTable(comm);
+            table.TableName = TableName.PrdCategories;
+
+            return EntityBase.ParseListFromTable<PrdCategories>(table);
+        }
+
         public List<PrdCategories> Search(string txtSearch, int startIndex, int pageSize, ref int totalItems)
         {
             DbCommand comm = this.GetCommand("Sp_PrdCategories_Search");

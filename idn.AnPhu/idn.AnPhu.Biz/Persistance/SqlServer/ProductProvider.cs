@@ -87,7 +87,7 @@ namespace idn.AnPhu.Biz.Persistance.SqlServer
         public void Update(Product @new, Product old)
         {
             var item = @new;
-            item.PrdCategoryId = old.PrdCategoryId;
+            //item.PrdCategoryId = old.PrdCategoryId;
             var comm = this.GetCommand("Sp_Product_Update");
             if (comm == null) return;
             comm.AddParameter<int>(this.Factory, "ProductId", item.ProductId);

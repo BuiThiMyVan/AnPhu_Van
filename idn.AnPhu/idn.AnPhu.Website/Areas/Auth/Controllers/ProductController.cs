@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 
 namespace idn.AnPhu.Website.Areas.Auth.Controllers
@@ -126,12 +127,13 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
                 return HttpNotFound();
             }
         }
-        [HttpPost]
+        [HttpPost, ValidateInput(false)]
         [ValidateAntiForgeryToken]
         public ActionResult Update(Product model)
         {
+            FormCollection form = new FormCollection(Request.Unvalidated().Form);
             var message = "";
-            if (model != null && !CUtils.IsNullOrEmpty(model.PrdCategoryId))
+            if (model != null && !CUtils.IsNullOrEmpty(model.ProductId))
             {
                 var product = ProductManager.Get(new Product() { ProductId = model.ProductId });
                 if (product != null)

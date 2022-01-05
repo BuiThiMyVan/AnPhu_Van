@@ -9,5 +9,6 @@ namespace idn.AnPhu.Biz.Persistance.Interface
 {
     interface IHtmlPageCategoriesProvider : IImportableDataProvider<HtmlPageCategories>
     {
+        List<HtmlPageCategories> GetAllActiveByShortName(string shortname);
     }
 }

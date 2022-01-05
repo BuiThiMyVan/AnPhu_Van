@@ -31,6 +31,11 @@ namespace idn.AnPhu.Biz.Services
             return NewsCategoriesProvider.GetAll(0, 0, ref total);
         }
 
+        public List<NewsCategories> GetAllActive()
+        {
+            return NewsCategoriesProvider.GetAllActive();
+        }
+
         public override void Add(NewsCategories item)
         {
             item.IsActive = true;
