@@ -178,6 +178,10 @@ img {
     visibility: hidden;
 }
 
+.text-uppercase {
+    text-transform: uppercase;
+}
+
 /* CSS styles */
 
 
@@ -521,6 +525,7 @@ img {
 .slide-info .slide-header-text {
     font-size: 28px;
     font-family: var(--main-font);
+    text-transform: uppercase;
 }
 
 .slide-info .slide-text-descript {
@@ -613,11 +618,11 @@ img {
 
 /* Highlights */
 
-#hightlights {
+#slide-content1 {
     margin-top: 30px;
 }
 
-#hightlights .highlights-header {
+#slide-content1 .highlights-header {
     text-align: center;
 }
 
@@ -677,7 +682,7 @@ img {
     color: #666;
 }
 
-#exterior {
+#slide-content2 {
     text-align: center;
     margin-top: 40px;
 }
@@ -688,7 +693,7 @@ img {
     font-family: var(--third-font);
 }
 
-#exterior .exterior-bg {
+#slide-content2 .exterior-bg {
     position: relative;
     width: 100%;
     height: 520px;
@@ -749,14 +754,14 @@ img {
 }
 
 /* NOI THAT */
-#furniture,
-#operation,
-#safe,
-#convenient {
+#slide-content3,
+#slide-content4,
+#slide-content5,
+#slide-content6 {
     text-align: center;
 }
 
-#furniture .furniture-bg {
+#slide-content3 .furniture-bg {
     position: relative;
     width: 100%;
     height: 520px;
@@ -781,18 +786,18 @@ img {
 }
 
 /* VAN HANH */
-#operation {
+#slide-content4 {
 
 }
 
-#operation .operation-bg {
+#slide-content4 .operation-bg {
     position: relative;
     width: 100%;
     height: 520px;
     background: url(../images/v1.jpg) no-repeat fixed 50% 50% #fff;
 }
 
-#operation .engine-descript {
+#slide-content4 .engine-descript {
     display: flex;
     padding-left: 85px;
 }
@@ -894,7 +899,7 @@ img {
 }
 
 /* AN TOAN */
-#safe {
+#slide-content5 {
     margin-top: 40px;
 }
 
@@ -945,7 +950,7 @@ img {
 }
 
 /* TIEN NGHI */
-#convenient {
+#slide-content6 {
 
 }
 
@@ -1424,5 +1429,5 @@ img {
 }
 
 .menu-active::before {
-    background-color: #dc7b5b;
+    background-color: #dc7b5b !important;
 }

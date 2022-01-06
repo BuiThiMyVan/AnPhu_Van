@@ -31,6 +31,11 @@ namespace idn.AnPhu.Biz.Services
             return ProductReviewsProvider.GetAllProperties(productId, 0, 0, ref total);
         }
 
+        public List<ProductProperties> GetAllActiveByProductId(int productId)
+        {
+            return ProductReviewsProvider.GetAllActiveByProductId(productId);
+        }
+
         public override void Add(ProductProperties item)
         {
             base.Add(item);

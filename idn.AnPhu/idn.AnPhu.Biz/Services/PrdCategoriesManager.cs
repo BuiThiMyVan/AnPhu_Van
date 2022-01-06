@@ -30,6 +30,11 @@ namespace idn.AnPhu.Biz.Services
             return PrdCategoriesProvider.GetAll(0, 0, ref total);
         }
 
+        public PrdCategories GetByShortName(string shortName)
+        {
+            return PrdCategoriesProvider.GetByShortName(shortName);
+        }
+
         public List<PrdCategories> GetAllActive()
         {
             return PrdCategoriesProvider.GetAllActive();

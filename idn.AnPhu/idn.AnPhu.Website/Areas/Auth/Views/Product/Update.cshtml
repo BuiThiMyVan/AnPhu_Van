@@ -310,6 +310,7 @@
         function checkValid(e) {
             var inputs = $('input, textarea');
             var bug = 0;
+            debugger
 
             for (var i = 1; i < inputs.length; i++) {
                 if ($(inputs[i]).val() == '' && $(inputs[i]).attr('id') != 'ProductImage' && $(inputs[i]).attr('id') != 'ProductBackground' && $(inputs[i]).attr('id') != 'ProductBrochure' && $(inputs[i]).attr('id') != 'ProductVideo') {
@@ -317,7 +318,7 @@
                     bug++;
                 }
             }
-
+            debugger
             if (bug > 0) {
                 e.preventDefault();
             } else {

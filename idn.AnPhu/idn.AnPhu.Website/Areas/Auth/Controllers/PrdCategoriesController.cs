@@ -83,6 +83,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
 
             try
             {
+                model.PrdCategoryShortName = model.PrdCategoryTitle.ToUrlSegment(250).ToLower();
                 PrdCategoriesManager.Add(model);
                 ViewBag.message = "Thêm mới loại xe thành công";
                 ViewBag.ListPrdCategories = PrdCategoriesManager.GetAll();
@@ -129,6 +130,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
                 var prdCategories = PrdCategoriesManager.Get(new PrdCategories() { PrdCategoryId = model.PrdCategoryId });
                 if (prdCategories != null)
                 {
+                    model.PrdCategoryShortName = model.PrdCategoryTitle.ToUrlSegment(250).ToLower();
                     PrdCategoriesManager.Update(model, prdCategories);
                     message = "Cập nhật thông tin loại xe thành công!";
                 }

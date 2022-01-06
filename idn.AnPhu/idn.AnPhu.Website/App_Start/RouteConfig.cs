@@ -40,6 +40,20 @@ namespace idn.AnPhu.Website
             //);
 
             routes.MapRoute(
+                "listprd",
+                "{culture}/danh-sach-san-pham/{shortname}",
+                new { culture = "vi", controller = "Product", action = "Index", shortname = UrlParameter.Optional },
+                new[] { "idn.AnPhu.Website.Controllers" }
+            );
+
+            routes.MapRoute(
+                "product",
+                "{culture}/san-pham/{productcode}",
+                new { culture = "vi", controller = "Product", action = "Details", productcode = UrlParameter.Optional },
+                new[] { "idn.AnPhu.Website.Controllers" }
+            );
+
+            routes.MapRoute(
              "NetAdvImage",
              "{scriptPath}/tinymce/plugins/netadvimage/{action}",
              new { controller = "NetAdvImage" }

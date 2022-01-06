@@ -26,6 +26,17 @@ namespace idn.AnPhu.Biz.Persistance.SqlServer
             return EntityBase.ParseListFromTable<PrdCategories>(table).FirstOrDefault();
         }
 
+        public PrdCategories GetByShortName(string shortName)
+        {
+            DbCommand comm = this.GetCommand("Sp_PrdCategories_GetByShortName");
+
+            comm.AddParameter<string>(this.Factory, "shortName", shortName);
+
+            var table = this.GetTable(comm);
+            table.TableName = TableName.PrdCategories;
+            return EntityBase.ParseListFromTable<PrdCategories>(table).FirstOrDefault();
+        }
+
         public List<PrdCategories> GetAll(int startIndex, int count, ref int totalItems)
         {
             DbCommand comm = this.GetCommand("Sp_PrdCategories_GetAll");
@@ -72,6 +83,7 @@ namespace idn.AnPhu.Biz.Persistance.SqlServer
 
             comm.AddParameter<int>(this.Factory, "ParentId", item.ParentId);
             comm.AddParameter<string>(this.Factory, "PrdCategoryTitle", (item.PrdCategoryTitle != null && item.PrdCategoryTitle.Trim().Length > 0) ? item.PrdCategoryTitle.Trim() : null);
+            comm.AddParameter<string>(this.Factory, "PrdCategoryShortName", (item.PrdCategoryShortName != null && item.PrdCategoryShortName.Trim().Length > 0) ? item.PrdCategoryShortName.Trim() : null);
             comm.AddParameter<string>(this.Factory, "PrdCategorySummary", (item.PrdCategorySummary != null && item.PrdCategorySummary.Trim().Length > 0) ? item.PrdCategorySummary.Trim() : null);
             comm.AddParameter<string>(this.Factory, "PrdCategoryDescription", (item.PrdCategoryDescription != null && item.PrdCategoryDescription.Trim().Length > 0) ? item.PrdCategoryDescription.Trim() : null);
             comm.AddParameter<string>(this.Factory, "PrdCategoryKeyword", (item.PrdCategoryKeyword != null && item.PrdCategoryKeyword.Trim().Length > 0) ? item.PrdCategoryKeyword.Trim() : null);
@@ -92,6 +104,7 @@ namespace idn.AnPhu.Biz.Persistance.SqlServer
             comm.AddParameter<int>(this.Factory, "PrdCategoryId", item.PrdCategoryId);
             comm.AddParameter<int>(this.Factory, "ParentId", item.ParentId);
             comm.AddParameter<string>(this.Factory, "PrdCategoryTitle", (item.PrdCategoryTitle != null && item.PrdCategoryTitle.Trim().Length > 0) ? item.PrdCategoryTitle.Trim() : null);
+            comm.AddParameter<string>(this.Factory, "PrdCategoryShortName", (item.PrdCategoryShortName != null && item.PrdCategoryShortName.Trim().Length > 0) ? item.PrdCategoryShortName.Trim() : null);
             comm.AddParameter<string>(this.Factory, "PrdCategorySummary", (item.PrdCategorySummary != null && item.PrdCategorySummary.Trim().Length > 0) ? item.PrdCategorySummary.Trim() : null);
             comm.AddParameter<string>(this.Factory, "PrdCategoryDescription", (item.PrdCategoryDescription != null && item.PrdCategoryDescription.Trim().Length > 0) ? item.PrdCategoryDescription.Trim() : null);
             comm.AddParameter<string>(this.Factory, "PrdCategoryKeyword", (item.PrdCategoryKeyword != null && item.PrdCategoryKeyword.Trim().Length > 0) ? item.PrdCategoryKeyword.Trim() : null);

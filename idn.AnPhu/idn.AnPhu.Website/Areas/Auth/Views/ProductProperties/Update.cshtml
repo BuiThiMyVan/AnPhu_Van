@@ -56,19 +56,19 @@
     </li>
     <li><a href="@Url.Action("Index", "Home")">Dashboard</a></li>
     <li><a href="@Url.Action("Index", "Product")">Danh sách xe</a></li>
-    <li><a href="@Url.Action("Index", "ProductReviews")">Danh sách bài viết đánh giá</a></li>
+    <li><a href="@Url.Action("Index", "ProductProperties", new { productId = ViewBag.ProductId })">Danh sách thuộc tính</a></li>
     @if (ViewBag.IsEdit != null && ViewBag.IsEdit == true)
     {
         <li class="active">@Model.ProductPropertyTitle</li>
     }
     else
     {
-        <li class="active">Tạo mới bài viết đánh giá</li>
+        <li class="active">Tạo mới thuộc tính</li>
     }
 </ul>
 
 <div class="container-admin">
-    <div class="header-admin">Tạo mới bài viết đánh giá</div>
+    <div class="header-admin">Tạo mới thuộc tính</div>
     <div class="content-admin">
         <div class="content-table">
             @using (Html.BeginForm("Update", "ProductProperties", FormMethod.Post, new { id = "manageForm", @class = "form-horizontal", onsubmit = "checkValid(event)" }))
@@ -95,7 +95,7 @@
 
                     <div class="col-sm-9 box-input">
                         <input type="hidden" name="ProductPropertyBody" value="@Model.ProductPropertyBody" id="property_body" />
-                        <textarea type="text" id="ProductPropertyBody" rows="2" class="col-xs-12 col-sm-6">@Model.ProductPropertyBody</textarea>
+                        <textarea type="text" id="ProductPropertyBody" rows="2" class="col-xs-12 col-sm-6">@MvcHtmlString.Create(Model.ProductPropertyBody)</textarea>
                         <div class="text-danger"></div>
                     </div>
                 </div>
@@ -140,19 +140,17 @@
 
         tinymce.init({
             selector: "#ProductPropertyBody",
+            plugins: 'code',
             init_instance_callback: function (editor) {
                 editor.on('input', function (e) {
                     var value = tinymce.get("ProductPropertyBody").getContent();
-                    var div = document.createElement("div");
-                    div.innerHTML = value;
-                    var text = div.textContent || div.innerText || "";
-                    $('#property_body').val(text);
+                    $('#property_body').val(value);
                 });
             }
         });
 
         function validateEmpty(e) {
-            if ($(e.target).val() == '' && $(e.target).attr('id') != 'ProductPropertyBody') {
+            if ($(e.target).val() == '' && $(e.target).attr('id') != 'ProductPropertyBody' && $(e.target).attr('id') != 'property_body') {
                 $(e.target).next().text('Bạn không được để trống');
             } else {
                 $(e.target).next().text('');
@@ -173,6 +171,8 @@
             if (bug > 0) {
                 e.preventDefault();
             } else {
+                var value = tinymce.get("ProductPropertyBody").getContent();
+                $('#property_body').val(value);
                 return true;
             }
             debugger

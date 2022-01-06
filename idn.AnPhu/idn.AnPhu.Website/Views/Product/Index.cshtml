@@ -1,0 +1,107 @@
+﻿@using idn.AnPhu.Biz.Models
+@model List<Product>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+@section StyleSheet {
+<style>
+    a:hover {
+        cursor: pointer;
+    }
+
+    .product-wrapper {
+        padding-top: 55px;
+        font-weight: 700;
+    }
+
+    .product-cate-list {
+        border-bottom: 1px solid #333;
+    }
+    .product-cate-item {
+        display: flex;
+        color: #337ab7;
+        height: 60px;
+    }
+
+    .product-cate-item_active {
+        color: #df6a0e;
+    }
+
+    .product-cate-item_active:hover {
+        color: #df6a0e;
+    }
+
+        .product-cate-item span {
+            margin-left: 12px;
+        }
+
+    .cate-icon {
+        width: 38px;
+    }
+
+    .product-item {
+        padding-top: 25px;
+    }
+
+    .product-list .product-img {
+        min-height: 190px;
+        -webkit-transition: all 1s ease;
+    }
+
+    .product-list .product-img:hover {
+        transform: scale(1.1);
+    }
+
+    .product-list div {
+        text-align: center;        
+    }
+
+</style>
+}
+
+<div class="container">
+    <div class="product-wrapper">
+        <div class="row product-cate-list">
+            @foreach (PrdCategories item in ViewBag.ListProductCategory)
+            {
+                if (item.PrdCategoryId == ViewBag.PrdCategoryId)
+                {
+                    <a class="product-cate-item product-cate-item_active col-md-3 col-xs-6" href="/vi/danh-sach-san-pham/@item.PrdCategoryShortName">
+                        <div class="cate-icon">
+                            <img src="~/Content/images/pro-cate-1.png" height="30" alt="Alternate Text" />
+                        </div>
+                        <span>@item.PrdCategoryTitle</span>
+                    </a>
+                }
+                else
+                {
+                    <a class="product-cate-item col-md-3 col-xs-6" href="/vi/danh-sach-san-pham/@item.PrdCategoryShortName">
+                        <div class="cate-icon">
+                            <img src="~/Content/images/pro-cate-1.png" height="30" alt="Alternate Text" />
+                        </div>
+                        <span>@item.PrdCategoryTitle</span>
+                    </a>
+                }
+
+            }
+
+        </div>
+        <div class="product-list row">
+            @foreach (Product product in Model)
+            {
+                <a class="product-item col-md-3 col-xs-6" href="/vi/san-pham/@product.ProductCode">
+                    <div class="product-img">
+                        <img src="@product.ProductImage" alt="Alternate Text" />
+                    </div>
+                    
+                    <div>@product.ProductName</div>
+                </a>
+            }
+
+        </div>
+    </div>
+   
+</div>
+

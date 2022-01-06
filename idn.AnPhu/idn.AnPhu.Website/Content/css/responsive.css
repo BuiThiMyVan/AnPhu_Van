@@ -172,8 +172,8 @@
     .descript-text-2,
     .descript-text-box,
     .safe-info-box,
-    #exterior .exterior-bg,
-    #safe .safe-bg,
+    #slide-content2 .exterior-bg,
+    #slide-content5 .safe-bg,
     .operation-bg,
     .convenient-bg,
     .menu-bottom-left,
@@ -202,7 +202,7 @@
         display: none;
     }
 
-    #exterior .exterior-bg {
+    #slide-content2 .exterior-bg {
         display: none;
     }
 

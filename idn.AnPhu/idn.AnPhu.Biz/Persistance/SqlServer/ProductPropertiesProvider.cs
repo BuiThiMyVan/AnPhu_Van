@@ -27,6 +27,15 @@ namespace idn.AnPhu.Biz.Persistance.SqlServer
             return EntityBase.ParseListFromTable<ProductProperties>(table).FirstOrDefault();
         }
 
+        public List<ProductProperties> GetAllActiveByProductId(int productId)
+        {
+            DbCommand comm = this.GetCommand("Sp_ProductProperties_GetAllActiveByProductId");
+            comm.AddParameter<int>(this.Factory, "productId", productId);
+            var table = this.GetTable(comm);
+            table.TableName = TableName.ProductProperties;
+            return EntityBase.ParseListFromTable<ProductProperties>(table);
+        }
+
         public List<ProductProperties> GetAllProperties(int productId, int startIndex, int count, ref int totalItems)
         {
             DbCommand comm = this.GetCommand("Sp_ProductProperties_GetAll");

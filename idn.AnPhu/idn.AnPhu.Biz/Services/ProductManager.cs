@@ -32,6 +32,16 @@ namespace idn.AnPhu.Biz.Services
             return ProductProvider.GetAll(0, 0, ref total);
         }
 
+        public Product GetByCode(string productCode)
+        {
+            return ProductProvider.GetByCode(productCode);
+        }
+
+        public List<Product> GetByCateId(int id)
+        {
+            return ProductProvider.GetByCateId(id);
+        }
+
         public override void Add(Product item)
         {
             base.Add(item);

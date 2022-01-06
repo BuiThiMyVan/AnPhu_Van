@@ -78,7 +78,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
             return View();
         }
 
-        [HttpPost]
+        [HttpPost, ValidateInput(false)]
         public ActionResult Create(ProductProperties model)
         {
             try
@@ -121,7 +121,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
                 return HttpNotFound();
             }
         }
-        [HttpPost]
+        [HttpPost, ValidateInput(false)]
         [ValidateAntiForgeryToken]
         public ActionResult Update(ProductProperties model)
         {

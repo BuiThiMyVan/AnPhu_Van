@@ -77,7 +77,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
             return View();
         }
 
-        [HttpPost]
+        [HttpPost, ValidateInput(false)]
         public ActionResult Create(Product model)
         {
             var createBy = "";
@@ -86,8 +86,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
                 createBy = CUtils.StrTrim(UserState.UserName);
             }
             model.CreateBy = createBy;
-            var productName = model.ProductName;
-            model.ProductCode = productName.Trim().Replace(" ", "-").ToLower();
+            model.ProductCode = model.ProductName.ToUrlSegment(250).ToLower();
             try
             {
                 ProductManager.Add(model);
@@ -138,6 +137,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
                 var product = ProductManager.Get(new Product() { ProductId = model.ProductId });
                 if (product != null)
                 {
+                    model.ProductCode = model.ProductName.ToUrlSegment(250).ToLower();
                     ProductManager.Update(model, product);
                     message = "Cập nhật thông tin sản phẩm thành công!";
                 }

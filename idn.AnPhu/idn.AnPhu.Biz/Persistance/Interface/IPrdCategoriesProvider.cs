@@ -12,5 +12,7 @@ namespace idn.AnPhu.Biz.Persistance.Interface
         List<PrdCategories> Search(string txtSearch, int startIndex, int pageCount, ref int totalItems);
 
         List<PrdCategories> GetAllActive();
+
+        PrdCategories GetByShortName(string shortName);
     }
 }

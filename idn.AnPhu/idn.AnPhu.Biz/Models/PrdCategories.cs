@@ -19,6 +19,9 @@ namespace idn.AnPhu.Biz.Models
         public string PrdCategoryTitle { get; set; }
 
         [DataColum]
+        public string PrdCategoryShortName { get; set; }
+
+        [DataColum]
         public string PrdCategoryDescription { get; set; }
 
         [DataColum]

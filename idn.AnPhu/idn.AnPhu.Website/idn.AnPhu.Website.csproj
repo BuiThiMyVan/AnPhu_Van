@@ -163,6 +163,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NetAdvImageController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Data\DataWrapper.cs" />
     <Compile Include="Extensions\HtmlExtensions.cs" />
     <Compile Include="Extensions\Pager\IPagedList.cs" />
@@ -1197,6 +1198,7 @@
     <Content Include="Content\images\nt-nb9.jpg" />
     <Content Include="Content\images\nt0nb17.jpg" />
     <Content Include="Content\images\phone-ring.png" />
+    <Content Include="Content\images\pro-cate-1.png" />
     <Content Include="Content\images\tien1.jpg" />
     <Content Include="Content\images\tien2.jpg" />
     <Content Include="Content\images\tien3.jpg" />
@@ -3215,6 +3217,10 @@
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
     <Content Include="Scripts\ZeroClipboard.swf" />
+    <Content Include="Scripts\tinymce\langs\README.md" />
+    <Content Include="Scripts\tinymce\skins\ui\oxide-dark\fonts\tinymce-mobile.woff" />
+    <Content Include="Scripts\tinymce\skins\ui\oxide\fonts\tinymce-mobile.woff" />
+    <Content Include="Scripts\tinymce\tsconfig.json" />
     <None Include="Scripts\_references.js" />
     <Content Include="Views\NetAdvImage\Index.aspx" />
     <Content Include="Views\NetAdvImage\Pickup.aspx" />
@@ -3238,15 +3244,12 @@
     <Content Include="Views\Shared\ServiceException.cshtml" />
     <Content Include="Views\Shared\_loading.cshtml" />
     <Content Include="Views\Shared\FilteredErrorAjax.cshtml" />
-    <Content Include="Views\Shared\EditorScripts.cshtml" />
     <Content Include="Views\Shared\FileManagerButton.cshtml" />
-    <Content Include="Scripts\tinymce\skins\ui\oxide\fonts\tinymce-mobile.woff" />
-    <Content Include="Scripts\tinymce\skins\ui\oxide-dark\fonts\tinymce-mobile.woff" />
-    <Content Include="Scripts\tinymce\langs\README.md" />
-    <Content Include="Scripts\tinymce\tsconfig.json" />
     <Content Include="Views\Shared\_HomeLayout.cshtml" />
     <Content Include="Views\Shared\NavBar.cshtml" />
     <Content Include="Views\Shared\Footer.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Product\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
