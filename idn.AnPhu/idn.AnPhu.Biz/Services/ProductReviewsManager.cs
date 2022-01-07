@@ -36,6 +36,11 @@ namespace idn.AnPhu.Biz.Services
             return ProductReviewsProvider.GetAllReview(productId, 0, 0, ref total);
         }
 
+        public List<ProductReviews> GetAllActive(int productId)
+        {
+            return ProductReviewsProvider.GetAllActive(productId);
+        }
+
         public override void Add(ProductReviews item)
         {
             base.Add(item);

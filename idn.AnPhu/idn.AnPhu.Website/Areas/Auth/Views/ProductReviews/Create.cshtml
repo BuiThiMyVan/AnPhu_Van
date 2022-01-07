@@ -56,7 +56,7 @@
     </li>
     <li><a href="@Url.Action("Index", "Home")">Dashboard</a></li>
     <li><a href="@Url.Action("Index", "Product")">Danh sách xe</a></li>
-    <li><a href="@Url.Action("Index", "ProductReviews")">Danh sách bài viết đánh giá</a></li>
+    <li><a href="@Url.Action("Index", "ProductReviews", new { productId = ViewBag.ProductId })">Danh sách bài viết đánh giá</a></li>
     @if (ViewBag.IsEdit != null && ViewBag.IsEdit == true)
     {
         <li class="active">@Model.ReviewTitle</li>
@@ -190,13 +190,11 @@
 
         tinymce.init({
             selector: "#ReviewBody",
+            plugins: 'code',
             init_instance_callback: function (editor) {
                 editor.on('input', function (e) {
                     var value = tinymce.get("ReviewBody").getContent();
-                    var div = document.createElement("div");
-                    div.innerHTML = value;
-                    var text = div.textContent || div.innerText || "";
-                    $('#review_body').val(text);
+                    $('#review_body').val(value);
                 });
             }
         });
@@ -220,7 +218,7 @@
         function checkValid(e) {
             var inputs = $('input, textarea');
             var bug = 0;
-
+            debugger
             for (var i = 1; i < inputs.length; i++) {
                 if ($(inputs[i]).val() == '' && $(inputs[i]).attr('id') != 'ReviewBody' && $(inputs[i]).attr('id') != 'ReviewLogo' && $(inputs[i]).attr('id') != 'ProductId') {
                     $(inputs[i]).next().text('Bạn không được để trống');
@@ -231,8 +229,10 @@
             if (bug > 0) {
                 e.preventDefault();
             } else {
+
                 return true;
             }
+            debugger
         }
 
         var message = '@MvcHtmlString.Create(message)';

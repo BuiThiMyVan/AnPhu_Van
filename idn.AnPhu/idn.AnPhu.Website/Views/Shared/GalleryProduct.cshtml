@@ -1,0 +1,21 @@
+﻿@using idn.AnPhu.Biz.Models
+@model Product
+
+@{
+    Layout = null;
+    var galleryCat = ViewBag.GalleryCat as List<AppDicDomain> ?? null;
+    var baseUrl = Request.Url.GetLeftPart(UriPartial.Authority);
+    var url = Url.Action("Download", "Products");
+}
+
+<div class="container">
+    <div class="slide-content">
+        <ul class="nav nav-pills">
+            @Html.Raw(ViewBag.gaCat)
+        </ul>
+        <div class="tab-content">
+            @Html.Raw(ViewBag.gaCatItem)
+        </div>
+    </div>
+
+</div>

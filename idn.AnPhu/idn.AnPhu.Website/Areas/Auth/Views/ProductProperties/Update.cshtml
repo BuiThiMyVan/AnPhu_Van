@@ -160,7 +160,7 @@
         function checkValid(e) {
             var inputs = $('input, textarea');
             var bug = 0;
-            debugger
+
             for (var i = 1; i < inputs.length; i++) {
                 if ($(inputs[i]).val() == '' && $(inputs[i]).attr('id') != 'ProductPropertyBody') {
                     $(inputs[i]).next().text('Bạn không được để trống');
@@ -175,7 +175,6 @@
                 $('#property_body').val(value);
                 return true;
             }
-            debugger
         }
 
         var message = '@MvcHtmlString.Create(message)';

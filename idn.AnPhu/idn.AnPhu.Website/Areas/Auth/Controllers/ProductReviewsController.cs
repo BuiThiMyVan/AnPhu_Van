@@ -71,7 +71,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
             return View();
         }
 
-        [HttpPost]
+        [HttpPost, ValidateInput(false)]
         public ActionResult Create(ProductReviews model)
         {
             var createBy = "";
@@ -112,6 +112,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
             {
                 ViewBag.message = "";
                 ViewBag.IsEdit = true;
+                ViewBag.ProductId = review.ProductId;
                 return View(review);
             }
             else
@@ -119,7 +120,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
                 return HttpNotFound();
             }
         }
-        [HttpPost]
+        [HttpPost, ValidateInput(false)]
         [ValidateAntiForgeryToken]
         public ActionResult Update(ProductReviews model)
         {
@@ -130,19 +131,20 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
                 if (review != null)
                 {
                     ProductReviewsManager.Update(model, review);
-                    message = "Cập nhật thông tin danh mục thành công!";
+                    message = "Cập nhật bài viết đánh giá thành công!";
                 }
                 else
                 {
-                    message = "Mã danh mục tin tức '" + model.ReviewId + "' không có trong hệ thống!";
+                    message = "Mã bài viết đánh giá '" + model.ReviewId + "' không có trong hệ thống!";
                 }
             }
             else
             {
-                message = "Mã danh mục tin tức trống!";
+                message = "Mã bài viết đánh giá trống!";
             }
             ViewBag.message = message;
             ViewBag.IsEdit = true;
+            ViewBag.ProductId = model.ProductId;
             return View(model);
         }
 

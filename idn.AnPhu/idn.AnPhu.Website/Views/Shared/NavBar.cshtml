@@ -20,20 +20,25 @@
         <li class="nav-menu-sp">
             <a href="#">Sản phẩm</a>
             <ul class="subnav display-none js-subnav-item">
-                @foreach (PrdCategories prdcate in listPrdCate)
+                @if (listPrdCate != null)
                 {
-                    <li><a href="/vi/danh-sach-san-pham/@prdcate.PrdCategoryShortName">@prdcate.PrdCategoryTitle</a></li>
+                    foreach (PrdCategories prdcate in listPrdCate)
+                    {
+                        <li><a href="/vi/danh-sach-san-pham/@prdcate.PrdCategoryShortName">@prdcate.PrdCategoryTitle</a></li>
+                    }
                 }
             </ul>
         </li>
         <li>
             <a href="#">Tin tức</a>
             <ul class="subnav display-none js-subnav-item">
-                @foreach (NewsCategories newsCate in listNewsCate)
+                @if (listNewsCate != null)
                 {
-                    <li><a href="#">@newsCate.NewsCategoryTitle</a></li>
+                    foreach (NewsCategories newsCate in listNewsCate)
+                    {
+                        <li><a href="#">@newsCate.NewsCategoryTitle</a></li>
+                    }
                 }
-
             </ul>
         </li>
         <li>

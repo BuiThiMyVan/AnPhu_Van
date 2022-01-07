@@ -39,6 +39,7 @@ namespace idn.AnPhu.Biz.Services
             services.Add(typeof(PriceOptionsManager), new PriceOptionsManager(new PriceOptionsProvider()));
             services.Add(typeof(LocationDiscountsManager), new LocationDiscountsManager(new LocationDiscountsProvider()));
             services.Add(typeof(ImageFootersManager), new ImageFootersManager(new ImageFootersProvider()));
+            services.Add(typeof(AppDicDomainManager), new AppDicDomainManager(new AppDicDomainProvider()));
             #endregion
         }
 
@@ -336,6 +337,18 @@ namespace idn.AnPhu.Biz.Services
             set
             {
                 services[typeof(HtmlPagesManager)] = value;
+            }
+        }
+
+        public static AppDicDomainManager AppDicDomainManager
+        {
+            get
+            {
+                return (AppDicDomainManager)services[typeof(AppDicDomainManager)];
+            }
+            set
+            {
+                services[typeof(AppDicDomainManager)] = value;
             }
         }
     }

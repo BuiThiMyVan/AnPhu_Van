@@ -134,7 +134,7 @@
 
                     <div class="col-sm-9 box-input">
                         <input type="hidden" name="ReviewBody" id="review_body" value="@Model.ReviewBody" />
-                        <textarea type="text" id="ReviewBody" rows="2" class="col-xs-12 col-sm-6">@Model.ReviewBody</textarea>
+                        <textarea type="text" id="ReviewBody" rows="2" class="col-xs-12 col-sm-6">@MvcHtmlString.Create(@Model.ReviewBody)</textarea>
                         <div class="text-danger"></div>
                     </div>
                 </div>
@@ -191,13 +191,11 @@
 
         tinymce.init({
             selector: "#ReviewBody",
+            plugins: 'code',
             init_instance_callback: function (editor) {
                 editor.on('input', function (e) {
                     var value = tinymce.get("ReviewBody").getContent();
-                    var div = document.createElement("div");
-                    div.innerHTML = value;
-                    var text = div.textContent || div.innerText || "";
-                    $('#review_body').val(text);
+                    $('#review_body').val(value);
                 });
             }
         });
@@ -230,6 +228,8 @@
             if (bug > 0) {
                 e.preventDefault();
             } else {
+                var value = tinymce.get("ReviewBody").getContent();
+                $('#review_body').val(value);
                 return true;
             }
         }

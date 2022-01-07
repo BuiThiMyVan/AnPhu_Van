@@ -37,6 +37,15 @@ namespace idn.AnPhu.Biz.Persistance.SqlServer
             return EntityBase.ParseListFromTable<ProductReviews>(table);
         }
 
+        public List<ProductReviews> GetAllActive(int productId)
+        {
+            DbCommand comm = this.GetCommand("Sp_ProductReviews_GetAllActive");
+            comm.AddParameter<int>(this.Factory, "productId", productId);
+            var table = this.GetTable(comm);
+            table.TableName = TableName.ProductReviews;
+            return EntityBase.ParseListFromTable<ProductReviews>(table);
+        }
+
         public List<ProductReviews> Search(int productId, string txtSearch, int startIndex, int pageSize, ref int totalItems)
         {
             DbCommand comm = this.GetCommand("Sp_ProductReviews_Search");

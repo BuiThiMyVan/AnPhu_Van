@@ -54,6 +54,7 @@
       <HintPath>..\..\05.Refs\dlls\Client.Core.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -189,6 +190,9 @@
     <Compile Include="State\UserState.cs" />
     <Compile Include="UI\BaseViewPage.cs" />
     <Compile Include="Utils\FileUtils.cs" />
+    <Compile Include="Utils\StringUtils.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Auth\Content\Administrator.css" />
@@ -3250,6 +3254,8 @@
     <Content Include="Views\Shared\Footer.cshtml" />
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Product\Details.cshtml" />
+    <Content Include="Views\Shared\NavBar_Mobile.cshtml" />
+    <Content Include="Views\Shared\GalleryProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

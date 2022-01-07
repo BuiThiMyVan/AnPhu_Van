@@ -64,6 +64,7 @@ namespace idn.AnPhu.Constants
         public const string VideoCategories = "VideoCategories";
         public const string ImageFooters = "ImageFooters";
         public const string LocationDiscounts = "LocationDiscounts";
+        public const string AppDicDomain = "AppDicDomain";
     }
 
     #region["Columns Table"]

@@ -1,0 +1,99 @@
+﻿@using idn.AnPhu.Biz.Models
+
+@{
+    Layout = null;
+    var listNewsCate = idn.AnPhu.Biz.Services.ServiceFactory.NewsCategoriesManager.GetAllActive();
+    var services = idn.AnPhu.Biz.Services.ServiceFactory.HtmlPageCategoriesManager.GetAllActiveByShortName("dich-vu");
+    var listPrdCate = idn.AnPhu.Biz.Services.ServiceFactory.PrdCategoriesManager.GetAllActive();
+}
+
+<div class="mb-menu-top display-none">
+    <div class="mb-menu-top-above">
+        <div class="mb-daily-logo">
+            <a href="#">
+                <img src="/Content/images/anphu-mobile-toplogo.png" alt="">
+            </a>
+        </div>
+        <div class="mb-menu-toggle" onclick="openMbMenu(event)">
+            <i class="ti-menu"></i>
+        </div>
+    </div>
+    <div class="phone">028  36 36 82 95</div>
+    <ul class="mb-menu-content display-none" id="mb-menu">
+        <li>
+            <a href="#">Giới thiệu</a>
+        </li>
+        <li class="nav-menu-sp mb-menu-multi-level">
+            <div class="mb-menu-level-root">
+                <a href="#">Sản phẩm</a>
+                <span onclick="openSubMenu(event)"><i class="fas fa-caret-down"></i></span>
+            </div>
+            <ul class="subnav js-subnav-item mb-subnav display-none">
+                @if (listPrdCate != null)
+                {
+                    foreach (PrdCategories prdcate in listPrdCate)
+                    {
+                        <li><a href="/vi/danh-sach-san-pham/@prdcate.PrdCategoryShortName">@prdcate.PrdCategoryTitle</a></li>
+                    }
+                }
+
+            </ul>
+        </li>
+        <li class="nav-menu-sp mb-menu-multi-level">
+            <div class="mb-menu-level-root">
+                <a href="#">Tin tức</a>
+                <span onclick="openSubMenu(event)"><i class="fas fa-caret-down"></i></span>
+            </div>
+
+            <ul class="subnav display-none js-subnav-item">
+                @if (listNewsCate != null)
+                {
+                    foreach (NewsCategories newsCate in listNewsCate)
+                    {
+                        <li><a href="#">@newsCate.NewsCategoryTitle</a></li>
+                    }
+                }
+            </ul>
+        </li>
+        <li class="nav-menu-sp mb-menu-multi-level">
+            <div class="mb-menu-level-root">
+                <a href="#">Dịch vụ</a>
+                <span onclick="openSubMenu(event)"><i class="fas fa-caret-down"></i></span>
+            </div>
+
+            <ul class="subnav display-none js-subnav-item">
+                <li><a href="#">Chăm sóc khách hàng</a></li>
+                <li><a href="#">Hướng dẫn bảo hành</a></li>
+                <li><a href="#">Bảo dưỡng định kỳ</a></li>
+                <li><a href="#">Phụ tùng & phụ kiện</a></li>
+            </ul>
+        </li>
+        <li class="nav-menu-sp mb-menu-multi-level">
+            <div class="mb-menu-level-root">
+                <a href="#">Đăng ký lái thử</a>
+                <span onclick="openSubMenu(event)"><i class="fas fa-caret-down"></i></span>
+            </div>
+
+            <ul class="subnav display-none js-subnav-item">
+                <li><a href="#">Đăng ký lái thử</a></li>
+                <li><a href="#">Đặt lịch bảo dưỡng</a></li>
+            </ul>
+        </li>
+        <li class="nav-menu-sp mb-menu-multi-level">
+            <div class="mb-menu-level-root">
+                <a href="#">Mua xe</a>
+                <span onclick="openSubMenu(event)"><i class="fas fa-caret-down"></i></span>
+            </div>
+
+            <ul class="subnav display-none js-subnav-item">
+                <li><a href="#">Bảng giá</a></li>
+                <li><a href="#">Dự toán chi phí</a></li>
+                <li><a href="#">Hỗ trợ trả góp</a></li>
+                <li><a href="#">Hướng dẫn thủ tục</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">Liên hệ</a>
+        </li>
+    </ul>
+</div>

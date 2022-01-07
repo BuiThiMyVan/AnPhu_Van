@@ -4,99 +4,14 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_HomeLayout.cshtml";
     var listProperties = ViewBag.ProductProperties;
+    var listNewsCate = idn.AnPhu.Biz.Services.ServiceFactory.NewsCategoriesManager.GetAllActive();
+    var services = idn.AnPhu.Biz.Services.ServiceFactory.HtmlPageCategoriesManager.GetAllActiveByShortName("dich-vu");
+    var listPrdCate = idn.AnPhu.Biz.Services.ServiceFactory.PrdCategoriesManager.GetAllActive();
+    var listProductReviews = ViewBag.ListProductReviews;
 }
 
 <section id="product">
-    <div class="mb-menu-top display-none">
-        <div class="mb-menu-top-above">
-            <div class="mb-daily-logo">
-                <a href="#">
-                    <img src="/Content/images/anphu-mobile-toplogo.png" alt="">
-                </a>
-            </div>
-            <div class="mb-menu-toggle" onclick="openMbMenu(event)">
-                <i class="ti-menu"></i>
-            </div>
-        </div>
-        <div class="phone">028  36 36 82 95</div>
-        <ul class="mb-menu-content display-none" id="mb-menu">
-            <li>
-                <a href="#">Giới thiệu</a>
-            </li>
-            <li class="nav-menu-sp mb-menu-multi-level">
-                <div class="mb-menu-level-root">
-                    <a href="#">Sản phẩm</a>
-                    <span onclick="openSubMenu(event)"><i class="fas fa-caret-down"></i></span>
-                </div>
-                <ul class="subnav js-subnav-item mb-subnav display-none">
-                    <li><a href="#">Xe du lịch</a></li>
-                    <li><a href="#">Xe SUV</a></li>
-                    <li><a href="#">Xe thương mại</a></li>
-                    <li><a href="#">Limousine An Phú</a></li>
-                </ul>
-            </li>
-            <li class="nav-menu-sp mb-menu-multi-level">
-                <div class="mb-menu-level-root">
-                    <a href="#">Tin tức</a>
-                    <span onclick="openSubMenu(event)"><i class="fas fa-caret-down"></i></span>
-                </div>
-
-                <ul class="subnav display-none js-subnav-item">
-                    <li><a href="#">Tin khuyến mãi</a></li>
-                    <li><a href="#">Khuyến mãi 12</a></li>
-                    <li><a href="#">Danh mục mới 123</a></li>
-                    <li><a href="#">Danh mục mới 123</a></li>
-                    <li><a href="#">Danh mục mới 1256</a></li>
-                    <li><a href="#">Danh mục mới 123456</a></li>
-                    <li><a href="#">Tin tức chung</a></li>
-                    <li><a href="#">tintuc</a></li>
-                    <li><a href="#">Tuyển dụng</a></li>
-                    <li><a href="#">Hỏi đáp</a></li>
-                    <li><a href="#">Hỏi đáp</a></li>
-                </ul>
-            </li>
-            <li class="nav-menu-sp mb-menu-multi-level">
-                <div class="mb-menu-level-root">
-                    <a href="#">Dịch vụ</a>
-                    <span onclick="openSubMenu(event)"><i class="fas fa-caret-down"></i></span>
-                </div>
-
-                <ul class="subnav display-none js-subnav-item">
-                    <li><a href="#">Chăm sóc khách hàng</a></li>
-                    <li><a href="#">Hướng dẫn bảo hành</a></li>
-                    <li><a href="#">Bảo dưỡng định kỳ</a></li>
-                    <li><a href="#">Phụ tùng & phụ kiện</a></li>
-                </ul>
-            </li>
-            <li class="nav-menu-sp mb-menu-multi-level">
-                <div class="mb-menu-level-root">
-                    <a href="#">Đăng ký lái thử</a>
-                    <span onclick="openSubMenu(event)"><i class="fas fa-caret-down"></i></span>
-                </div>
-
-                <ul class="subnav display-none js-subnav-item">
-                    <li><a href="#">Đăng ký lái thử</a></li>
-                    <li><a href="#">Đặt lịch bảo dưỡng</a></li>
-                </ul>
-            </li>
-            <li class="nav-menu-sp mb-menu-multi-level">
-                <div class="mb-menu-level-root">
-                    <a href="#">Mua xe</a>
-                    <span onclick="openSubMenu(event)"><i class="fas fa-caret-down"></i></span>
-                </div>
-
-                <ul class="subnav display-none js-subnav-item">
-                    <li><a href="#">Bảng giá</a></li>
-                    <li><a href="#">Dự toán chi phí</a></li>
-                    <li><a href="#">Hỗ trợ trả góp</a></li>
-                    <li><a href="#">Hướng dẫn thủ tục</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">Liên hệ</a>
-            </li>
-        </ul>
-    </div>
+    @Html.Partial("NavBar_Mobile")
     <div id="carouselExampleIndicators" class="carousel slide" data-interval="false">
         <div class="carousel-inner" id="carousel-product">
             <div class="carousel-item active">
@@ -184,220 +99,24 @@
                 </div>
             </div>
             <div class="carousel-item">
-                <div class="container">
-                    <div class="slide-content">
-                        <ul class="nav nav-pills">
-                            <li class="nav-item"><a href="#general-info" class="nav-link active" role="tab" data-bs-toggle="tab">Tổng quan</a></li>
-                            <li class="nav-item"><a href="#furniture-info" class="nav-link" role="tab" data-bs-toggle="tab">Nội thất</a></li>
-                            <li class="nav-item"><a href="#exterior-info" class="nav-link" role="tab" data-bs-toggle="tab">Ngoại thất</a></li>
-                        </ul>
-                        <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane active" id="general-info">
-                                <div class="row">
-                                    <div class="col-md-3 col-6 mt16">
-                                        <img src="/Content/images/gallery_sum01.png" data-bs-toggle="modal" data-bs-target="#sum01" alt="">
-
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="sum01" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <img src="/Content/images/gallery_01.png" alt="">
-                                                    <div class="close" data-bs-dismiss="modal"><i class="fas fa-times"></i></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-6 mt16">
-                                        <img src="/Content/images/gallery_sum02.png" data-bs-toggle="modal" data-bs-target="#sum02" alt="">
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="sum02" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <img src="/Content/images/gallery_02.png" alt="">
-                                                    <div class="close" data-bs-dismiss="modal"><i class="fas fa-times"></i></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="text-align-center mt16">1 of 1</div>
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="furniture-info">
-                                <div class="row">
-                                    <div class="col-md-3 col-6 mt16">
-                                        <img src="/Content/images/interior_driving-space_sum00.png" data-bs-toggle="modal" data-bs-target="#drivespace0" alt="">
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="drivespace0" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    The requested content cannot be loaded.
-                                                    <br>
-                                                    Please try again later.
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-6 mt16">
-                                        <img src="/Content/images/interior_driving-space_sum01.png" data-bs-toggle="modal" data-bs-target="#drivespace1" alt="">
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="drivespace1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <img src="/Content/images/interior_driving-space_01.jpg" alt="">
-                                                    <div class="close" data-bs-dismiss="modal"><i class="fas fa-times"></i></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-6 mt16">
-                                        <img src="/Content/images/interior_driving-space_sum02.png" data-bs-toggle="modal" data-bs-target="#drivespace2" alt="">
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="drivespace2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <img src="/Content/images/interior_driving-space_02.jpg" alt="">
-                                                    <div class="close" data-bs-dismiss="modal"><i class="fas fa-times"></i></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-6 mt16">
-                                        <img src="/Content/images/interior_driving-space_sum03.png" data-bs-toggle="modal" data-bs-target="#drivespace3" alt="">
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="drivespace3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <img src="/Content/images/interior_driving-space_03.jpg" alt="">
-                                                    <div class="close" data-bs-dismiss="modal"><i class="fas fa-times"></i></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="text-align-center mt16">1 of 1</div>
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="exterior-info">
-                                <div class="row">
-                                    <div class="col-md-3 col-6 mt16">
-                                        <img src="/Content/images/exterior_front_sum01.png" data-bs-toggle="modal" data-bs-target="#exteriordoor1" alt="">
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="exteriordoor1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <img src="/Content/images/exterior_4door_front_01.jpg" alt="">
-                                                    <div class="close" data-bs-dismiss="modal"><i class="fas fa-times"></i></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-6 mt16">
-                                        <img src="/Content/images/exterior_front_sum02.png" data-bs-toggle="modal" data-bs-target="#exteriordoor2" alt="">
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="exteriordoor2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <img src="/Content/images/exterior_4door_front_02.jpg" alt="">
-                                                    <div class="close" data-bs-dismiss="modal"><i class="fas fa-times"></i></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-6 mt16">
-                                        <img src="/Content/images/exterior_front_sum03.png" data-bs-toggle="modal" data-bs-target="#exteriordoor3" alt="">
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="exteriordoor3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <img src="/Content/images/exterior_4door_front_03.jpg" alt="">
-                                                    <div class="close" data-bs-dismiss="modal"><i class="fas fa-times"></i></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-6 mt16">
-                                        <img src="/Content/images/exterior_front_sum04.png" data-bs-toggle="modal" data-bs-target="#exteriordoor4" alt="">
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="exteriordoor4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <img src="/Content/images/exterior_4door_front_04.jpg" alt="">
-                                                    <div class="close" data-bs-dismiss="modal"><i class="fas fa-times"></i></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-6 mt16">
-                                        <img src="/Content/images/exterior_front_sum05.png" data-bs-toggle="modal" data-bs-target="#exteriordoor5" alt="">
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="exteriordoor5" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <img src="/Content/images/exterior_4door_front_05.jpg" alt="">
-                                                    <div class="close" data-bs-dismiss="modal"><i class="fas fa-times"></i></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-6 mt16">
-                                        <img src="/Content/images/exterior_front_sum06.png" data-bs-toggle="modal" data-bs-target="#exteriordoor6" alt="">
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="exteriordoor6" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <img src="/Content/images/exterior_4door_front_06.jpg" alt="">
-                                                    <div class="close" data-bs-dismiss="modal"><i class="fas fa-times"></i></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="text-align-center mt16">1 of 1</div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+                @Html.Partial("GalleryProduct")
 
             </div>
             <div class="carousel-item">
                 <div class="container">
                     <div class="row pb16">
-                        <div class="col-md-3 col-12 mt16 rate-box">
-                            <div class="rate-title">Đánh giá xe grand - i10</div>
-                            <div class="rate-img">
-                                <img src="/Content/images/new-county.png" alt="">
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-12 mt16 rate-box">
-                            <div class="rate-title">Đánh giá xe (News)</div>
-                            <div class="rate-img">
-
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-12 mt16 rate-box">
-                            <div class="rate-title">Đánh giá xe (News 1)</div>
-                            <div class="rate-img">
-
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-12 mt16 rate-box">
-                            <div class="rate-title">Đánh giá xe (News 2)</div>
-                            <div class="rate-img">
-
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-12 mt16 rate-box">
-                            <div class="rate-title">Đánh giá xe (News 3)</div>
-                            <div class="rate-img">
-
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-12 mt16 rate-box">
-                            <div class="rate-title">đánh giá xe</div>
-                            <div class="rate-img">
-                                <img src="/Content/images/es_0.png" alt="">
-                            </div>
-                        </div>
+                        @if (listProductReviews != null)
+                        {
+                            foreach (ProductReviews productReview in listProductReviews)
+                            {
+                                <div class="col-md-3 col-12 mt16 rate-box">
+                                    <div class="rate-title">@productReview.ReviewTitle</div>
+                                    <div class="rate-img">
+                                        <img src="@productReview.ReviewLogo" alt="">
+                                    </div>
+                                </div>
+                            }
+                        }
                     </div>
                 </div>
             </div>
@@ -720,6 +439,18 @@
     {
         @MvcHtmlString.Create(productProp.ProductPropertyBody)
     }
+}
+
+@section Scripts {
+<script>
+    $(document).ready(function () {
+        $('#es-sand').rotate3d({
+            'source': 'images/ex_xeb/es_',
+            'ext': '.png',
+            'count': 35,
+        });
+    });
+</script>
 }
 
 
