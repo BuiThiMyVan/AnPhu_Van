@@ -68,10 +68,30 @@ namespace idn.AnPhu.Website.Utils
                     }
                     sReturn += "<div class='col-md-3 col-6 mt16'>";
                 }
-                sReturn += "<img src='" + URLForHTML(sRoot + sClass + "/" + Path.GetFileName(sFile)) + "'data-bs-toggle='modal' data-bs-target='" +sClass + i+"'>" + "<div class='modal fade' id='" + sClass + i + "' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'><div class='modal-dialog'><div class='modal-content'><img src = '" + URLForHTML(sRoot + sClass + "/" + Path.GetFileName(sFile)) + "'><div class='close' data-bs-dismiss='modal'><i class='fas fa-times'></i></div></div></div></div></div>";
+                sReturn += "<img src='" + URLForHTML(sRoot + sClass + "/" + Path.GetFileName(sFile)) + "'data-bs-toggle='modal' data-bs-target='#" +sClass + i+"'>" + "<div class='modal fade' id='" + sClass + i + "' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'><div class='modal-dialog'><div class='modal-content'><img src = '" + URLForHTML(sRoot + sClass + "/" + Path.GetFileName(sFile)) + "'><div class='close' data-bs-dismiss='modal'><i class='fas fa-times'></i></div></div></div></div></div>";
                 i++;
             }
             return sReturn;
+        }
+
+        public static string File_Read(string sFileName)
+        {
+            bool flag = sFileName.StartsWith("~");
+            if (flag)
+            {
+                sFileName = HttpContext.Current.Server.MapPath(sFileName);
+            }
+            flag = File.Exists(sFileName);
+            string result;
+            if (flag)
+            {
+                result = File.ReadAllText(sFileName);
+            }
+            else
+            {
+                result = null;
+            }
+            return result;
         }
     }
 }

@@ -1,0 +1,74 @@
+﻿@{
+    var variablesScript = ViewBag.variablesScript as string ?? "";
+}
+
+<div class="slide-2-head-text">
+    <a href="#">Ngoại thất</a>
+</div>
+<ul class="nav flex-column img-360-btn-group">
+    <li class="nav-item" id="name-color">
+        <img src="/Content/images/img-360/cover_color.png" alt="">
+        <span>Cát</span>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" role="tab" data-bs-toggle="tab" data-text="Cát" onclick="getInfoCate(event)" href="#es-sand">
+            <img src="/Content/images/img-360/cover_color.png" data-text="Cát" alt="">
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" role="tab" data-bs-toggle="tab" data-text="Trắng" onclick="getInfoCate(event)" href="#es-white">
+            <img src="/Content/images/img-360/ex_Noble_White.png" data-text="Trắng" alt="">
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" role="tab" data-bs-toggle="tab" data-text="Đỏ" onclick="getInfoCate(event)" href="#es-red">
+            <img src="/Content/images/img-360/ex_Ruby_wine.png" data-text="Đỏ" alt="">
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" role="tab" data-bs-toggle="tab" data-text="Bạc" onclick="getInfoCate(event)" href="#es-silver">
+            <img src="/Content/images/img-360/ex_Sleek_Silver.png" data-text="Bạc" alt="">
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" role="tab" data-bs-toggle="tab" data-text="Xanh" onclick="getInfoCate(event)" href="#es-blue">
+            <img src="/Content/images/img-360/ex_Night_Sky.png" data-text="Xanh" alt="">
+        </a>
+    </li>
+</ul>
+
+<div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="es-sand">
+        @*<div class="btn-start" onclick="getListImg(event)">
+                <img src="/Content/images/btn_start.png" class="btn-start" alt="">
+            </div>*@
+        @*<img src="/Content/images/ex_xeb/es_0.png" alt="">*@
+    </div>
+    <div role="tabpanel" class="tab-pane" id="es-white">
+        Updating
+
+    </div>
+    <div role="tabpanel" class="tab-pane" id="es-red">
+        Updating
+
+    </div>
+    <div role="tabpanel" class="tab-pane" id="es-silver">
+
+        Updating
+    </div>
+    <div role="tabpanel" class="tab-pane" id="es-blue">
+        Updating
+
+    </div>
+</div>
+<script>
+    //$(document).ready(function () {
+    //    $('#es-sand').rotate3d({
+    //        'source': '/Content/images/ex_xeb/es_',
+    //        'ext': '.png',
+    //        'count': 35,
+    //    });
+    //});
+
+    @Html.Raw(variablesScript)
+</script>
