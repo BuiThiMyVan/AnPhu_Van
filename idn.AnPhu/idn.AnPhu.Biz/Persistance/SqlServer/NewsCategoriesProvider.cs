@@ -28,6 +28,17 @@ namespace idn.AnPhu.Biz.Persistance.SqlServer
             return EntityBase.ParseListFromTable<NewsCategories>(table).FirstOrDefault();
         }
 
+        public NewsCategories GetByShortName(string shortName)
+        {
+            DbCommand comm = this.GetCommand("Sp_NewsCategories_GetByShortName");
+
+            comm.AddParameter<string>(this.Factory, "shortName", shortName);
+
+            var table = this.GetTable(comm);
+            table.TableName = TableName.NewsCategories;
+            return EntityBase.ParseListFromTable<NewsCategories>(table).FirstOrDefault();
+        }
+
         public List<NewsCategories> GetAll(int startIndex, int count, ref int totalItems)
         {
             DbCommand comm = this.GetCommand("Sp_NewsCategories_GetAll");

@@ -27,7 +27,7 @@
 <body>
     <div id="main">
         @Html.Partial("NavBar")
-
+        @Html.Partial("NavBar_Mobile")
         @RenderBody()
 
         @Html.Partial("Footer")
@@ -94,8 +94,9 @@
         var name_color = e.target.getAttribute('data-text');
         var link_img_color = e.target.getAttribute('src');
         var box_name = document.getElementById('name-color');
-        box_name.childNodes[1].setAttribute('src', link_img_color);
-        box_name.childNodes[3].innerText = name_color;
+        console.log([box_name]);
+        box_name.childNodes[0].setAttribute('src', link_img_color);
+        box_name.childNodes[1].innerText = name_color;
     }
 
     function openSubMenu(e) {

@@ -5,70 +5,92 @@
 <div class="slide-2-head-text">
     <a href="#">Ngoại thất</a>
 </div>
-<ul class="nav flex-column img-360-btn-group">
-    <li class="nav-item" id="name-color">
-        <img src="/Content/images/img-360/cover_color.png" alt="">
-        <span>Cát</span>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link active" aria-current="page" role="tab" data-bs-toggle="tab" data-text="Cát" onclick="getInfoCate(event)" href="#es-sand">
-            <img src="/Content/images/img-360/cover_color.png" data-text="Cát" alt="">
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" role="tab" data-bs-toggle="tab" data-text="Trắng" onclick="getInfoCate(event)" href="#es-white">
-            <img src="/Content/images/img-360/ex_Noble_White.png" data-text="Trắng" alt="">
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" role="tab" data-bs-toggle="tab" data-text="Đỏ" onclick="getInfoCate(event)" href="#es-red">
-            <img src="/Content/images/img-360/ex_Ruby_wine.png" data-text="Đỏ" alt="">
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" role="tab" data-bs-toggle="tab" data-text="Bạc" onclick="getInfoCate(event)" href="#es-silver">
-            <img src="/Content/images/img-360/ex_Sleek_Silver.png" data-text="Bạc" alt="">
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" role="tab" data-bs-toggle="tab" data-text="Xanh" onclick="getInfoCate(event)" href="#es-blue">
-            <img src="/Content/images/img-360/ex_Night_Sky.png" data-text="Xanh" alt="">
-        </a>
-    </li>
+<ul class="experience_option nav flex-column img-360-btn-group">
+
 </ul>
 
-<div class="tab-content">
-    <div role="tabpanel" class="tab-pane active" id="es-sand">
-        @*<div class="btn-start" onclick="getListImg(event)">
-                <img src="/Content/images/btn_start.png" class="btn-start" alt="">
-            </div>*@
-        @*<img src="/Content/images/ex_xeb/es_0.png" alt="">*@
-    </div>
-    <div role="tabpanel" class="tab-pane" id="es-white">
-        Updating
+<div class="tab-content" id="content-360">
 
-    </div>
-    <div role="tabpanel" class="tab-pane" id="es-red">
-        Updating
-
-    </div>
-    <div role="tabpanel" class="tab-pane" id="es-silver">
-
-        Updating
-    </div>
-    <div role="tabpanel" class="tab-pane" id="es-blue">
-        Updating
-
-    </div>
 </div>
 <script>
-    //$(document).ready(function () {
-    //    $('#es-sand').rotate3d({
-    //        'source': '/Content/images/ex_xeb/es_',
-    //        'ext': '.png',
-    //        'count': 35,
-    //    });
-    //});
-
     @Html.Raw(variablesScript)
+</script>
+<script>
+    $(function () {
+        $(".experience_category a").click(function () {
+            if ($(this).attr("class") != "on") {
+                $(".experience_category a").removeClass("on");
+                $(this).addClass("on");
+                if ($(this).parent().attr("class") == "exterior")
+                    exteriorInit();
+                else
+                    interiorInit();
+            }
+            return false;
+        });
+        exteriorInit();
+    });
+    var iCount = iIntCount;
+    function interiorInit() {
+        $(".experience_option ul").empty();
+        for (var i = 1; i < iCount + 1; i++) {
+            $(".experience_option ul").append("<li class=\"i" + i + "\"><a code='" + arrInt[i - 1]["Code"] + "' href=\"#\" title='" + arrInt[i - 1]["NameVN"] + "'><img alt=\"abc\" src=\"" + expRoot + "/i" + i + ".gif\"></a></li>");
+        }
+        optionInit();
+        $(".experience_option li a").click(function () {
+            $(".experience_option li a").removeClass("on");
+            $(".experience_option li span").hide();
+            $(this).addClass("on");
+            if ($("span", $(this).parent()).length == 0)
+                $("<span><img src=\"/Content/images/cover_color.png\" /></span>").appendTo($(this).parent());
+            else
+                $("span", $(this).parent()).show();
+            carColor = $(this).parent().attr("class");
+            $(".experience_panoramabox").empty();
+            heii = $("#tempimage img").height();
+            widi = $("#tempimage img").width();
+
+            var folder = $(this).parent().attr('class');
+            pannellum.viewer('panorama', {
+                "type": "equirectangular",
+                "panorama": "" + expRoot + "/" + folder + "/isp.jpg",
+                "preview": "" + expRoot + "/" + folder + "/isp_thumb.jpg"
+            });
+
+            $('#panorama').height($('#panorama').width() / 2);
+
+            $('#panorama .pnlm-load-button p').remove();
+            $('#panorama .pnlm-load-button').append('<img src="/Content/images/btn_start2.png" alt="Start">');
+            $(".experience_option p").html("<img src='" + $("img", $(this)).attr("src") + "'/>&nbsp;" + $(this).attr("title"));
+            return false;
+            return false;
+        });
+        $(".experience_option li a:first").click();
+    }
+    var eCount = iExtCount;
+    function exteriorInit() {
+        $(".experience_option").empty();
+        $(".experience_option").append("<li class='nav-item' id='name-color'><img alt=\"\" src=\"" + colorRoot + "/ex_" + arrExt[0]["NameEN"].replace(/\s/g, "_") + ".png\"><span>" + arrExt[0]["NameVN"] + "</span></li>");
+        for (var i = 0; i < eCount; i++) {
+            if (i == 0) {
+                $(".experience_option").append("<li class='nav-item'><a class='nav-link active' aria-current='page' role = 'tab' data-bs-toggle='tab' data-text='" + arrExt[i]["NameVN"] + "' onclick = 'getInfoCate(event)' href = '#" + arrExt[i]["NameEN"].toLowerCase().replace(/\s/g, "_") + "' ><img src=\"" + colorRoot + "/ex_" + arrExt[i]["NameEN"].replace(/\s/g, "_") + ".png\" data-text='" + arrExt[i]["NameVN"] + "'></a></li >");
+                $("#content-360").append("<div role='tabpanel' class='tab-pane active' id='" + arrExt[i]["NameEN"].toLowerCase().replace(/\s/g, "_") + "'><div class= 'btn-start' onclick = 'getListImages(event,\"" + expRoot + "\",\"" + arrExt[i]["Code"] +"\")'><img src='" + colorRoot + "/btn_start.png' class='btn-start'></div><img src='" + expRoot + "/" + arrExt[i]["Code"] +"/es_0.png'></div>");
+            } else {
+                $(".experience_option").append("<li class='nav-item'><a class= 'nav-link' aria-current='page' role = 'tab' data-bs-toggle='tab' data - text='" + arrExt[i]["NameVN"] + "' onclick = 'getInfoCate(event)' href = '#" + arrExt[i]["NameEN"].toLowerCase().replace(/\s/g, "_") + "' ><img src=\"" + colorRoot + "/ex_" + arrExt[i]["NameEN"].replace(/\s/g, "_") + ".png\" data-text='" + arrExt[i]["NameVN"] + "'></a></li >");
+                $("#content-360").append("<div role='tabpanel' class='tab-pane' id='" + arrExt[i]["NameEN"].toLowerCase().replace(/\s/g, "_") + "'><div class= 'btn-start' onclick = 'getListImages(event,\"" + expRoot + "\",\"" + arrExt[i]["Code"] + "\")'><img src='" + colorRoot + "/btn_start.png' class='btn-start'></div><img src='" + expRoot + "/" + arrExt[i]["Code"] + "/es_0.png'></div>");
+            }
+        }
+        
+    }
+
+    function getListImages(e, expRoot, code) {
+        $(e.target).parent().next().hide();
+        $(e.target).parent().parent().rotate3d({
+            'source': expRoot + "/" + code + "/es_",
+            'ext': '.png',
+            'count': 35,
+        });
+        
+        $(e.target).hide();
+    }
 </script>

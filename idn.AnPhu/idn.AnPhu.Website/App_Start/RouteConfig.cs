@@ -54,6 +54,20 @@ namespace idn.AnPhu.Website
             );
 
             routes.MapRoute(
+                "news-cate",
+                "{culture}/tin-tuc/{shortname}/{page}",
+                new { culture = "vi", controller = "News", action = "ShowCateNews", shortname = UrlParameter.Optional, page = UrlParameter.Optional },
+                new[] { "idn.AnPhu.Website.Controllers" }
+            );
+
+            routes.MapRoute(
+                "news-details",
+                "{culture}/tin-tuc-chi-tiet/{id}",
+                new { culture = "vi", controller = "News", action = "Details", id = UrlParameter.Optional },
+                new[] { "idn.AnPhu.Website.Controllers" }
+            );
+
+            routes.MapRoute(
              "NetAdvImage",
              "{scriptPath}/tinymce/plugins/netadvimage/{action}",
              new { controller = "NetAdvImage" }

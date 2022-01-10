@@ -48,9 +48,9 @@ namespace idn.AnPhu.Website.Controllers
             ViewBag.ListProductReviews = ProductReviewsManager.GetAllActive(product.ProductId);
             #region["Gallery Products"]
 
-            var sRootGallery = "/UploadFiles/images/products/gallery/" + productCode + "/gallery/";
+            var sRootGallery = "~/UploadFiles/images/products/gallery/" + productCode + "/gallery/";
             if (!Directory.Exists(Server.MapPath(sRootGallery)))
-                sRootGallery = "/UploadFiles/images/products/gallery/" + productCode + "/";
+                sRootGallery = "~/UploadFiles/images/products/gallery/" + productCode + "/";
             var gaCat = "";
             var gaCatItem = "";
             var galleryCat = ServiceFactory.AppDicDomainManager.GetListAppDicDomainByItemCode("GALLERY_CAT");
@@ -173,7 +173,7 @@ namespace idn.AnPhu.Website.Controllers
 
             #endregion
             #region["Thong so ky thuat"]
-            var sFile = string.Format("~/tempfiles/uploads/products/html/{0}_{1}.htm", product.ProductCode.Replace('-', '_'), "spec");
+            var sFile = string.Format("~/UploadFiles/files/products/html/{0}_{1}.htm", product.ProductCode.Replace('-', '_'), "spec");
             var contentFile = StringUtils.File_Read(sFile);
             ViewBag.contentFile = !String.IsNullOrEmpty(contentFile) ? contentFile : "";
             #endregion

@@ -26,6 +26,8 @@ namespace idn.AnPhu.Biz.Persistance.SqlServer
             return EntityBase.ParseListFromTable<News>(table).FirstOrDefault();
         }
 
+
+
         public List<News> GetAll(int startIndex, int count, ref int totalItems)
         {
             DbCommand comm = this.GetCommand("Sp_News_GetAll");
@@ -42,6 +44,27 @@ namespace idn.AnPhu.Biz.Persistance.SqlServer
             comm.AddParameter<int>(this.Factory, "top", top);
             var table = this.GetTable(comm);
             table.TableName = TableName.News;
+
+            return EntityBase.ParseListFromTable<News>(table);
+        }
+
+        public List<News> SearchUsersSide(int newsCategoryId, int startIndex, int pageSize, ref int totalItems)
+        {
+            DbCommand comm = this.GetCommand("Sp_News_SearchByCate");
+            comm.AddParameter<int>(this.Factory, "newsCategoryId", newsCategoryId);
+            comm.AddParameter<int>(this.Factory, "startIndex", startIndex);
+            comm.AddParameter<int>(this.Factory, "count", pageSize);
+
+            DbParameter totalItemsParam = comm.AddParameter(this.Factory, "totalItems", DbType.Int32, null);
+            totalItemsParam.Direction = ParameterDirection.Output;
+
+            var table = this.GetTable(comm);
+            table.TableName = TableName.News;
+
+            if (totalItemsParam.Value != DBNull.Value)
+            {
+                totalItems = Convert.ToInt32(totalItemsParam.Value);
+            }
 
             return EntityBase.ParseListFromTable<News>(table);
         }
@@ -73,6 +96,7 @@ namespace idn.AnPhu.Biz.Persistance.SqlServer
             comm.AddParameter<string>(this.Factory, "newsTitle", (item.NewsTitle != null && item.NewsTitle.Trim().Length > 0) ? item.NewsTitle.Trim() : "");
             comm.AddParameter<string>(this.Factory, "newsSummary", (item.NewsSummary != null && item.NewsSummary.Trim().Length > 0) ? item.NewsSummary.Trim() : null);
             comm.AddParameter<string>(this.Factory, "newsBody", (item.NewsBody != null && item.NewsBody.Trim().Length > 0) ? item.NewsBody.Trim() : null);
+            comm.AddParameter<string>(this.Factory, "newsShortName", (item.NewsShortName != null && item.NewsShortName.Trim().Length > 0) ? item.NewsShortName.Trim() : null);
             comm.AddParameter<string>(this.Factory, "newsDescription", (item.NewsDescription != null && item.NewsDescription.Trim().Length > 0) ? item.NewsDescription.Trim() : null);
             comm.AddParameter<string>(this.Factory, "newsKeyword", (item.NewsKeyword != null && item.NewsKeyword.Trim().Length > 0) ? item.NewsKeyword.Trim() : null);
             comm.AddParameter<string>(this.Factory, "createBy", (item.CreateBy != null && item.CreateBy.Trim().Length > 0) ? item.CreateBy.Trim() : null);
@@ -99,6 +123,7 @@ namespace idn.AnPhu.Biz.Persistance.SqlServer
             comm.AddParameter<int>(this.Factory, "newsCategoryId", item.NewsCategoryId);
             comm.AddParameter<string>(this.Factory, "newsTitle", (item.NewsTitle != null && item.NewsTitle.Trim().Length > 0) ? item.NewsTitle.Trim() : "");
             comm.AddParameter<string>(this.Factory, "newsSummary", (item.NewsSummary != null && item.NewsSummary.Trim().Length > 0) ? item.NewsSummary.Trim() : null);
+            comm.AddParameter<string>(this.Factory, "newsShortName", (item.NewsShortName != null && item.NewsShortName.Trim().Length > 0) ? item.NewsShortName.Trim() : null);
             comm.AddParameter<string>(this.Factory, "newsBody", (item.NewsBody != null && item.NewsBody.Trim().Length > 0) ? item.NewsBody.Trim() : null);
             comm.AddParameter<string>(this.Factory, "newsDescription", (item.NewsDescription != null && item.NewsDescription.Trim().Length > 0) ? item.NewsDescription.Trim() : null);
             comm.AddParameter<string>(this.Factory, "newsKeyword", (item.NewsKeyword != null && item.NewsKeyword.Trim().Length > 0) ? item.NewsKeyword.Trim() : null);           

@@ -42,7 +42,7 @@ namespace idn.AnPhu.Website.Utils
                 return "";
             }
 
-            foreach (var sFile in Directory.GetFiles(HttpContext.Current.Server.MapPath(sRoot + "/" + sClass + "/"), "*_sum*.*"))
+            foreach (var sFile in Directory.GetFiles(HttpContext.Current.Server.MapPath(sRoot + sClass + "/"), "**.*"))
             {
                 var fileText = HttpContext.Current.Server.MapPath(sRoot + "/" + sClass + "/" + Path.GetFileNameWithoutExtension(sFile) + "l.txt");
                 if (File.Exists(fileText))

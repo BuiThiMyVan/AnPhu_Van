@@ -79,7 +79,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
             return View();
         }
 
-        [HttpPost]
+        [HttpPost, ValidateInput(false)]
         public ActionResult Create(News model)
         {
             var createBy = "";
@@ -90,8 +90,9 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
             }
             try
             {
+                model.NewsShortName = model.NewsTitle.ToUrlSegment(250).ToLower();
                 NewsManager.Add(model);
-                ViewBag.ListCategoriesNews = NewsCategoriesManager.GetAll();
+                ViewBag.ListCategoriesNews = NewsCategoriesManager.GetAll();               
                 ViewBag.message = "Thêm mới tin tức thành công";
                 return View(model);
             }
@@ -129,7 +130,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
                 return HttpNotFound();
             }
         }
-        [HttpPost]
+        [HttpPost, ValidateInput(false)]
         [ValidateAntiForgeryToken]
         public ActionResult Update(News model)
         {
@@ -139,6 +140,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
                 var news = NewsManager.Get(new News() { NewsId = model.NewsId });
                 if (news != null)
                 {
+                    model.NewsShortName = model.NewsTitle.ToUrlSegment(250).ToLower();
                     NewsManager.Update(model, news);
                     message = "Cập nhật tin tức thành công!";
                 }

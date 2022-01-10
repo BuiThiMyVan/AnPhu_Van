@@ -260,13 +260,11 @@
         // Initialize your tinyMCE Editor with your preferred options
         tinymce.init({
             selector: "#NewsBody",
+            plugins: 'code',
             init_instance_callback: function (editor) {
                 editor.on('input', function (e) {
                     var value = tinymce.get("NewsBody").getContent();
-                    var div = document.createElement("div");
-                    div.innerHTML = value;
-                    var text = div.textContent || div.innerText || "";
-                    $('#news_body').val(text);
+                    $('#news_body').val(value);
                 });
             }
         });

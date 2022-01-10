@@ -1,0 +1,218 @@
+﻿@using idn.AnPhu.Biz.Models
+@using Client.Core.Data.Entities.Paging;
+@model PageInfo<News>
+@{
+    ViewBag.Title = "ShowCateNews";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+    var listHotNews = ViewBag.NewsHot;
+}
+
+@section StyleSheet {
+<style>
+    .news-header {
+        padding: 20px 0;
+    }
+    .news-link {
+        color: white;
+        font-weight: 700;
+    }
+
+        .news-link:hover {
+            opacity: 1;
+            color: white;
+        }
+
+        .news-cate-item {
+            position: relative;
+        }
+
+    .news-cate-item > span {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    .header-list {
+        width: 100%;
+        text-align: center;
+        padding: 20px 0;
+    }
+
+    .header-text {       
+        font-size: 25px;
+    }
+
+    .col-md-3 {
+        width: 20% !important;
+    }
+
+    .news-title {
+        font-size: 18px;
+        color: #333;
+        font-weight: 700;
+    }
+
+        .news-title:hover {
+            opacity: 0.8;
+            color: #337ab7;
+        }
+
+        .news-info {
+            font-size: 13px;
+            color: #333;
+        }
+
+    .hot-news-item {
+        padding: 10px 0;
+    }
+
+        .hot-news-item a {
+            color: #337ab7;
+        }
+
+            .hot-news-item a:hover {
+                color: #337ab7;
+                opacity: 0.8;
+            }
+
+            .hot-news-item span {
+                font-size: 15px !important;
+                text-transform: uppercase;
+            }
+
+    .head-news {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 24px;
+    }
+
+    .paginate {
+        display: flex;
+    }
+
+        .paginate .item-page a {
+            font-weight: 700;
+            color: #034A84;
+            padding: 9px 18px;
+        }
+
+            .paginate .item-page a:hover {
+                color: #fff;
+                background-color: #034A84;
+            }
+    .active-page {
+        color: #fff !important;
+        background-color: #034A84;
+    }
+</style>
+    }
+
+<div class="container">
+    <div class="news-header row">
+        <a href="#" class="news-link col-xs-6 col-md-3">
+            <div class="news-cate-item">
+                <img src="~/Content/images/img_blogs_1.jpg" />
+                <span>Tin tức chung</span>
+            </div>
+        </a>
+        <a href="#" class="news-link col-xs-6 col-md-3">
+            <div class="news-cate-item">
+                <img src="~/Content/images/img_blogs_2.jpg" />
+                <span>Tin khuyến mãi</span>
+            </div>
+        </a>
+        <a href="#" class="news-link col-xs-6 col-md-3">
+            <div class="news-cate-item">
+                <img src="~/Content/images/img_blogs_3.jpg" />
+                <span>Tin tuyển dụng</span>
+            </div>
+        </a>
+        <a href="#" class="news-link col-xs-6 col-md-3">
+            <div class="news-cate-item">
+                <img src="~/Content/images/img_blogs_3.jpg" />
+                <span>Tin dịch vụ</span>
+            </div>
+        </a>
+        <a href="#" class="news-link col-xs-6 col-md-3">
+            <div class="news-cate-item">
+                <img src="~/Content/images/img_blogs_5.jpg" />
+                <span>Hỏi đáp</span>
+            </div>
+        </a>
+    </div>
+    <div>
+        <div class="header-list">
+            <span class="header-text">@ViewBag.NewsCategoryTitle</span>
+        </div>
+        <div class="row" style="margin-top: 40px;">            
+            <div class="col-md-8 col-xs-12">
+                @foreach (News item in Model.DataList)
+                {
+                    <a href="/vi/tin-tuc-chi-tiet/@item.NewsId">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <img src="@item.NewsImage" alt="@item.NewsShortName" />
+                            </div>
+                            <div class="col-md-8">
+                                <div class="news-title">@item.NewsTitle</div>
+                                <div class="news-info">@item.NewsCategoryTitle, @item.CreateDateFormat</div>
+                                <div class="news-info">@item.NewsSummary</div>
+                            </div>
+                        </div>
+
+                    </a>
+                }
+            </div>
+            <div class="col-md-4 col-xs-12">
+                <div class="head-news"><span class="header-text" style="font-size: 20px">@ViewBag.NewsCategoryTitle</span></div>
+                @if (listHotNews != null)
+                {
+                    foreach (News hotnews in listHotNews)
+                    {
+                        <div class="hot-news-item">
+                            <img src="@hotnews.NewsImage" alt="Alternate Text" />
+                            <a><span>@hotnews.NewsTitle</span></a>
+                        </div>
+                    }
+                }
+
+            </div>
+        </div>
+        <ul class="paginate">
+            @if (Model.PageIndex > 0)
+            {
+                <li class="item-page"><a href="/vi/tin-tuc/@ViewBag.NewsCategoryShortName/@(Model.PageIndex - 1)"><<</a></li>
+            }
+            @for (int i = 0; i < Model.PageCount; i++)
+            {
+                if (i == Model.PageIndex)
+                {
+                    <li class="item-page"><a class="active-page" href="/vi/tin-tuc/@ViewBag.NewsCategoryShortName/@i">@(i + 1)</a></li>
+                }
+
+
+            }
+            @if (Model.PageIndex + 1 < Model.PageCount)
+            {
+                <li class="item-page"><a href="/vi/tin-tuc/@ViewBag.NewsCategoryShortName/@(Model.PageIndex + 1)">>></a></li>
+            }
+
+        </ul>
+    </div>
+</div>
+<script>
+    //var pagination = $('.paginate li a');
+    //jQuery.each(pagination, function (i, val) {
+
+    //    $(pagination[i]).on('click', function () {
+    //        jQuery.each(pagination, function (i, val) {
+    //            $(pagination[i]).removeClass('active-page');
+
+    //        }
+    //        $(this).addClass('active-page');
+    //    })
+    //});
+</script>
+

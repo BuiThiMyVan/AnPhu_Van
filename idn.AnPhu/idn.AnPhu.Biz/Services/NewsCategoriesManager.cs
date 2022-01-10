@@ -31,6 +31,11 @@ namespace idn.AnPhu.Biz.Services
             return NewsCategoriesProvider.GetAll(0, 0, ref total);
         }
 
+        public NewsCategories GetByShortName(string shortName)
+        {
+            return NewsCategoriesProvider.GetByShortName(shortName);
+        }
+
         public List<NewsCategories> GetAllActive()
         {
             return NewsCategoriesProvider.GetAllActive();

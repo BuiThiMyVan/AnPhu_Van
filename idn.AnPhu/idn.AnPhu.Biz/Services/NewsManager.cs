@@ -42,6 +42,18 @@ namespace idn.AnPhu.Biz.Services
             base.Add(item);
         }
 
+        public PageInfo<News> SearchUsersSide(int newsCategoryId, int page)
+        {
+            var pageSize = 6;
+            int totalItems = 0;
+            var pageInfo = new PageInfo<News>(page, pageSize);
+            var startIndex = page * pageSize;
+            pageInfo.DataList = NewsProvider.SearchUsersSide(newsCategoryId, startIndex, pageSize, ref totalItems);
+            pageInfo.ItemCount = totalItems;
+            return pageInfo;
+            //return NewsProvider.SearchUsersSide(newsCategoryId, page, pageSize, ref totalItems);
+        }
+
         public PageInfo<News> Search(string txtSearch, int pageIndex, int pageSize)
         {
             int totalItems = 0;

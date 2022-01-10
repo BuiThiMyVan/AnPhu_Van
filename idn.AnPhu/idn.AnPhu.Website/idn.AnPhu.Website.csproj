@@ -26,7 +26,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <TypeScriptToolsVersion>4.3</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>4.2</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -164,6 +164,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NetAdvImageController.cs" />
+    <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Data\DataWrapper.cs" />
     <Compile Include="Extensions\HtmlExtensions.cs" />
@@ -1155,6 +1156,10 @@
     <Content Include="Content\images\img-360\ex_Noble_White.png" />
     <Content Include="Content\images\img-360\ex_Ruby_wine.png" />
     <Content Include="Content\images\img-360\ex_Sleek_Silver.png" />
+    <Content Include="Content\images\img_blogs_1.jpg" />
+    <Content Include="Content\images\img_blogs_2.jpg" />
+    <Content Include="Content\images\img_blogs_3.jpg" />
+    <Content Include="Content\images\img_blogs_5.jpg" />
     <Content Include="Content\images\interior_driving-space_01.jpg" />
     <Content Include="Content\images\interior_driving-space_02.jpg" />
     <Content Include="Content\images\interior_driving-space_03.jpg" />
@@ -3257,6 +3262,9 @@
     <Content Include="Views\Shared\NavBar_Mobile.cshtml" />
     <Content Include="Views\Shared\GalleryProduct.cshtml" />
     <Content Include="Views\Shared\Product360.cshtml" />
+    <Content Include="Views\Shared\SpecProduct.cshtml" />
+    <Content Include="Views\News\ShowCateNews.cshtml" />
+    <Content Include="Views\News\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

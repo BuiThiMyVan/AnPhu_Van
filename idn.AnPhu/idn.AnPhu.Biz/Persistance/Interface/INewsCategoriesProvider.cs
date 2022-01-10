@@ -12,6 +12,8 @@ namespace idn.AnPhu.Biz.Persistance.Interface
     {
         List<NewsCategories> Search(string txtSearch, int startIndex, int pageCount, ref int totalItems);
 
+        NewsCategories GetByShortName(string shortName);
+
         List<NewsCategories> GetAllActive();
     }
 }

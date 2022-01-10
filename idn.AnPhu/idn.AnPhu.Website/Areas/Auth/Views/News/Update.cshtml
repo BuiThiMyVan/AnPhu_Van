@@ -196,8 +196,8 @@
                     </label>
 
                     <div class="col-sm-9 box-input">
-                        <input type="hidden" name="NewsBody" id="news_body" />
-                        <textarea type="text" id="NewsBody" rows="2" class="col-xs-12 col-sm-6" oninput="validateEmpty(event)">@Model.NewsBody</textarea>
+                        <input type="hidden" name="NewsBody" id="news_body" value="@Model.NewsBody" />
+                        <textarea type="text" id="NewsBody" rows="2" class="col-xs-12 col-sm-6" oninput="validateEmpty(event)">@MvcHtmlString.Create(Model.NewsBody)</textarea>
                         <div class="text-danger"></div>
                     </div>
                 </div>
@@ -271,13 +271,11 @@
         // Initialize your tinyMCE Editor with your preferred options
         tinymce.init({
             selector: "#NewsBody",
+            plugins: 'code',
             init_instance_callback: function (editor) {
                 editor.on('input', function (e) {
                     var value = tinymce.get("NewsBody").getContent();
-                    var div = document.createElement("div");
-                    div.innerHTML = value;
-                    var text = div.textContent || div.innerText || "";
-                    $('#news_body').val(text);
+                    $('#news_body').val(value);
                 });
             }
         });

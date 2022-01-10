@@ -83,6 +83,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
                     createBy = CUtils.StrTrim(UserState.UserName);
                 }
                 model.CreateBy = createBy;
+                model.NewsCategoryShortName = model.NewsCategoryTitle.ToUrlSegment(250).ToLower();
                 NewsCategoriesManager.Add(model);
                 ViewBag.ListCategoriesNews = NewsCategoriesManager.GetAll();
                 ViewBag.message = "Tạo mới danh mục tin tức thành công!";
@@ -128,6 +129,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
                 var newsCategories = NewsCategoriesManager.Get(new NewsCategories() { NewsCategoryId = model.NewsCategoryId });
                 if (newsCategories != null)
                 {
+                    newsCategories.NewsCategoryShortName = newsCategories.NewsCategoryTitle.ToUrlSegment(250).ToLower();
                     NewsCategoriesManager.Update(model, newsCategories);
                     message = "Cập nhật thông tin danh mục thành công!";
                 }
