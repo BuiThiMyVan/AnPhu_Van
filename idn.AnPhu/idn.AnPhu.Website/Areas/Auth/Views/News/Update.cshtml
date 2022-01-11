@@ -238,9 +238,9 @@
 
                     <div class="checkbox">
                         <label>
-                            <input name="IsActive" type="checkbox" class="ace" value="true" @hot>
+                            <input name="IsHotNews" type="checkbox" class="ace" value="true" @hot>
                             <span class="lbl"> Bài viết nổi bật</span>
-                            <input name="IsActive" type="hidden" value="false" />
+                            <input name="IsHotNews" type="hidden" value="false" />
                         </label>
                     </div>
                 </div>
@@ -315,6 +315,8 @@
             if (bug > 0) {
                 e.preventDefault();
             } else {
+                var value = tinymce.get("NewsBody").getContent();
+                $('#news_body').val(value);
                 return true;
             }
         }

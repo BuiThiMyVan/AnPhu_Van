@@ -1,4 +1,10 @@
-﻿        <!-- CONTACT -->
+﻿@using idn.AnPhu.Biz.Models
+
+@{
+    var imageFooter = idn.AnPhu.Biz.Services.ServiceFactory.ImageFootersManager.GetTop(4);
+    var news = idn.AnPhu.Biz.Services.ServiceFactory.NewsManager.GetHot(3);
+}
+<!-- CONTACT -->
 <div class="contact mt32">
     <div>Đăng ký để nhận tin từ Hyundai An Phú</div>
     <input type="text" placeholder="Nhập địa chỉ Email">
@@ -23,42 +29,30 @@
                     <div class="content-item-title">
                         HÌNH ẢNH
                     </div>
-                    <div class="content-item-img">
-                        <img src="/Content/images/181218_Gioi-thieu-showroom.jpg" alt="">
-                    </div>
+                    @foreach (ImageFooters image in imageFooter)
+                    {
+                        <div class="content-item-img">
+                            <img src="@image.Image">
+                        </div>
+                    }
                 </div>
                 <div class="col-md-3 col-12 content-item">
                     <div class="content-item-title">
                         BÀI VIẾT GẦN ĐÂY
                     </div>
-                    <div class="row content-item-post">
-                        <div class="col-md-4 col-3 post-img">
-                            <img src="/Content/images/bv1.jpg" alt="">
-                        </div>
+                    @foreach (News newsItem in news)
+                    {
+                        <a href="/vi/tin-tuc-chi-tiet/@newsItem.NewsId" class="row content-item-post">
+                            <div class="col-md-4 col-3 post-img">
+                                <img src="@newsItem.NewsImage" alt="">
+                            </div>
 
-                        <div class="col-md-8 col-9 post-link">
-                            <span>🚘 CHƯƠNG TRÌNH GIA HẠN BẢO HÀNH “H...</span>
-                            <span class="post-date">17/04/2020</span>
-                        </div>
-                    </div>
-                    <div class="row content-item-post">
-                        <div class="col-md-4 col-3 post-img">
-                            <img src="/Content/images/bv2.jpg" alt="">
-                        </div>
-                        <div class="col-md-8 col-9 post-link">
-                            <span>🔥 KHỞI SẮC ROADSHOW THÁNG 06 TẠI H...</span>
-                            <span class="post-date">13/06/2020</span>
-                        </div>
-                    </div>
-                    <div class="row content-item-post">
-                        <div class="col-md-4 col-3 post-img">
-                            <img src="/Content/images/bv3.jpg" alt="">
-                        </div>
-                        <div class="col-md-8 col-9 post-link">
-                            <span>🏆 ĐÓN XE SANG CÙNG HYUNDAI AN PHÚ ...</span>
-                            <span class="post-date">12/06/2020</span>
-                        </div>
-                    </div>
+                            <div  class="col-md-8 col-9 post-link">
+                                <span style="text-overflow: ellipsis;overflow: hidden;display: -webkit-box !important;-webkit-line-clamp: 2;-webkit-box-orient: vertical;white-space: normal;">@newsItem.NewsTitle</span>
+                                <span class="post-date">@newsItem.CreateDateFormat</span>
+                            </div>
+                        </a>
+                    }
                 </div>
                 <div class="col-md-3 col-12 content-item">
                     <div class="content-item-title">
@@ -142,9 +136,9 @@
                 <span class="chat-box-message">Chat với chúng tôi</span>
             </div>
             <div class="chat-box-body display-none">
-                <input type="text" class="chat-text" placeholder="Mời bạn nhập Tên"/>
-                <input type="text" class="chat-text" placeholder="Mời bạn nhập Email"/>
-                <input type="text" class="chat-text" placeholder="Mời bạn nhập số điện thoại"/>
+                <input type="text" class="chat-text" placeholder="Mời bạn nhập Tên" />
+                <input type="text" class="chat-text" placeholder="Mời bạn nhập Email" />
+                <input type="text" class="chat-text" placeholder="Mời bạn nhập số điện thoại" />
                 <textarea name="" id="" class="chat-text question-input" cols="1" rows="2"></textarea>
                 <div class="line"></div>
                 <button class="btn-send-message">Gửi tin nhắn</button>

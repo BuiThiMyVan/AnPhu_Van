@@ -163,6 +163,7 @@
     <Compile Include="Controllers\AdministratorController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HtmlPagesController.cs" />
     <Compile Include="Controllers\NetAdvImageController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
@@ -1208,6 +1209,7 @@
     <Content Include="Content\images\nt0nb17.jpg" />
     <Content Include="Content\images\phone-ring.png" />
     <Content Include="Content\images\pro-cate-1.png" />
+    <Content Include="Content\images\slide-1.jpg" />
     <Content Include="Content\images\tien1.jpg" />
     <Content Include="Content\images\tien2.jpg" />
     <Content Include="Content\images\tien3.jpg" />
@@ -3265,6 +3267,7 @@
     <Content Include="Views\Shared\SpecProduct.cshtml" />
     <Content Include="Views\News\ShowCateNews.cshtml" />
     <Content Include="Views\News\Details.cshtml" />
+    <Content Include="Views\HtmlPages\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

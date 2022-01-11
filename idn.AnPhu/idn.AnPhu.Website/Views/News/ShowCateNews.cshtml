@@ -106,36 +106,71 @@
         color: #fff !important;
         background-color: #034A84;
     }
+
+    .news-item {
+        display: inline-block;
+        margin-top: 50px;
+    }
+
+    .hot-news-item {
+        display: inline-block;
+        color: #337ab7;
+    }
+
+    .hot-news-item:hover {
+        cursor: pointer;
+    }
+
+    .header-text {
+        border-bottom: none;
+    }
+
+    .news-line {
+        width: 28px;
+        border-bottom: 3px solid var(--main-color);
+        margin: auto;
+    }
+
+    .page-disable a:hover {
+        cursor: not-allowed !important;
+        background-color: #fff !important;
+        color: #034A84 !important;
+    }
+
+    .page-prev a,
+    .page-next a {
+        font-size: 10px;
+    }
 </style>
     }
 
 <div class="container">
     <div class="news-header row">
-        <a href="#" class="news-link col-xs-6 col-md-3">
+        <a href="/vi/tin-tuc/tin-tuc-chung/0" class="news-link col-xs-6 col-md-3">
             <div class="news-cate-item">
                 <img src="~/Content/images/img_blogs_1.jpg" />
                 <span>Tin tức chung</span>
             </div>
         </a>
-        <a href="#" class="news-link col-xs-6 col-md-3">
+        <a href="/vi/tin-tuc/tin-khuyen-mai/0" class="news-link col-xs-6 col-md-3">
             <div class="news-cate-item">
                 <img src="~/Content/images/img_blogs_2.jpg" />
                 <span>Tin khuyến mãi</span>
             </div>
         </a>
-        <a href="#" class="news-link col-xs-6 col-md-3">
+        <a href="/vi/tin-tuc/tin-tuyen-dung/0" class="news-link col-xs-6 col-md-3">
             <div class="news-cate-item">
                 <img src="~/Content/images/img_blogs_3.jpg" />
                 <span>Tin tuyển dụng</span>
             </div>
         </a>
-        <a href="#" class="news-link col-xs-6 col-md-3">
+        <a href="/vi/tin-tuc/tin-dich-vu/0" class="news-link col-xs-6 col-md-3">
             <div class="news-cate-item">
                 <img src="~/Content/images/img_blogs_3.jpg" />
                 <span>Tin dịch vụ</span>
             </div>
         </a>
-        <a href="#" class="news-link col-xs-6 col-md-3">
+        <a href="/vi/tin-tuc/hoi-dap/0" class="news-link col-xs-6 col-md-3">
             <div class="news-cate-item">
                 <img src="~/Content/images/img_blogs_5.jpg" />
                 <span>Hỏi đáp</span>
@@ -145,15 +180,16 @@
     <div>
         <div class="header-list">
             <span class="header-text">@ViewBag.NewsCategoryTitle</span>
+            <div class="news-line"></div>
         </div>
         <div class="row" style="margin-top: 40px;">            
             <div class="col-md-8 col-xs-12">
                 @foreach (News item in Model.DataList)
                 {
-                    <a href="/vi/tin-tuc-chi-tiet/@item.NewsId">
+                    <a href="/vi/tin-tuc-chi-tiet/@item.NewsId" class="news-item">
                         <div class="row">
-                            <div class="col-md-4">
-                                <img src="@item.NewsImage" alt="@item.NewsShortName" />
+                            <div class="col-md-4" style="height: 110px;">
+                                <img src="@item.NewsImage" alt="@item.NewsShortName" height="100%"/>
                             </div>
                             <div class="col-md-8">
                                 <div class="news-title">@item.NewsTitle</div>
@@ -166,15 +202,15 @@
                 }
             </div>
             <div class="col-md-4 col-xs-12">
-                <div class="head-news"><span class="header-text" style="font-size: 20px">@ViewBag.NewsCategoryTitle</span></div>
+                <div class="head-news"><span class="header-text" style="font-size: 20px">Tin nổi bật</span><div class="news-line"></div></div>
                 @if (listHotNews != null)
                 {
                     foreach (News hotnews in listHotNews)
                     {
-                        <div class="hot-news-item">
-                            <img src="@hotnews.NewsImage" alt="Alternate Text" />
-                            <a><span>@hotnews.NewsTitle</span></a>
-                        </div>
+                        <a class="hot-news-item" href="/vi/tin-tuc-chi-tiet/@hotnews.NewsId">
+                            <img src="@hotnews.NewsImage" alt="Alternate Text" height="196" />
+                            <span>@hotnews.NewsTitle</span>
+                        </a>
                     }
                 }
 
@@ -183,7 +219,11 @@
         <ul class="paginate">
             @if (Model.PageIndex > 0)
             {
-                <li class="item-page"><a href="/vi/tin-tuc/@ViewBag.NewsCategoryShortName/@(Model.PageIndex - 1)"><<</a></li>
+                <li class="item-page page-prev"><a href="/vi/tin-tuc/@ViewBag.NewsCategoryShortName/@(Model.PageIndex - 1)"><<</a></li>
+            }
+            else
+            {
+                <li class="item-page page-prev page-disable"><a href="#"><<</a></li>
             }
             @for (int i = 0; i < Model.PageCount; i++)
             {
@@ -196,7 +236,11 @@
             }
             @if (Model.PageIndex + 1 < Model.PageCount)
             {
-                <li class="item-page"><a href="/vi/tin-tuc/@ViewBag.NewsCategoryShortName/@(Model.PageIndex + 1)">>></a></li>
+                <li class="item-page page-next"><a href="/vi/tin-tuc/@ViewBag.NewsCategoryShortName/@(Model.PageIndex + 1)">>></a></li>
+            }
+            else
+            {
+                <li class="item-page page-next page-disable"><a href="#">>></a></li>
             }
 
         </ul>

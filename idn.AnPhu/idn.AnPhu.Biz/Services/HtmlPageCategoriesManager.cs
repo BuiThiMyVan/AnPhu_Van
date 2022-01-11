@@ -31,7 +31,7 @@ namespace idn.AnPhu.Biz.Services
             return HtmlPageCategoriesProvider.GetAll(0, 0, ref total);
         }
 
-        public List<HtmlPageCategories> GetAllActiveByShortName(string shortname)
+        public HtmlPageCategories GetAllActiveByShortName(string shortname)
         {
             return HtmlPageCategoriesProvider.GetAllActiveByShortName(shortname);
         }

@@ -3,19 +3,22 @@
 @{
     Layout = null;
     var listNewsCate = idn.AnPhu.Biz.Services.ServiceFactory.NewsCategoriesManager.GetAllActive();
-    var services = idn.AnPhu.Biz.Services.ServiceFactory.HtmlPageCategoriesManager.GetAllActiveByShortName("dich-vu");
+    var service = idn.AnPhu.Biz.Services.ServiceFactory.HtmlPageCategoriesManager.GetAllActiveByShortName("dich-vu");
+    var services = idn.AnPhu.Biz.Services.ServiceFactory.HtmlPagesManager.GetHtmlPageByCateId(service.HtmlPageCategoryId);
+    var buycar = idn.AnPhu.Biz.Services.ServiceFactory.HtmlPageCategoriesManager.GetAllActiveByShortName("mua-xe");
+    var buycars = idn.AnPhu.Biz.Services.ServiceFactory.HtmlPagesManager.GetHtmlPageByCateId(buycar.HtmlPageCategoryId);
     var listPrdCate = idn.AnPhu.Biz.Services.ServiceFactory.PrdCategoriesManager.GetAllActive();
 }
 
 <header id="header">
     <ul id="nav">
         <li class="huyndai-logo">
-            <a href="#">
+            <a href="/Home/Index">
                 <img src="/Content/images/hyundai-logo.png" id="huyndai-logo" alt="">
             </a>
         </li>
         <li>
-            <a href="#">Giới thiệu</a>
+            <a href="/vi/trang-tinh/gioi-thieu-chung">Giới thiệu</a>
         </li>
         <li class="nav-menu-sp">
             <a href="#">Sản phẩm</a>
@@ -44,10 +47,14 @@
         <li>
             <a href="#">Dịch vụ</a>
             <ul class="subnav display-none js-subnav-item">
-                <li><a href="#">Chăm sóc khách hàng</a></li>
-                <li><a href="#">Hướng dẫn bảo hành</a></li>
-                <li><a href="#">Bảo dưỡng định kỳ</a></li>
-                <li><a href="#">Phụ tùng & phụ kiện</a></li>
+                @if (services != null)
+                {
+                    foreach (HtmlPages serv in services)
+                    {
+                        <li><a href="/vi/trang-tinh/@serv.HtmlPageShortName">@serv.HtmlPageTitle</a></li>
+                    }
+
+                }
             </ul>
         </li>
         <li>
@@ -60,17 +67,21 @@
         <li>
             <a href="#">Mua xe</a>
             <ul class="subnav display-none js-subnav-item">
-                <li><a href="#">Bảng giá</a></li>
-                <li><a href="#">Dự toán chi phí</a></li>
-                <li><a href="#">Hỗ trợ trả góp</a></li>
-                <li><a href="#">Hướng dẫn thủ tục</a></li>
+                @if (buycars != null)
+                {
+                    foreach (HtmlPages buyca in buycars)
+                    {
+                        <li><a href="/vi/trang-tinh/@buyca.HtmlPageShortName">@buyca.HtmlPageTitle</a></li>
+                    }
+
+                }
             </ul>
         </li>
         <li>
             <a href="#">Liên hệ</a>
         </li>
         <li class="daily-logo">
-            <a href="#">
+            <a href="/Home/Index">
                 <img src="/Content/images/daily-logo.png" id="daily-logo" alt="">
             </a>
         </li>

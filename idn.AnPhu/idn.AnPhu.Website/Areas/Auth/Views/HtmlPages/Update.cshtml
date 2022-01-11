@@ -187,7 +187,7 @@
 
                     <div class="col-sm-9 box-input">
                         <input type="hidden" name="HtmlPageBody" id="htmlpage_body" value="@Model.HtmlPageBody" />
-                        <textarea type="text" id="HtmlPageBody" rows="2" class="col-xs-12 col-sm-6" oninput="validateEmpty(event)">@Model.HtmlPageBody</textarea>
+                        <textarea type="text" id="HtmlPageBody" rows="2" class="col-xs-12 col-sm-6" oninput="validateEmpty(event)">@MvcHtmlString.Create(Model.HtmlPageBody)</textarea>
                         <div class="text-danger"></div>
                     </div>
                 </div>
@@ -231,13 +231,11 @@
         // Initialize your tinyMCE Editor with your preferred options
         tinymce.init({
             selector: "#HtmlPageBody",
+            plugins: 'code',
             init_instance_callback: function (editor) {
                 editor.on('input', function (e) {
                     var value = tinymce.get("HtmlPageBody").getContent();
-                    var div = document.UpdateElement("div");
-                    div.innerHTML = value;
-                    var text = div.textContent || div.innerText || "";
-                    $('#htmlpage_body').val(text);
+                    $('#htmlpage_body').val(value);
                 });
             }
         });
@@ -285,6 +283,8 @@
             if (bug > 0) {
                 e.preventDefault();
             } else {
+                var value = tinymce.get("HtmlPageBody").getContent();
+                $('#htmlpage_body').val(value);
                 return true;
             }
         }

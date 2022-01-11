@@ -46,6 +46,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
             }
             try
             {
+                model.HtmlPageCategoryShortName = model.HtmlPageCategoryTitle.ToUrlSegment(250).ToLower();
                 HtmlPageCategoriesManager.Add(model);
                 ViewBag.message = "Thêm mới danh mục trang tĩnh thành công";
                 ViewBag.ListCategories = HtmlPageCategoriesManager.GetAll();
@@ -95,6 +96,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
                 var HtmlPageCategories = HtmlPageCategoriesManager.Get(new HtmlPageCategories() { HtmlPageCategoryId = model.HtmlPageCategoryId });
                 if (HtmlPageCategories != null)
                 {
+                    model.HtmlPageCategoryShortName = model.HtmlPageCategoryTitle.ToUrlSegment(250).ToLower();
                     HtmlPageCategoriesManager.Update(model, HtmlPageCategories);
                     message = "Cập nhật danh mục trang tĩnh thành công!";
                 }

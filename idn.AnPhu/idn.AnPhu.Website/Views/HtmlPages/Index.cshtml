@@ -1,0 +1,12 @@
+﻿@using idn.AnPhu.Biz.Models
+@model HtmlPages
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+<div class="container">
+    @MvcHtmlString.Create(Model.HtmlPageBody)
+</div>
+
+

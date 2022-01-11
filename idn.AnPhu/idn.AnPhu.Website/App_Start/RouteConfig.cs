@@ -68,6 +68,13 @@ namespace idn.AnPhu.Website
             );
 
             routes.MapRoute(
+                "html-pages",
+                "{culture}/trang-tinh/{shortname}",
+                new { culture = "vi", controller = "HtmlPages", action = "Index", shortname = UrlParameter.Optional },
+                new[] { "idn.AnPhu.Website.Controllers" }
+            );
+
+            routes.MapRoute(
              "NetAdvImage",
              "{scriptPath}/tinymce/plugins/netadvimage/{action}",
              new { controller = "NetAdvImage" }

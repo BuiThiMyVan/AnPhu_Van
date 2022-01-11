@@ -24,6 +24,11 @@ namespace idn.AnPhu.Biz.Services
             }
         }
 
+        public HtmlPages GetByShortName(string shortName)
+        {
+            return HtmlPagesProvider.GetByShortName(shortName);
+        }
+
         public List<HtmlPages> GetAll()
         {
             int total = 0;

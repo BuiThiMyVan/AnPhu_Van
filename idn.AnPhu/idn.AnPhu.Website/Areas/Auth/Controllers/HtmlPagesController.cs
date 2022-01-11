@@ -42,7 +42,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
                 return View();
             }
 
-            [HttpPost]
+            [HttpPost, ValidateInput(false)]
             public ActionResult Create(HtmlPages model)
             {
                 var createBy = "";
@@ -53,6 +53,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
                 }
                 try
                 {
+                    model.HtmlPageShortName = model.HtmlPageTitle.ToUrlSegment(250).ToLower();
                     HtmlPagesManager.Add(model);
                     ViewBag.message = "Thêm mới  trang tĩnh thành công";
                     ViewBag.ListCategories = HtmlPageCategoriesManager.GetAll();
@@ -93,7 +94,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
                     return HttpNotFound();
                 }
             }
-            [HttpPost]
+            [HttpPost, ValidateInput(false)]
             [ValidateAntiForgeryToken]
             public ActionResult Update(HtmlPages model)
             {
@@ -103,6 +104,7 @@ namespace idn.AnPhu.Website.Areas.Auth.Controllers
                     var HtmlPages = HtmlPagesManager.Get(new HtmlPages() { HtmlPageId = model.HtmlPageId });
                     if (HtmlPages != null)
                     {
+                        model.HtmlPageShortName = model.HtmlPageTitle.ToUrlSegment(250).ToLower();
                         HtmlPagesManager.Update(model, HtmlPages);
                         message = "Cập nhật  trang tĩnh thành công!";
                     }

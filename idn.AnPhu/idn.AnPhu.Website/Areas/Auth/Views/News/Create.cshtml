@@ -317,6 +317,8 @@
             if (bug > 0) {
                 e.preventDefault();
             } else {
+                var value = tinymce.get("NewsBody").getContent();
+                $('#news_body').val(value);
                 return true;
             }
         }

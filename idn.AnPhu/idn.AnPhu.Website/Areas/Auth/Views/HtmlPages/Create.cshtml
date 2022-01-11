@@ -214,13 +214,11 @@
         // Initialize your tinyMCE Editor with your preferred options
         tinymce.init({
             selector: "#HtmlPageBody",
+            plugins: 'code',
             init_instance_callback: function (editor) {
                 editor.on('input', function (e) {
                     var value = tinymce.get("HtmlPageBody").getContent();
-                    var div = document.createElement("div");
-                    div.innerHTML = value;
-                    var text = div.textContent || div.innerText || "";
-                    $('#htmlpage_body').val(text);
+                    $('#htmlpage_body').val(value);
                 });
             }
         });
@@ -268,6 +266,8 @@
             if (bug > 0) {
                 e.preventDefault();
             } else {
+                var value = tinymce.get("HtmlPageBody").getContent();
+                $('#htmlpage_body').val(value);
                 return true;
             }
         }

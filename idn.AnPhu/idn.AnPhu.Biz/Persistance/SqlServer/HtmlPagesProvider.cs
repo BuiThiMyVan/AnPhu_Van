@@ -25,6 +25,17 @@ namespace idn.AnPhu.Biz.Persistance.SqlServer
             return EntityBase.ParseListFromTable<HtmlPages>(table).FirstOrDefault();
         }
 
+        public HtmlPages GetByShortName(string shortName)
+        {
+            DbCommand comm = this.GetCommand("Sp_HtmlPages_GetByShortName");
+
+            comm.AddParameter<string>(this.Factory, "shortName", shortName);
+
+            var table = this.GetTable(comm);
+            table.TableName = TableName.HtmlPages;
+            return EntityBase.ParseListFromTable<HtmlPages>(table).FirstOrDefault();
+        }
+
         public List<HtmlPages> GetAll(int startIndex, int count, ref int totalItems)
         {
             DbCommand comm = this.GetCommand("Sp_HtmlPages_GetAll");
@@ -50,6 +61,7 @@ namespace idn.AnPhu.Biz.Persistance.SqlServer
         {
             DbCommand comm = this.GetCommand("Sp_HtmlPages_Create");
             comm.AddParameter<string>(this.Factory, "HtmlPageTitle", (item.HtmlPageTitle != null && item.HtmlPageTitle.Trim().Length > 0) ? item.HtmlPageTitle.Trim() : "");
+            comm.AddParameter<string>(this.Factory, "HtmlPageShortName", (item.HtmlPageShortName != null && item.HtmlPageShortName.Trim().Length > 0) ? item.HtmlPageShortName.Trim() : "");
             comm.AddParameter<string>(this.Factory, "HtmlPageBody", (item.HtmlPageBody != null && item.HtmlPageBody.Trim().Length > 0) ? item.HtmlPageBody.Trim() : "");
             comm.AddParameter<string>(this.Factory, "HtmlPageImage", (item.HtmlPageImage != null && item.HtmlPageImage.Trim().Length > 0) ? item.HtmlPageImage.Trim() : "");
             comm.AddParameter<string>(this.Factory, "HtmlPageDescription", (item.HtmlPageDescription != null && item.HtmlPageDescription.Trim().Length > 0) ? item.HtmlPageDescription.Trim() : "");
@@ -72,6 +84,7 @@ namespace idn.AnPhu.Biz.Persistance.SqlServer
             if (comm == null) return;
             comm.AddParameter<int>(this.Factory, "HtmlPageId", item.HtmlPageId);
             comm.AddParameter<string>(this.Factory, "HtmlPageTitle", (item.HtmlPageTitle != null && item.HtmlPageTitle.Trim().Length > 0) ? item.HtmlPageTitle.Trim() : "");
+            comm.AddParameter<string>(this.Factory, "HtmlPageShortName", (item.HtmlPageShortName != null && item.HtmlPageShortName.Trim().Length > 0) ? item.HtmlPageShortName.Trim() : "");
             comm.AddParameter<string>(this.Factory, "HtmlPageBody", (item.HtmlPageBody != null && item.HtmlPageBody.Trim().Length > 0) ? item.HtmlPageBody.Trim() : "");
             comm.AddParameter<string>(this.Factory, "HtmlPageImage", (item.HtmlPageImage != null && item.HtmlPageImage.Trim().Length > 0) ? item.HtmlPageImage.Trim() : "");
             comm.AddParameter<string>(this.Factory, "HtmlPageDescription", (item.HtmlPageDescription != null && item.HtmlPageDescription.Trim().Length > 0) ? item.HtmlPageDescription.Trim() : "");
